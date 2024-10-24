@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../assets/styles.css">
     <title>Leckere Rezepte</title>
     <style>
 
@@ -47,7 +47,7 @@
 
 <header>
       <div class="logo">
-    <img src="Logo.jpg" alt="logo">
+    <img src="..\assets\LogoLight1.png" alt="logo">
         <h1>Leckere Rezepte</h1>
         </div>
         <div class="suchen">
@@ -65,40 +65,60 @@
     </header>
     <nav>
         <ul class="filter">
-            <li>Mahlzeit</li>
-            <li>Ernährung</li>
-            <li>Rezeptart</li>
-            <li>Kategorie
+            <li>Mahlzeit
                 <ul>
-                    <li>Mittag</li>
-                    <li>Abend</li>
-                    <li>Snack</li>
+                    <li>Frühstück</li>
+                    <li>Mittagessen</li>
+                    <li>Abendessen</li>
                 </ul>
             </li>
-            <li>Getränke</li>
-            <li>Anlass</li>
-            <li>Saison</li>
-            <li>Backen & Süßes</li>
-            <li>Weltweit</li>
+            <li>Menü
+                <ul>
+                    <li>Vorspeise</li>
+                    <li>Hauptspeise</li>
+                    <li>Nachspeise</li>
+                    <li>Snack</li>
+                    <li>Salat</li>
+                    <li>Beilage</li>
+                </ul>
+            </li>
+            <li>Ernährung
+                <ul>
+                    <li>Vegetarisch</li>
+                    <li>Vegan</li>
+                    <li>Fisch</li>
+                    <li>Fleisch</li>
+                </ul>
+            </li>
+            <li>Weltweit
+                <ul>
+                    <li>Amerikanisch</li>
+                    <li>Italienisch</li>
+                    <li>Indisch</li>
+                    <li>Orientalisch</li>
+                    <li>Deutsch</li>
+                    <li>Asiatisch</li>
+                </ul>
+            </li>
         </ul>
     </nav>
 <body>
     <main>
         <div class="recipe-cards">
             <div class="recipe-card">
-                <img src="NeusteRezepte.png" alt="Rezept 1" />
+                <img src="../assets/NeusteRezepte.png" alt="Rezept 1" />
                 <div class="overlay">NEUESTE REZEPTE</div>
             </div>
             <div class="recipe-card">
-                <img src="Sonntagskuchen.png" alt="Rezept 2" />
+                <img src="../assets/Sonntagskuchen.png" alt="Rezept 2" />
                 <div class="overlay">SONNTAGS-KUCHEN</div>
             </div>
             <div class="recipe-card">
-                <img src="Vegetarian.png" alt="Rezept 3" />
+                <img src="../assets/Vegetarian.png" alt="Rezept 3" />
                 <div class="overlay">VEGGIE HAUPTGERICHTE</div>
             </div>
             <div class="recipe-card">
-                <img src="Italienisch.avif" alt="Rezept 4" />
+                <img src="../assets/Italienisch.avif" alt="Rezept 4" />
                 <div class="overlay">ITALIENISCH</div>
             </div>
         </div>
