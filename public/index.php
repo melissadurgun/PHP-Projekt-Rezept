@@ -44,7 +44,13 @@
     </style>
 </head>
 
-<header>
+<?php
+include '../includes/header.php';
+?>
+
+
+
+<!-- <header>
     <div class="logo">
         <img src="..\assets\images\LogoLight1.png" alt="logo">
         <h1>Leckere Rezepte</h1>
@@ -61,7 +67,7 @@
             </ul>
         </div>
     </div>
-</header>
+</header> -->
 <nav>
     <ul class="filter">
         <li>Mahlzeit

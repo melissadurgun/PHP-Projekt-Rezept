@@ -133,24 +133,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 
-<header>
-        <div class="logo">
-            <img src="Logo.jpg" alt="logo" onclick="location.href='index.php'">
-            <h1>Leckere Rezepte</h1>
-        </div>
-        <div class="suchen">
-            <input type="text" placeholder="Worauf hast du Lust?" class="search-bar" />
-            <div class="account-container">
-                <i class="fa fa-user account-icon"></i>
-                <ul class="dropdown-menu">
-                    <li onclick="location.href='RezepteAnlegen.php'">Rezepte anlegen</li>
-                    <li onclick="location.href='RezepteBearbeiten.php'">Rezepte bearbeiten</li>
-                    <li onclick="location.href='RezepteLöschen.php'">Rezepte löschen</li>
-                    <li onclick="location.href='RezepteAnzeigen.php'">Rezepte anzeigen</li>
-                </ul>
-            </div>
-        </div>
-    </header>
+// Header ausgelagert
+<?php
+include '../includes/header.php';
+?>
 
     <nav>
         <ul class="filter">

@@ -129,3 +129,102 @@ nav {
 .filter li:hover ul {
   display: block;
 }
+
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+form {
+  border: 1px solid black;
+  border-radius: 15px;
+  width: 370px;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  border-color: grey;
+  margin: 20px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
+  background-color: white; /* Hintergrundfarbe des Formulars */
+}
+
+input[type="text"]:not(.search-bar),
+textarea,
+input[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(128, 128, 128, 0.461);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+input[type="text"].search-bar {
+  background-color: #ffffff; 
+}
+
+input[type="text"]:not(.search-bar) {
+  background-color: #00ffb34c;
+}
+
+textarea {
+  background-color: #95ff004c;
+}
+
+input[type="submit"] {
+  background-color: #ff88004c;
+  border: 1px solid rgba(128, 128, 128, 0.461);
+  cursor: pointer;
+  margin-top: 5px;
+}
+
+input[type="submit"]:hover {
+  background-color: #ff55004c;
+}
+
+.zeitaufwand-options,
+.schwierigkeitsgrad-options,
+.kategorie-options {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.zeitaufwand-options label,
+.schwierigkeitsgrad-options label,
+.kategorie-options label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+button {
+  background-color: lightgray;
+  border: 1px solid rgba(128, 128, 128, 0.461);
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+button:hover {
+  background-color: gray;
+}
+
+.anlegen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 370px;
+  text-align: center;
+  margin: 50px;
+}

@@ -22,6 +22,7 @@
 
                 <li onclick="location.href = '' ">Profil</li>
                 <li onclick="location.href='../pages/RezepteAnlegen.php'">Rezepte anlegen</li>
+                <li onclick="location.href='../pages/test-RezeptHinzufügen.php'">TEST Rezepte anlegen</li>
                 <li onclick="location.href='../pages/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
                 <li onclick="location.href='../pages/RezepteLöschen.php'">Rezepte löschen</li>
                 <li onclick="location.href='../pages/RezepteAnzeigen.php'">Rezepte anzeigen</li>
