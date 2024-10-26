@@ -24,11 +24,11 @@
             <ul class="dropdown-menu">
 
                 <li onclick="location.href = '' ">Profil</li>
-                <li onclick="location.href='../pages/RezepteAnlegen.php'">Rezepte anlegen</li>
-                <li onclick="location.href='../pages/test-RezeptHinzufügen.php'">TEST Rezepte anlegen</li>
-                <li onclick="location.href='../pages/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
-                <li onclick="location.href='../pages/RezepteLöschen.php'">Rezepte löschen</li>
-                <li onclick="location.href='../pages/RezepteAnzeigen.php'">Rezepte anzeigen</li>
+                <li onclick="location.href='../pages/Rezeptverwaltung/RezepteAnlegen.php'">Rezepte anlegen</li>
+                <li onclick="location.href='../pages/Rezeptverwaltung/test-RezeptHinzufügen.php'">TEST Rezepte anlegen</li>
+                <li onclick="location.href='../pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
+                <li onclick="location.href='../pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
+                <li onclick="location.href='../pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
             </ul>
         </div>
     </div>

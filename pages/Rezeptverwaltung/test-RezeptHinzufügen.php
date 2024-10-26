@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../assets/styles.css">
+    <link rel="stylesheet" href="../../assets/styles/styles.css">
     <title>Rezept hinzufügen</title>
 </head>
 <!-- Header ausgelagert -->
 
 <?php
-include '../includes/header.php';
+include '../../includes/header.php';
 ?>
 
 <body>
@@ -65,23 +65,22 @@ include '../includes/header.php';
 <script>
 function addIngredient() {
     const ingredientsDiv = document.getElementById('ingredients');
-    const index = ingredientsDiv.childElementCount / 3;  // Calculate the next index
+    const index = ingredientsDiv.childElementCount / 3;  // Calculate the next index for new ingredient fields
 
     // Create new ingredient fields
-    const nameField = `<label for="zutat${index}">Zutat:</label>
-                       <input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>
-                       <input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>
-                       <select name="zutaten[${index}][einheit]">
-                           <option value="g">g</option>
-                           <option value="ml">ml</option>
-                           <option value="Stück">Stück</option>
-                           <option value="TL">TL</option>
-                           <option value="EL">EL</option>
-                           <option value="L">L</option>
-                           <option value="kg">kg</option>
-                       </select><br>`;
+    const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
+    const mengeField = `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
+    const einheitField = `<select name="zutaten[${index}][einheit]">
+                             <option value="g">g</option>
+                             <option value="ml">ml</option>
+                             <option value="Stück">Stück</option>
+                             <option value="TL">TL</option>
+                             <option value="EL">EL</option>
+                             <option value="L">L</option>
+                             <option value="kg">kg</option>
+                          </select><br>`;
 
-    ingredientsDiv.insertAdjacentHTML('beforeend', nameField);
+    ingredientsDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
 }
 </script>
 
