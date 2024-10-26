@@ -44,30 +44,11 @@
     </style>
 </head>
 
+<!-- Header ausgelagert -->
 <?php
 include '../includes/header.php';
 ?>
 
-
-
-<!-- <header>
-    <div class="logo">
-        <img src="..\assets\images\LogoLight1.png" alt="logo">
-        <h1>Leckere Rezepte</h1>
-    </div>
-    <div class="suchen">
-        <input type="text" placeholder="Worauf hast du Lust?" class="search-bar" />
-        <div class="account-container">
-            <i class="fa fa-user account-icon"></i>
-            <ul class="dropdown-menu">
-                <li onclick="location.href='../pages/RezepteAnlegen.php'">Rezepte anlegen</li>
-                <li onclick="location.href='../pages/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
-                <li onclick="location.href='../pages/RezepteLöschen.php'">Rezepte löschen</li>
-                <li onclick="location.href='../pages/RezepteAnzeigen.php'">Rezepte anzeigen</li>
-            </ul>
-        </div>
-    </div>
-</header> -->
 <nav>
     <ul class="filter">
         <li>Mahlzeit

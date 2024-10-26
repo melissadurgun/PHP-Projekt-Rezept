@@ -17,7 +17,10 @@
     <div class="suchen">
         <input type="text" placeholder="Worauf hast du Lust?" class="search-bar" />
         <div class="account-container">
-            <i class="fa fa-user account-icon"></i>
+            <div class= "account-container-profile-icon">
+                <i class="fa fa-user account-icon"></i>
+            </div>
+            
             <ul class="dropdown-menu">
 
                 <li onclick="location.href = '' ">Profil</li>
