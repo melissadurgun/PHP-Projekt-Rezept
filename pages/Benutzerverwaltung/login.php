@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <?php
-include '../includes/header.php';
+include $_SERVER['DOCUMENT_ROOT'] .'\PHP-Projekt\includes\header.php';
 ?>
 
 <body>
@@ -20,6 +20,8 @@ include '../includes/header.php';
     <input type="password" id="password" name="password" required><br>
 
     <button type="submit">Login</button>
+
+    <input type="submit">
 </form>
 </body>
 </html>

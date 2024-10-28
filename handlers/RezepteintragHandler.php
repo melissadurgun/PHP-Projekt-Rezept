@@ -6,12 +6,15 @@ session_start(); // Start session to access session variables
 
 // Check if user is logged in
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ..\pages\Benutzerverwaltung\login.php"); // Redirect to login if not logged in
+    header("Location: \PHP-Projekt\pages\Benutzerverwaltung\login.php"); // Redirect to login if not logged in
     exit();
 }
 
 // Retrieve user_id from session
-$user_id = $_SESSION['user_id'];
+// $user_id = $_SESSION['user_id'];
+
+//TEST
+$user_id = 333;
 
 // Create a new instance of the DB class
 $db = new DB('localhost', 'rezepte', 'root', '');

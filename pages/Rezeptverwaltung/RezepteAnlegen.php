@@ -133,7 +133,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </style>
 </head>
 
-// Header ausgelagert
 <?php
 include '../includes/header.php';
 ?>

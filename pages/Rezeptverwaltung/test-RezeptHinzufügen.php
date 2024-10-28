@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="../../assets/styles/styles.css">
+    <link rel="stylesheet" href="\PHP-Projekt\assets\styles\styles.css">
     <title>Rezept hinzufügen</title>
 </head>
 <!-- Header ausgelagert -->
@@ -17,15 +17,26 @@ include '../../includes/header.php';
 <h2>Rezept hinzufügen</h2>
 <div class="form-container">
     <div class="anlegen">
-        <form action="..\handlers\RezepteintragHandler.php" method="POST">
+        
+        <!-- Rezept Formular -->
+        <form action="\PHP-Projekt\handlers\RezepteintragHandler.php" method="POST">
             <label for="titel">Titel:</label>
             <input type="text" id="titel" name="titel" required><br>
 
             <label for="zubereitung">Zubereitung:</label>
             <textarea id="zubereitung" name="zubereitung" required></textarea><br>
 
-            <label for="zubereitungsdauer">Zubereitungsdauer (Minuten):</label>
-            <input type="number" id="zubereitungsdauer" name="zubereitungsdauer" required><br>
+                <div class="zeitaufwand-options">
+                    <label>Kurz
+                        <input type="radio" name="zeitaufwand" value="Kurz" required>
+                    </label>
+                    <label>Mittel
+                        <input type="radio" name="zeitaufwand" value="Mittel" required>
+                    </label>
+                    <label>Lang
+                        <input type="radio" name="zeitaufwand" value="Lang" required>
+                    </label>
+                </div><br>
 
             <label for="portionen">Portionen:</label>
             <input type="number" id="portionen" name="portionen" required><br>
@@ -41,7 +52,7 @@ include '../../includes/header.php';
 
             <!-- Ingredients section -->
             <h3>Zutaten</h3>
-            <div id="ingredients">
+            <div id="zutaten">
                 <label for="zutat1">Zutat:</label>
                 <input type="text" name="zutaten[0][name]" placeholder="Zutat" required>
                 <input type="number" name="zutaten[0][menge]" placeholder="Menge" step="0.1" required>
@@ -55,7 +66,7 @@ include '../../includes/header.php';
                     <option value="kg">kg</option>
                 </select><br>
             </div>
-            <button type="button" onclick="addIngredient()">Weitere Zutat hinzufügen</button><br>
+            <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button><br>
 
             <button type="submit">Rezept speichern</button>
         </form>
@@ -63,9 +74,9 @@ include '../../includes/header.php';
 </div>
 
 <script>
-function addIngredient() {
-    const ingredientsDiv = document.getElementById('ingredients');
-    const index = ingredientsDiv.childElementCount / 3;  // Calculate the next index for new ingredient fields
+function zutatHinzufügen() {
+    const zutatenDiv = document.getElementById('zutaten');
+    const index = zutatenDiv.childElementCount / 3;  // Calculate the next index for new ingredient fields
 
     // Create new ingredient fields
     const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
@@ -80,7 +91,7 @@ function addIngredient() {
                              <option value="kg">kg</option>
                           </select><br>`;
 
-    ingredientsDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
+    zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
 }
 </script>
 
