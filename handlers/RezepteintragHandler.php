@@ -21,16 +21,38 @@ $db = new DB('localhost', 'rezepte', 'root', '');
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Retrieve recipe details from form
-    $titel = $_POST['titel'] ?? '';
-    $zubereitung = $_POST['zubereitung'] ?? '';
-    $zubereitungsdauer = $_POST['zubereitungsdauer'] ?? 0;
-    $portionen = $_POST['portionen'] ?? 0;
-    $ernaehrung = $_POST['ernaehrung'] ?? '';
-    $schwierigkeitsgrad = $_POST['schwierigkeitsgrad'] ?? '';
-    $mahlzeitkategorie = $_POST['mahlzeitkategorie'] ?? '';
-    $kueche = $_POST['kueche'] ?? '';
-    $bild_url = $_POST['bild_url'] ?? '';
+    // $user_id = $_SESSION['user_id'];
+    $titel = $_POST['titel'];
+    $zubereitung = $_POST['zubereitung'];
+    $zubereitungsdauer = $_POST['zubereitungsdauer'];
+    $portionen = $_POST['portionen'];
+    $ernaehrung = $_POST['ernaehrung'];
+    $schwierigkeitsgrad = $_POST['schwierigkeitsgrad'];
+    $mahlzeitkategorie = $_POST['mahlzeitkategorie'];
+    $kueche = $_POST['kueche'];
+    $bild_url = $_POST['bild'];
+
+
+    // Bildverarbeitung
+
+    if (isset($_POST['bild'])) {
+        echo "Bild erhalten";
+        $bild = $bild_url;
+
+        // Zielverzeichnis und Dateiname festlegen
+        $upload_dir = '../uploads/';
+        $bild_name = uniqid() . '-' . basename($bild['name']);
+        $bild_path = $upload_dir . $bild_name;
+
+        // Bild speichern
+        if (move_uploaded_file($bild['tmp_name'], $bild_path)) {
+            $bild_url = 'uploads/' . $bild_name; // Pfad für die Datenbank
+            echo "Bild gespeichert";
+        } else {
+            echo "Fehler beim Hochladen des Bildes.";
+            exit();
+        }
+    }
 
     // Insert the recipe into the rezept table, including user_id
     $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild_url)

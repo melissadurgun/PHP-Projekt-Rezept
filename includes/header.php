@@ -21,8 +21,6 @@
             <i class="fa fa-user account-icon"></i>
             <ul class="dropdown-menu">
                 <li onclick="location.href = '' ">Profil</li>
-                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteAnlegen.php'">Rezepte anlegen
-                </li>
                 <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/test2-RezHinzu.php'">TEST Rezepte
                     anlegen</li>
                 <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte

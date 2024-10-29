@@ -19,7 +19,9 @@
             <div class="recipe-header">
                 <!-- feature needs to be implemented: add picture -->
                 <div class="image-placeholder">
-                    <img src="\PHP-Projekt\assets\images\ImagePlaceholder.jpg" alt="Recipe Image">
+                    <input type="file" id="bild" name="bild" accept="image/*" style="display: none;" required>
+                    <label for="bild" class="file-label"></label>
+                    <!-- <img src="\PHP-Projekt\assets\images\ImagePlaceholder.jpg" alt="Recipe Image"> -->
                 </div>
                 <div class="titel">
                     <label for="titel">Titel</label>

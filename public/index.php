@@ -7,41 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../assets/styles/styles.css">
     <title>Leckere Rezepte</title>
-    <style>
-        .recipe-cards {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: nowrap;
-            padding: 20px;
-            margin-top: 10px;
-            transition: margin-top 0.3s ease;
-        }
-
-        .recipe-card {
-            position: relative;
-            margin: 10px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .recipe-card img {
-            width: 300px;
-            height: auto;
-            display: block;
-        }
-
-        .overlay {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            text-align: center;
-            padding: 10px 0;
-        }
-    </style>
 </head>
 
 <!-- Header ausgelagert -->
