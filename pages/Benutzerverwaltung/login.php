@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,20 +9,19 @@
     <title>Document</title>
 </head>
 <?php
-include $_SERVER['DOCUMENT_ROOT'] .'\PHP-Projekt\includes\header.php';
+include $_SERVER['DOCUMENT_ROOT'] . '\PHP-Projekt\includes\header.php';
 ?>
 
 <body>
-<form action="login.php" method="POST">
-    <label for="username">Username:</label>
-    <input type="text" id="username" name="username" required><br>
+    <form action="login.php" method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required><br>
 
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required><br>
 
-    <button type="submit">Login</button>
-
-    <input type="submit">
-</form>
+        <button type="submit">Login</button>
+    </form>
 </body>
+
 </html>

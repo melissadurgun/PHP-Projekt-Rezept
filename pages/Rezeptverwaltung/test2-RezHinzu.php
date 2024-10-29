@@ -1,88 +1,146 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Form</title>
-    <link rel="stylesheet" href="\PHP-Projekt\pages\Rezeptverwaltung\test2-styles.css">
+    <link rel="stylesheet" href="\PHP-Projekt\assets\styles\RezeptCreate.css">
 </head>
-
-<?php
-include '../../includes/header.php';
-?>
+<header>
+    <?php
+    include '../../includes/header.php';
+    ?>
+</header>
 
 <body>
-    <div class="recipe-form">
-        <div class="header">
-            <div class="image-placeholder">
-                <img src="\PHP-Projekt\assets\images\ImagePlaceholder.jpg" alt="Recipe Image">
+    <form action="\PHP-Projekt\handlers\RezepteintragHandler.php" method="POST">
+        <div class="recipe-form">
+            <div class="recipe-header">
+                <!-- feature needs to be implemented: add picture -->
+                <div class="image-placeholder">
+                    <img src="\PHP-Projekt\assets\images\ImagePlaceholder.jpg" alt="Recipe Image">
+                </div>
+                <div class="titel">
+                    <label for="titel">Titel</label>
+                    <input type="text" id="titel" name="titel" required>
+                </div>
             </div>
-            <div class="titel">
-                <label for="title">Titel</label>
-                <input type="text" id="title" placeholder="placeholder">
-            </div>
-        </div>
-        
-        <div class="info">
-            <div>
-                <label for="portionen">Portionen</label>
-                <input type="text" id="portionen">
-            </div>
-            <div>
-                <label for="zubereitungsdauer">Zubereitungsdauer</label>
-                <input type="text" id="zubereitungsdauer">
-            </div>
-            <div>
-                <label for="schwierigkeitsgrad">Schwierigkeitsgrad</label>
-                <select id="schwierigkeitsgrad">
-                    <option>Leicht</option>
-                    <option>Mittel</option>
-                    <option>Schwer</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="zubereitung">
-            <label for="zubereitung">Zubereitung</label>
-            <textarea id="zubereitung"></textarea>
-        </div>
+            <div class="info">
+                <div>
+                    <label for="portionen">Portionen</label>
+                    <input type="number" id="portionen" name="portionen" required>
+                </div>
+                <div>
+                    <label for="zubereitungsdauer">Zubereitungsdauer</label>
+                    <input type="number" id="zubereitungsdauer" name="zubereitungsdauer" placeholder="in Minuten"
+                        required>
+                </div>
+                <div>
+                    <label for="schwierigkeitsgrad">Schwierigkeitsgrad</label>
+                    <!-- TODO! Handler has to be able to read schwierigkeitsgrad-->
+                    <select id="schwierigkeitsgrad" name="schwierigkeitsgrad" required>
+                        <option value="Leicht">Leicht</option>
+                        <option value="Mittel">Mittel</option>
+                        <option value="Schwer">Schwer</option>
+                    </select>
+                </div>
+            </div>
 
-        <div class="zutaten">
-            <label>Zutaten</label>
-            <div class="zutaten-row">
-                <input type="text" placeholder="Zutat">
-                <input type="text" placeholder="Menge">
-                <select>
-                    <option>Menu Item</option>
-                </select>
+            <div class="zubereitung">
+                <label for="zubereitung">Zubereitung</label>
+                <textarea id="zubereitung" name="zubereitung" required></textarea>
             </div>
-            <button type="button">+ Zutat hinzufügen</button>
-        </div>
 
-        <div class="additional-options">
-            <div>
-                <label for="menu-type">Menüart</label>
-                <select id="menu-type">
-                    <option>Menu Item</option>
-                </select>
+            <div class="zutaten">
+                <label>Zutaten</label>
+                <div class="zutaten-row" id="zutaten">
+                    <input type="text" id="zutat" name="zutat" placeholder="Zutat">
+                    <input type="number" id="menge" name="menge" placeholder="Menge" required>
+                    <!-- TODO! Handler has to be able to read einheit-->
+                    <select id="zutaten" name="zutaten" required>
+                        <option value="g">g</option>
+                        <option value="ml">ml</option>
+                        <option value="Stück">Stück</option>
+                        <option value="TL">TL</option>
+                        <option value="EL">EL</option>
+                        <option value="L">L</option>
+                        <option value="kg">kg</option>
+                    </select>
+                </div>
+                <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
             </div>
-            <div>
-                <label for="nutrition">Ernährung</label>
-                <select id="nutrition">
-                    <option>Menu Item</option>
-                </select>
-            </div>
-            <div>
-                <label for="cuisine">Küche</label>
-                <select id="cuisine">
-                    <option>Menu Item</option>
-                </select>
-            </div>
-        </div>
 
-        <div class="submit">
-            <button type="button">Rezept speichern</button>
+            <div class="additional-options">
+                <div>
+                    <label for="mahlzeitkategorie">Menüart</label>
+                    <!-- TODO! Handler has to be able to read -->
+                    <select id="mahlzeitkategorie" name="mahlzeitkategorie" required>
+                        <option value="Frühstück">Frühstück</option>
+                        <option value="Mittagessen">Mittagessen</option>
+                        <option value="Abendessen">Abendessen</option>
+                        <option value="Dessert">Dessert</option>
+                        <option value="Snack">Snack</option>
+                        <option value="Beilage">Beilage</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="ernaehrung">Ernährung</label>
+                    <!-- TODO! Handler has to be able to read -->
+                    <select id="ernaehrung" name="ernaehrung" required>
+                        <option value="Vegan">Vegan</option>
+                        <option value="Vegetarisch">Vegetarisch</option>
+                        <option value="Fleisch">Fleisch</option>
+                        <option value="Fisch">Fisch</option>
+                    </select>
+                </div>
+                <div>
+                    <label for="kueche">Küche</label>
+                    <!-- TODO! Handler has to be able to read -->
+                    <select id="kueche" name="kueche" required>
+                        <option value="Amerikanisch">Amerikanisch</option>
+                        <option value="Italienisch">Italienisch</option>
+                        <option value="Indisch">Indisch</option>
+                        <option value="Asiatisch">Asiatisch</option>
+                        <option value="Orientalisch">Orientalisch</option>
+                        <option value="Deutsch">Deutsch</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="buttonsContainer">
+                <a href="\PHP-Projekt\public\index.php">
+                    <button type="button" class="back">Zurück zum Profil</button>
+                </a>
+                <input type="submit" value="Rezept speichern">
+            </div>
         </div>
-    </div>
+    </form>
+
+    <!-- Dynamisches Hinzufügen der Zutaten -->
+    <script>
+    function zutatHinzufügen() {
+        const zutatenDiv = document.getElementById('zutaten');
+        const index = zutatenDiv.childElementCount / 3; // Calculate the next index for new ingredient fields
+
+        // Create new ingredient fields
+        const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
+        const mengeField =
+            `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
+        const einheitField = `<select name="zutaten[${index}][einheit]">
+                             <option value="g">g</option>
+                             <option value="ml">ml</option>
+                             <option value="Stück">Stück</option>
+                             <option value="TL">TL</option>
+                             <option value="EL">EL</option>
+                             <option value="L">L</option>
+                             <option value="kg">kg</option>
+                          </select>`;
+
+        zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
+    }
+    </script>
 </body>
+
 </html>

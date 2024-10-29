@@ -1,0 +1,153 @@
+* {
+    box-sizing: border-box;
+}
+
+.recipe-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.image-placeholder img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.image-placeholder :hover {
+    cursor: pointer;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"]:not(.search-bar),
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.461);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.zubereitung textarea {
+    resize: vertical;
+    /* Allow vertical resizing */
+    min-height: 100px;
+    /* Set a reasonable minimum height */
+    max-height: 500px;
+    /* Set a maximum height if desired */
+    overflow-y: auto;
+    /* Show scrollbar if content exceeds max height */
+}
+
+.titel {
+    width: 100%;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Three equal columns */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.info div {
+    display: flex;
+    flex-direction: column;
+}
+
+.zubereitung {
+    margin-bottom: 20px;
+}
+
+.zutaten {
+    margin-bottom: 20px;
+}
+
+.zutaten-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.zutaten button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #ccddd1;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.additional-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 80px;
+}
+
+.additional-options div {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsContainer {
+    text-align: right;
+}
+
+.buttonsContainer input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    background-color: #04914f;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.buttonsContainer .back {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ccddd1;
+    color: #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.buttonsContainer button:hover {
+    background-color: #78807b;
+}
+
+input[type="submit"]:hover {
+    background-color: #054e2c;
+}
+
+a {
+    color: white;
+}

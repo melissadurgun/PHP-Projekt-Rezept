@@ -12,7 +12,7 @@
 
 <header>
     <div class="logo">
-       <a href="\PHP-Projekt\public\index.php"><img src="\PHP-Projekt\assets\images\LogoLight1.png" alt="logo"></a> 
+        <a href="\PHP-Projekt\public\index.php"><img src="\PHP-Projekt\assets\images\LogoLight1.png" alt="logo"></a>
         <h1>Leckere Rezepte</h1>
     </div>
     <div class="suchen">
@@ -21,11 +21,16 @@
             <i class="fa fa-user account-icon"></i>
             <ul class="dropdown-menu">
                 <li onclick="location.href = '' ">Profil</li>
-                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteAnlegen.php'">Rezepte anlegen</li>
-                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/test-RezeptHinzufügen.php'">TEST Rezepte anlegen</li>
-                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
-                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
-                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
+                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteAnlegen.php'">Rezepte anlegen
+                </li>
+                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/test2-RezHinzu.php'">TEST Rezepte
+                    anlegen</li>
+                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte
+                    bearbeiten</li>
+                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen
+                </li>
+                <li onclick="location.href='/PHP-Projekt/pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen
+                </li>
             </ul>
         </div>
     </div>

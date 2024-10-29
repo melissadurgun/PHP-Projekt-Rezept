@@ -252,14 +252,14 @@ nav {
 }
 
 /*Rezepte anlegen/bearbeiten*/
-.form-container {
+/* .form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-}
+} */
 
-form {
+/* form {
   border: 1px solid black;
   border-radius: 15px;
   width: 500px;
@@ -269,12 +269,13 @@ form {
   margin: 20px;
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.1);
   background-color: white;
-  /* Hintergrundfarbe des Formulars */
+
 }
 
 input[type="text"]:not(.search-bar),
+input[type="number"],
+select,
 textarea,
-button[type="submit"],
 input[type="password"] {
   width: 100%;
   padding: 10px;
@@ -286,7 +287,8 @@ input[type="password"] {
   transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-button[type="submit"] {
+*/
+/* button[type="submit"] {
   background-color: #92af97;
   border: 1px solid rgba(128, 128, 128, 0.461);
   cursor: pointer;
@@ -339,7 +341,7 @@ button[type="submit"]:hover {
   text-align: center;
   margin: 50px;
   margin-top: 0px;
-}
+} */
 
 .headline {
   display: flex;
