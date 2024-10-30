@@ -1,11 +1,3 @@
-<?php
-include 'LoadJson.php';
-$rezepte = load_json();
-if (empty($rezepte)) {
-    die('Keine Rezepte gefunden.');
-}
-?>
-
 <!DOCTYPE html>
 <html lang="de">
 
