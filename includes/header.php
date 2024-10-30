@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="\PHP-Projekt/assets/styles/styles.css">
+    <link rel="stylesheet" href="\PHP-Projekt-Rezept\assets\styles\styles.css">
     <title>Document</title>
 </head>
 
 
 <header>
     <div class="logo">
-        <a href="\PHP-Projekt\public\index.php"><img src="\PHP-Projekt\assets\images\LogoLight1.png" alt="logo"></a>
+        <a href="\PHP-Projekt\public\index.php"><img src="\PHP-Projekt\PHP-Projekt-Rezept\assets\images\LogoLight1.png"
+                alt="logo"></a>
         <h1>Leckere Rezepte</h1>
     </div>
     <div class="suchen">

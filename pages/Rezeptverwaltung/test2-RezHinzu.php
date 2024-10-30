@@ -9,7 +9,7 @@
 </head>
 <header>
     <?php
-    include '../../includes/header.php';
+    include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Projekt-Rezept/includes/header.php';
     ?>
 </header>
 
@@ -122,15 +122,15 @@
 
     <!-- Dynamisches Hinzufügen der Zutaten -->
     <script>
-    function zutatHinzufügen() {
-        const zutatenDiv = document.getElementById('zutaten');
-        const index = zutatenDiv.childElementCount / 3; // Calculate the next index for new ingredient fields
+        function zutatHinzufügen() {
+            const zutatenDiv = document.getElementById('zutaten');
+            const index = zutatenDiv.childElementCount / 3; // Calculate the next index for new ingredient fields
 
-        // Create new ingredient fields
-        const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
-        const mengeField =
-            `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
-        const einheitField = `<select name="zutaten[${index}][einheit]">
+            // Create new ingredient fields
+            const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
+            const mengeField =
+                `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
+            const einheitField = `<select name="zutaten[${index}][einheit]">
                              <option value="g">g</option>
                              <option value="ml">ml</option>
                              <option value="Stück">Stück</option>
@@ -140,8 +140,8 @@
                              <option value="kg">kg</option>
                           </select>`;
 
-        zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
-    }
+            zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
+        }
     </script>
 </body>
 
