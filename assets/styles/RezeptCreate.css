@@ -21,18 +21,6 @@
     margin-bottom: 20px;
 }
 
-/* .image-placeholder img {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.image-placeholder :hover {
-    cursor: pointer;
-} */
-
 label {
     font-weight: bold;
     display: block;

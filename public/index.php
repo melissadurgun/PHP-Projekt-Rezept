@@ -12,47 +12,8 @@
 <!-- Header ausgelagert -->
 <?php
 include '../includes/header.php';
+include '../includes/navigation.php';
 ?>
-
-<nav>
-    <ul class="filter">
-        <li>Mahlzeit
-            <ul>
-                <li>Frühstück</li>
-                <li>Mittagessen</li>
-                <li>Abendessen</li>
-            </ul>
-        </li>
-        <li>Menü
-            <ul>
-                <li>Vorspeise</li>
-                <li>Hauptspeise</li>
-                <li>Nachspeise</li>
-                <li>Snack</li>
-                <li>Salat</li>
-                <li>Beilage</li>
-            </ul>
-        </li>
-        <li>Ernährung
-            <ul>
-                <li>Vegetarisch</li>
-                <li>Vegan</li>
-                <li>Fisch</li>
-                <li>Fleisch</li>
-            </ul>
-        </li>
-        <li>Weltweit
-            <ul>
-                <li>Amerikanisch</li>
-                <li>Italienisch</li>
-                <li>Indisch</li>
-                <li>Orientalisch</li>
-                <li>Deutsch</li>
-                <li>Asiatisch</li>
-            </ul>
-        </li>
-    </ul>
-</nav>
 
 <body>
     <main>

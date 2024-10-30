@@ -5,16 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Form</title>
-    <link rel="stylesheet" href="\PHP-Projekt\assets\styles\RezeptCreate.css">
+    <!-- <link rel="stylesheet" href="..\..\assets\styles\RezeptCreate.css"> -->
+    <link rel="stylesheet" href="..\..\assets\styles\styles.css">
 </head>
 <header>
     <?php
-    include $_SERVER['DOCUMENT_ROOT'] . '/PHP-Projekt-Rezept/includes/header.php';
+    include '../../includes/header.php';
     ?>
 </header>
 
 <body>
-    <form action="\PHP-Projekt\handlers\RezepteintragHandler.php" method="POST">
+    <form action="..\handlers\RezepteintragHandler.php" method="POST">
         <div class="recipe-form">
             <div class="recipe-header">
                 <!-- feature needs to be implemented: add picture -->
