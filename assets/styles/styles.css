@@ -1,0 +1,514 @@
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+}
+
+header {
+  text-align: center;
+  padding: 20px;
+}
+
+h1 {
+  margin: 0;
+  font-size: 2.5em;
+}
+
+.search-bar {
+  width: 50%;
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.suchen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Zentriert das Icon vertikal */
+}
+
+.logo img {
+  position: absolute;
+  left: 30px;
+  width: 100px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.logo img:hover {
+  cursor: pointer;
+}
+
+.account-container {
+  position: relative;
+  justify-content: flex-end;
+  top: 5px;
+  right: -275px;
+}
+
+.account-icon {
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 10px 0;
+  z-index: 1;
+}
+
+.dropdown-menu li {
+  padding: 10px 15px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+/* Dropdown anzeigen beim Hover */
+.account-container:hover .dropdown-menu {
+  display: block;
+}
+
+nav {
+  background-color: #fff;
+  padding: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.filter {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.filter li {
+  margin: 0 15px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Dropdown-Menu */
+.filter li ul {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 5px;
+  z-index: 1;
+}
+
+.filter li ul li {
+  padding: 10px 15px;
+  white-space: nowrap;
+}
+
+.filter li ul li:hover {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+.filter li:hover ul {
+  display: block;
+}
+
+/*index*/
+.recipe-cards {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: nowrap;
+  padding: 20px;
+  margin-top: 10px;
+  transition: margin-top 0.3s ease;
+}
+
+.recipe-card {
+  position: relative;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-card img {
+  width: 300px;
+  height: auto;
+  display: block;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+/*Rezepte löschen*/
+.recipe-card-delete {
+  position: relative;
+  margin: 10px;
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-card-delete:hover,
+.recipe-card:hover {
+  transform: scale(1.05);
+}
+
+.recipe-card-delete h2 {
+  font-size: 1.5em;
+  margin: 0;
+  padding: 15px;
+  background-color: #ff88004c;
+  color: #333;
+  text-align: center;
+}
+
+.recipe-card-delete img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-card-delete .content {
+  padding: 15px;
+}
+
+.recipe-card-delete p {
+  margin: 10px 0;
+  color: #555;
+}
+
+.recipe-card-delete .details {
+  font-size: 0.9em;
+  color: #888;
+}
+
+.recipe-card-delete form {
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background-color: #ff4444;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0 0 10px 10px;
+  width: 80%;
+}
+
+.recipe-card-delete form:hover {
+  background-color: #ff0000;
+}
+
+.delete-button {
+  background-color: #ff4444;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.delete-button:hover {
+  background-color: #ff0000;
+}
+
+.no-recipes-message {
+  text-align: center;
+  font-size: 1.2em;
+  color: #888;
+  padding: 20px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.recipe-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 500px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-header {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Style for the label to look like an image button */
+.file-label {
+    display: inline-block;
+    width: 100px;
+    /* Adjust width as needed */
+    height: 100px;
+    /* Adjust height as needed */
+    background-image: url('/PHP-Projekt/assets/images/ImagePlaceholder.jpg');
+    /* Path to the image */
+    background-size: cover;
+    /* Cover to fill the area */
+    background-position: center;
+    cursor: pointer;
+    /* Pointer cursor for interactivity */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* Optionally add hover effect */
+.file-label:hover {
+    opacity: 0.4;
+    /* Slight transparency for hover effect */
+}
+
+/* Adding the "Upload File" message */
+.file-label::after {
+    content: "Upload File";
+    position: absolute;
+    top: -30px;
+    /* Adjust based on positioning needs */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Dark background with transparency */
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    /* opacity: 0; */
+    pointer-events: none;
+    /* Prevents the message from blocking clicks */
+    transition: opacity 0.3s ease;
+    /* Smooth fade-in transition */
+}
+
+/* Show message on hover */
+.file-label:hover::after {
+    opacity: 1;
+}
+
+input[type="text"]:not(.search-bar),
+input[type="number"],
+select,
+textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid rgba(128, 128, 128, 0.461);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.zubereitung textarea {
+    resize: vertical;
+    /* Allow vertical resizing */
+    min-height: 100px;
+    /* Set a reasonable minimum height */
+    max-height: 500px;
+    /* Set a maximum height if desired */
+    overflow-y: auto;
+    /* Show scrollbar if content exceeds max height */
+}
+
+.titel {
+    width: 100%;
+}
+
+.info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Three equal columns */
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.info div {
+    display: flex;
+    flex-direction: column;
+}
+
+.zubereitung {
+    margin-bottom: 20px;
+}
+
+.zutaten {
+    margin-bottom: 20px;
+}
+
+.zutaten-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.zutaten button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    background-color: #ccddd1;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.additional-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 80px;
+}
+
+.additional-options div {
+    display: flex;
+    flex-direction: column;
+}
+
+.buttonsContainer {
+    text-align: right;
+}
+
+.buttonsContainer input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    background-color: #04914f;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: right;
+}
+
+.buttonsContainer .back {
+    padding: 10px 20px;
+    border: none;
+    background-color: #ccddd1;
+    color: #000000;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.buttonsContainer button:hover {
+    background-color: #78807b;
+}
+
+input[type="submit"]:hover {
+    background-color: #054e2c;
+}
+
+a {
+    color: white;
+}
+
+.headline {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 50px;
+}
+
+/* Rezepte Anzeigen */
+.recipe-card-show {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  background-color: #fff;
+  transition: transform 0.2s;
+}
+
+.recipe-card-show:hover {
+  transform: scale(1.05);
+}
+
+.recipe-card-show h2 {
+  font-size: 1.5em;
+  margin: 0;
+  padding: 15px;
+  background-color: #ff88004c;
+  color: #333;
+  text-align: center;
+}
+
+.recipe-card-show img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.recipe-card-show .content {
+  padding: 15px;
+}
+
+.recipe-card-show p {
+  margin: 10px 0;
+  color: #555;
+}
+
+/* Link Container */
+.link-container {
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+}
+
+.link-container a {
+  flex: 1;
+  margin: 0 5px;
+  display: block;
+  text-align: center;
+  padding: 10px;
+  background-color: #ff88004c;
+  color: #333;
+  text-decoration: none;
+  border-radius: 0 0 10px 10px;
+}
+
+.link-container a:hover {
+  background-color: #ff55004c;
+}
