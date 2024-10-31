@@ -11,8 +11,8 @@
 
 <!-- Header ausgelagert -->
 <?php
-include '../includes/header.php';
-include '../includes/navigation.php';
+include '../../includes/header.php';
+include '../../includes/navigation.php';
 ?>
 
 <body>
@@ -38,6 +38,6 @@ include '../includes/navigation.php';
     </main>
 </body>
 <?php
-include '../includes/footer.php';
+include '../../includes/footer.php';
 ?>
 </html>

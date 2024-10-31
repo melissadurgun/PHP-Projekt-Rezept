@@ -11,12 +11,10 @@ if (!isset($_SESSION['user'])) {
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="..\..\assets\styles\styles.css">
-    <title>Leckere Rezepte</title>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\..\assets\styles\styles.css">   
+    <title>Recipe Form</title>
 </head>
 
 <?php
@@ -75,9 +73,9 @@ $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
 </section>
 
 
-    
-</body>
 <?php
-include '../includes/footer.php';
+include '../../includes/footer.php';
 ?>
+</body>
+
 </html>
