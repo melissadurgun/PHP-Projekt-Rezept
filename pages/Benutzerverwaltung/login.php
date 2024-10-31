@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="..\..\assets\styles\styles.css">
     <title>Login</title>
 </head>
 
 <?php
 include '../../includes/header.php';
+include '../../includes/navigation.php';
 ?>
 
 <body>
@@ -98,4 +99,7 @@ include '../../includes/header.php';
 
 
 </body>
+<?php
+include '../includes/footer.php';
+?>
 </html>

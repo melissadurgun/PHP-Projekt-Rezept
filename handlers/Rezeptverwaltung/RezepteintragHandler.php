@@ -1,6 +1,6 @@
 <?php
-include '../includes/header.php';
-include '../config/db.php';
+include '../../includes/header.php';
+include '../../config/db.php';
 
 session_start(); // Start session to access session variables
 

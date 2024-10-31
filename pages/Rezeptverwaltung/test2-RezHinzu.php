@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recipe Form</title>
-    <!-- <link rel="stylesheet" href="..\..\assets\styles\RezeptCreate.css"> -->
+    <link rel="stylesheet" href="..\..\assets\styles\RezeptCreate.css">
     <link rel="stylesheet" href="..\..\assets\styles\styles.css">
 </head>
 <header>
     <?php
     include '../../includes/header.php';
+    include '../../includes/navigation.php';
     ?>
 </header>
 
 <body>
-    <form action="..\handlers\RezepteintragHandler.php" method="POST">
+    <div class="form">
+    <form action="..\..\handlers\Rezeptverwaltung\RezepteintragHandler.php" method="POST">
         <div class="recipe-form">
             <div class="recipe-header">
                 <!-- feature needs to be implemented: add picture -->
@@ -120,7 +122,7 @@
             </div>
         </div>
     </form>
-
+    </div>
     <!-- Dynamisches Hinzufügen der Zutaten -->
     <script>
         function zutatHinzufügen() {
@@ -145,5 +147,7 @@
         }
     </script>
 </body>
-
+<?php
+include '../../includes/footer.php';
+?>
 </html>
