@@ -2,7 +2,8 @@ Anmerkung: Password muss leider Länge 255 haben, da die Passwörter gehashed we
 
 Letzte Änderung in der DB (Stand 01.11.24, Dump im Anhang): 
 - Tabelle rezept: id --> rezept_id
-- Tabelle rezept: aus der Spalte ernaehrung wurde der ENUM-Wert "Normal" gelöscht. 
+- Tabelle rezept: aus der Spalte ernaehrung wurde der ENUM-Wert "Normal" gelöscht.
+
 ![image](https://github.com/user-attachments/assets/f63918e9-e9c4-4589-858b-cd009ac95d68)
 
 [Up-- phpMyAdmin SQL Dump
