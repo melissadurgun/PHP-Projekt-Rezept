@@ -22,17 +22,18 @@
                 <i class="fa fa-user account-icon"></i>
                 <ul class="dropdown-menu">
                     <li onclick="location.href = ''">Profil</li>
-                    <li onclick="location.href='../pages/Rezeptverwaltung/test2-RezHinzu.php'">TEST Rezepte anlegen</li>
-                    <li onclick="location.href='../pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
-                    <li onclick="location.href='../pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
-                    <li onclick="location.href='../pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
+                    <li onclick="location.href='../Rezeptverwaltung/test2-RezHinzu.php'">TEST Rezepte anlegen</li>
+                    <li onclick="location.href='../Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten
+                    </li>
+                    <li onclick="location.href='../Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
+                    <li onclick="location.href='../Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
                 </ul>
             </div>
         </div>
         <br>
         <div class="suchen">
-        <i class="fa fa-search search-icon"></i>
-        <input type="text" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt" class="search-bar" />
+            <i class="fa fa-search search-icon"></i>
+            <input type="text" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt" class="search-bar" />
         </div>
 
     </header>

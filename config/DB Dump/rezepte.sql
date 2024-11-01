@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2024 at 11:39 PM
+-- Generation Time: Nov 01, 2024 at 10:23 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -28,30 +28,17 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `rezept` (
-  `id` int(11) NOT NULL,
+  `rezept_id` int(11) NOT NULL,
   `titel` varchar(255) NOT NULL,
   `user_id` int(11) NOT NULL,
   `zubereitung` text NOT NULL,
   `zubereitungsdauer` int(11) NOT NULL,
   `portionen` int(11) NOT NULL,
-  `ernaehrung` enum('Vegan','Vegetarisch','Normal','Fleisch','Fisch') NOT NULL,
+  `ernaehrung` enum('Vegan','Vegetarisch','Fleisch','Fisch') NOT NULL,
   `schwierigkeitsgrad` enum('Leicht','Mittel','Schwer') NOT NULL,
   `mahlzeitkategorie` enum('Frühstück','Mittagessen','Abendessen','Dessert','Snack') NOT NULL,
   `kueche` enum('Amerikanisch','Italienisch','Indisch','Asiatisch','Orientalisch','Deutsch') NOT NULL,
   `bild_url` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `rezept_zutaten`
---
-
-CREATE TABLE `rezept_zutaten` (
-  `rezept_id` int(11) NOT NULL,
-  `zutat_id` int(11) NOT NULL,
-  `menge` decimal(10,2) NOT NULL,
-  `einheit` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -75,8 +62,11 @@ CREATE TABLE `user` (
 --
 
 CREATE TABLE `zutaten` (
-  `id` int(11) NOT NULL,
-  `name` varchar(255) NOT NULL
+  `zutaten_id` int(11) NOT NULL,
+  `rezept_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `menge` decimal(10,2) NOT NULL,
+  `einheit` enum('g','ml','Stück','TL','EL','L','kg') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -87,15 +77,8 @@ CREATE TABLE `zutaten` (
 -- Indexes for table `rezept`
 --
 ALTER TABLE `rezept`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`rezept_id`),
   ADD KEY `fk_user_id` (`user_id`);
-
---
--- Indexes for table `rezept_zutaten`
---
-ALTER TABLE `rezept_zutaten`
-  ADD PRIMARY KEY (`rezept_id`,`zutat_id`),
-  ADD KEY `zutat_id` (`zutat_id`);
 
 --
 -- Indexes for table `user`
@@ -108,7 +91,8 @@ ALTER TABLE `user`
 -- Indexes for table `zutaten`
 --
 ALTER TABLE `zutaten`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`zutaten_id`),
+  ADD KEY `rezept_id` (`rezept_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -118,7 +102,7 @@ ALTER TABLE `zutaten`
 -- AUTO_INCREMENT for table `rezept`
 --
 ALTER TABLE `rezept`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `rezept_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -130,7 +114,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `zutaten`
 --
 ALTER TABLE `zutaten`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `zutaten_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -143,11 +127,10 @@ ALTER TABLE `rezept`
   ADD CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE;
 
 --
--- Constraints for table `rezept_zutaten`
+-- Constraints for table `zutaten`
 --
-ALTER TABLE `rezept_zutaten`
-  ADD CONSTRAINT `rezept_zutaten_ibfk_1` FOREIGN KEY (`rezept_id`) REFERENCES `rezept` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `rezept_zutaten_ibfk_2` FOREIGN KEY (`zutat_id`) REFERENCES `zutaten` (`id`) ON DELETE CASCADE;
+ALTER TABLE `zutaten`
+  ADD CONSTRAINT `zutaten_ibfk_1` FOREIGN KEY (`rezept_id`) REFERENCES `rezept` (`rezept_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

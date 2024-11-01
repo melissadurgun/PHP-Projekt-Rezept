@@ -22,6 +22,7 @@ $db = new DB('localhost', 'rezepte', 'root', '');
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $user_id = $_SESSION['user_id'];
+    $user_id = 1;
     $titel = $_POST['titel'];
     $zubereitung = $_POST['zubereitung'];
     $zubereitungsdauer = $_POST['zubereitungsdauer'];
@@ -30,29 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $schwierigkeitsgrad = $_POST['schwierigkeitsgrad'];
     $mahlzeitkategorie = $_POST['mahlzeitkategorie'];
     $kueche = $_POST['kueche'];
-    $bild_url = $_POST['bild'];
 
+    if (isset($_POST['submit'])) {
+        echo 'drinnen';
+        $file = $_FILES['bild'];
 
-    // Bildverarbeitung
-
-    if (isset($_POST['bild'])) {
-        echo "Bild erhalten";
-        $bild = $bild_url;
-
-        // Zielverzeichnis und Dateiname festlegen
-        $upload_dir = '../uploads/';
-        $bild_name = uniqid() . '-' . basename($bild['name']);
-        $bild_path = $upload_dir . $bild_name;
-
-        // Bild speichern
-        if (move_uploaded_file($bild['tmp_name'], $bild_path)) {
-            $bild_url = 'uploads/' . $bild_name; // Pfad für die Datenbank
-            echo "Bild gespeichert";
-        } else {
-            echo "Fehler beim Hochladen des Bildes.";
-            exit();
-        }
+        echo $file;
     }
+
+    $bild_url = $_POST['bild'];
 
     // Insert the recipe into the rezept table, including user_id
     $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild_url)
