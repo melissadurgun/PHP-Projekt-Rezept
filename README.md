@@ -59,7 +59,7 @@ CREATE TABLE `user` (
   `vorname` varchar(255) NOT NULL,
   `nachname` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
-  `passwort` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
