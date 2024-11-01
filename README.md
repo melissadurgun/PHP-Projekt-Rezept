@@ -1,3 +1,4 @@
 Anmerkung: Password muss leider Länge 255 haben, da die Passwörter gehashed werden... 
-![Screenshot 2024-10-24 153543](https://github.com/user-attachments/assets/1dc1e80a-b74e-4e10-bc6a-f48ecdd1fb56)
+![image](https://github.com/user-attachments/assets/f63918e9-e9c4-4589-858b-cd009ac95d68)
+
 
