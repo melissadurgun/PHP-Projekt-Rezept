@@ -1,4 +1,5 @@
 Anmerkung: Password muss leider Länge 255 haben, da die Passwörter gehashed werden... 
+
 Letzte Änderung in der DB (Stand 01.11.24, Dump im Anhang): 
 - Tabelle rezept: id --> rezept_id
 - Tabelle rezept: aus der Spalte ernaehrung wurde der ENUM-Wert "Normal" gelöscht. 
