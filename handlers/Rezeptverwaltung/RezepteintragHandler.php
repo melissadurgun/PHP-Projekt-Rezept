@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\..\assets\styles\styles.css">
+    <link rel="stylesheet" href="..\..\assets\styles\RezeptCreate.css">
+    <title>Document</title>
+</head>
+
 <?php
 include '../../includes/header.php';
 include '../../config/db.php';
@@ -32,14 +43,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $mahlzeitkategorie = $_POST['mahlzeitkategorie'];
     $kueche = $_POST['kueche'];
 
-    if (isset($_POST['submit'])) {
-        echo 'drinnen';
-        $file = $_FILES['bild'];
+    // Bildverarbeitung
 
-        echo $file;
+    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        $bild = $_FILES['file'];
+
+        echo 'Bild erhalten';
+
+        // Zielverzeichnis und Dateiname festlegen
+        $upload_dir = __DIR__ . '/../../uploads/'; // Absoluter Pfad zum uploads-Ordner
+        $bild_name = uniqid() . '-' . basename($bild['name']);
+        $bild_path = $upload_dir . $bild_name;
+
+        echo 'Bildname geändert';
+
+        // Bild speichern
+        if (move_uploaded_file($bild['tmp_name'], $bild_path)) {
+            $bild_url = '../../uploads/' . $bild_name; // Pfad für die Datenbank
+
+            echo 'Bild gespeichert';
+        } else {
+            echo "Fehler beim Hochladen des Bildes.";
+            exit();
+        }
+    } else {
+        echo "Fehler beim speichern des Bildes <br>" . $_FILES['file']['error'];
     }
-
-    $bild_url = $_POST['bild'];
 
     // Insert the recipe into the rezept table, including user_id
     $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild_url)
@@ -78,6 +107,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo "Rezept und Zutaten erfolgreich gespeichert!";
+    echo "Rezept und Zutaten erfolgreich gespeichert! <br> Redirecting...";
+
+    // Redirect to the RezeptDetailAnsicht page
+    header("Location: ../../handlers/Rezeptverwaltung/RezDetailansichtHandler.php?rezept_id=" . $rezept_id);
+    exit(); // Ensure no further code is executed after the redirect
 }
 ?>
+
+</html>

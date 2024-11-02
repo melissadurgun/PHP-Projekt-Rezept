@@ -22,7 +22,7 @@
                 <i class="fa fa-user account-icon"></i>
                 <ul class="dropdown-menu">
                     <li onclick="location.href = ''">Profil</li>
-                    <li onclick="location.href='../Rezeptverwaltung/test2-RezHinzu.php'">TEST Rezepte anlegen</li>
+                    <li onclick="location.href='../Rezeptverwaltung/RezHinzufügen.php'">TEST Rezepte anlegen</li>
                     <li onclick="location.href='../Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten
                     </li>
                     <li onclick="location.href='../Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>

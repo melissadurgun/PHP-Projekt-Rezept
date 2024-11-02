@@ -11,7 +11,6 @@ class DB extends PDO
             // Call the PDO constructor to establish the connection
             parent::__construct($dsn, $user, $password);
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            echo "DATABASE CONNECTED";
         } catch (PDOException $e) {
             die("Database connection failed: " . $e->getMessage());
         }

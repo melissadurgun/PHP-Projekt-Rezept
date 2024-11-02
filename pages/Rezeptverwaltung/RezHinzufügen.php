@@ -23,8 +23,8 @@
                 <div class="recipe-header">
                     <!-- feature needs to be implemented: add picture -->
                     <div class="image-placeholder">
-                        <input type="file" id="bild" name="bild" accept="image/*" style="display: none;" required>
-                        <label for="bild" class="file-label"></label>
+                        <input type="file" id="file" name="file" accept="image/*" style="display: none;" required>
+                        <label for="file" class="file-label"></label>
                         <!-- <img src="\PHP-Projekt\assets\images\ImagePlaceholder.jpg" alt="Recipe Image"> -->
                     </div>
                     <div class="titel">
@@ -119,7 +119,7 @@
                     <a href="\PHP-Projekt\public\index.php">
                         <button type="button" class="back">Zurück zum Profil</button>
                     </a>
-                    <input type="submit" value="Rezept speichern">
+                    <button type="submit" name="submit">Rezept speichern</button>
                 </div>
             </div>
         </form>
