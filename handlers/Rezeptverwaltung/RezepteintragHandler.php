@@ -28,7 +28,8 @@ session_start(); // Start session to access session variables
 $user_id = 1;
 
 // Create a new instance of the DB class
-$db = new DB('localhost', 'rezepte', 'root', '');
+$db = new DB('mariadb', 'Rezepte', 'root', '');
+
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

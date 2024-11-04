@@ -2,7 +2,7 @@
 include '../../config/db.php';
 
 // Create a new database connection
-$db = new DB('localhost', 'rezepte', 'root', '');
+$db = new DB('db', 'Rezepte', 'root', '');
 
 // Get the recipe ID from the URL
 $rezept_id = $_GET['rezept_id'] ?? null;

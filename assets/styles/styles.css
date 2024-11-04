@@ -548,3 +548,28 @@ footer {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
 }
+
+.section1 {
+  background-color: #dbe1dc;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section1 a {
+  text-decoration: none;
+  border: 2px solid #7f9383;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.rezepte-section {
+  background-color: #dbe1dc;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}

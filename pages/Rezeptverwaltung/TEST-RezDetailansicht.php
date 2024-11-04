@@ -25,16 +25,19 @@
             <div class="rezept-bild">
                 <img src="<?php echo $bild_url; ?>" alt="Bild von <?php echo $titel; ?>">
             </div>
-
             <!-- Recipe Information -->
             <div class="rezept-info">
                 <h1><?php echo $titel; ?></h1>
                 <p>Rezept von <?php echo $username; ?></p>
-                <p><i class="fas fa-clock"></i> <?php echo $zubereitungsdauer; ?> Minuten</p>
-                <p><i class="fas fa-tachometer-alt"></i> <?php echo $schwierigkeitsgrad; ?></p>
-                <p><i class="fas fa-utensils"></i> <?php echo $kueche; ?></p>
-                <p><i class="fas fa-leaf"></i> <?php echo $ernaehrung; ?></p>
-                <p><i class="fas fa-concierge-bell"></i> <?php echo $mahlzeitkategorie; ?></p>
+                <div class="icon-container1">
+                <p><i class="fa fa-clock-o"></i><?php echo $zubereitungsdauer; ?> Minuten</p>
+                <p><i class="fa fa-signal"></i> <?php echo $schwierigkeitsgrad; ?></p>
+                </div>
+                <div class="icon-container2">
+                <p><i class="fa fa-globe"></i> <?php echo $kueche; ?></p>
+                <p><i class="fa fa-leaf"></i> <?php echo $ernaehrung; ?></p>
+                <p><i class='fa fa-cutlery'></i> <?php echo $mahlzeitkategorie; ?></p>
+                </div>
             </div>
         </div>
         <div class="rezept-bottombox">
@@ -56,7 +59,9 @@
             </div>
         </div>
     </div>
-
+<?php
+include '../../includes/footer.php';
+?>
 </body>
 
 </html>
