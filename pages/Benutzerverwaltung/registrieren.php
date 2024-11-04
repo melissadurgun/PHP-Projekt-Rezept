@@ -14,18 +14,12 @@ include '../../includes/navigation.php';
 
 <body>
     <?php
-    require_once('functionals.php'); 
+    
     session_start();
 
-    // Inizialisierung 
-    $DSN = 'mysql:host=db;dbname=Rezepte';
-
-    //Datenbankverbindung aufbauen 
-    try { 
-        $DB = new Db($DSN, 'root', ''); 
-    } catch (PDOException $e) { 
-        exit('Connect failed: '.$e->getMessage()); 
-    } 
+    //Datenbankverbindung aufbauen
+    require_once('../../config/db.php'); 
+    $DB = new DB(); 
    
      // User ausloggen wenn gefordert
     if (isset($_REQUEST['logout'])) {
