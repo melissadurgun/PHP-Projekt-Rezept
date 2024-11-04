@@ -428,7 +428,7 @@ textarea {
   text-align: right;
 }
 
-.buttonsContainer input[type="submit"] {
+.buttonsContainer button[type="submit"] {
   padding: 10px 20px;
   border: none;
   background-color: #04914f;
@@ -452,7 +452,7 @@ textarea {
   background-color: #78807b;
 }
 
-input[type="submit"]:hover {
+button[type="submit"]:hover {
   background-color: #054e2c;
 }
 
@@ -547,4 +547,29 @@ a {
 footer {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   text-align: center;
+}
+
+.section1 {
+  background-color: #dbe1dc;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.section1 a {
+  text-decoration: none;
+  border: 2px solid #7f9383;
+  border-radius: 15px;
+  padding: 5px;
+}
+
+.rezepte-section {
+  background-color: #dbe1dc;
+  border-radius: 15px;
+  padding: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }

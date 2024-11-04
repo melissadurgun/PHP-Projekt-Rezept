@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="..\..\assets\styles\styles.css">
+    <link rel="stylesheet" href="..\..\assets\styles\RezeptCreate.css">
+    <title>Document</title>
+</head>
+
 <?php
 include '../../includes/header.php';
 include '../../config/db.php';
@@ -17,11 +28,13 @@ session_start(); // Start session to access session variables
 $user_id = 1;
 
 // Create a new instance of the DB class
-$db = new DB('localhost', 'rezepte', 'root', '');
+$db = new DB('mariadb', 'Rezepte', 'root', '');
+
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // $user_id = $_SESSION['user_id'];
+    $user_id = 1;
     $titel = $_POST['titel'];
     $zubereitung = $_POST['zubereitung'];
     $zubereitungsdauer = $_POST['zubereitungsdauer'];
@@ -30,28 +43,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $schwierigkeitsgrad = $_POST['schwierigkeitsgrad'];
     $mahlzeitkategorie = $_POST['mahlzeitkategorie'];
     $kueche = $_POST['kueche'];
-    $bild_url = $_POST['bild'];
-
 
     // Bildverarbeitung
 
-    if (isset($_POST['bild'])) {
-        echo "Bild erhalten";
-        $bild = $bild_url;
+    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+        $bild = $_FILES['file'];
+
+        echo 'Bild erhalten';
 
         // Zielverzeichnis und Dateiname festlegen
-        $upload_dir = '../uploads/';
+        $upload_dir = __DIR__ . '/../../uploads/'; // Absoluter Pfad zum uploads-Ordner
         $bild_name = uniqid() . '-' . basename($bild['name']);
         $bild_path = $upload_dir . $bild_name;
 
+        echo 'Bildname geändert';
+
         // Bild speichern
         if (move_uploaded_file($bild['tmp_name'], $bild_path)) {
-            $bild_url = 'uploads/' . $bild_name; // Pfad für die Datenbank
-            echo "Bild gespeichert";
+            $bild_url = '../../uploads/' . $bild_name; // Pfad für die Datenbank
+
+            echo 'Bild gespeichert';
         } else {
             echo "Fehler beim Hochladen des Bildes.";
             exit();
         }
+    } else {
+        echo "Fehler beim speichern des Bildes <br>" . $_FILES['file']['error'];
     }
 
     // Insert the recipe into the rezept table, including user_id
@@ -91,6 +108,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo "Rezept und Zutaten erfolgreich gespeichert!";
+    echo "Rezept und Zutaten erfolgreich gespeichert! <br> Redirecting...";
+
+    // Redirect to the RezeptDetailAnsicht page
+    header("Location: ../../handlers/Rezeptverwaltung/RezDetailansichtHandler.php?rezept_id=" . $rezept_id);
+    exit(); // Ensure no further code is executed after the redirect
 }
 ?>
+
+</html>
