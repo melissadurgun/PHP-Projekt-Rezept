@@ -116,7 +116,7 @@
                 </div>
 
                 <div class="buttonsContainer">
-                    <a href="\PHP-Projekt\public\index.php">
+                    <a href="../Benutzerverwaltung/benutzerseite.php">
                         <button type="button" class="back">Zurück zum Profil</button>
                     </a>
                     <button type="submit" name="submit">Rezept speichern</button>
@@ -126,15 +126,15 @@
     </div>
     <!-- Dynamisches Hinzufügen der Zutaten -->
     <script>
-    function zutatHinzufügen() {
-        const zutatenDiv = document.getElementById('zutaten');
-        const index = zutatenDiv.childElementCount / 3; // Calculate the next index for new ingredient fields
+        function zutatHinzufügen() {
+            const zutatenDiv = document.getElementById('zutaten');
+            const index = zutatenDiv.childElementCount / 3; // Calculate the next index for new ingredient fields
 
-        // Create new ingredient fields
-        const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
-        const mengeField =
-            `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
-        const einheitField = `<select name="zutaten[${index}][einheit]">
+            // Create new ingredient fields
+            const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
+            const mengeField =
+                `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
+            const einheitField = `<select name="zutaten[${index}][einheit]">
                              <option value="g">g</option>
                              <option value="ml">ml</option>
                              <option value="Stück">Stück</option>
@@ -144,8 +144,8 @@
                              <option value="kg">kg</option>
                           </select>`;
 
-        zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
-    }
+            zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
+        }
     </script>
 </body>
 <?php

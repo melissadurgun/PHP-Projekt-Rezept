@@ -13,7 +13,7 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="../public/index.php">
+                <a href="../../public/index.php">
                     <img src="../../assets/images/LogoLight1.png" alt="logo">
                 </a>
             </div>
@@ -21,7 +21,7 @@
             <div class="account-container">
                 <i class="fa fa-user account-icon"></i>
                 <ul class="dropdown-menu">
-                    <li onclick="location.href = ''">Profil</li>
+                    <li onclick="location.href = '../Benutzerverwaltung/benutzerseite.php'">Profil</li>
                     <li onclick="location.href='../Rezeptverwaltung/RezHinzufügen.php'">TEST Rezepte anlegen</li>
                     <li onclick="location.href='../Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten
                     </li>
