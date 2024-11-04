@@ -1,10 +1,14 @@
 <?php
 class DB extends PDO
 {
-    // Constructor to initialize the database connection
-    public function __construct($host = 'localhost', $dbname = 'Rezepte', $user = 'root', $password = '')
+    public function __construct()
     {
-        // DSN (Data Source Name) for the database connection
+        // Use 'localhost' by default, or 'db' if specified in an environment variable
+        $host = getenv('DB_HOST') ?: 'localhost';
+        $dbname = 'rezepte';
+        $user = 'root';
+        $password = '';
+
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
         try {
