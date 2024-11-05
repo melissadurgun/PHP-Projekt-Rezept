@@ -4,7 +4,7 @@ class DB extends PDO
     public function __construct()
     {
         // Use 'localhost' by default, or 'db' if specified in an environment variable
-        $host = getenv('DB_HOST') ?: 'localhost';
+        $host = "db";
         $dbname = 'rezepte';
         $user = 'root';
         $password = '';

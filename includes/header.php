@@ -13,7 +13,7 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="../../public/index.php">
+                <a href="../../pages/public/index.php">
                     <img src="../../assets/images/LogoLight1.png" alt="logo">
                 </a>
             </div>
@@ -21,12 +21,12 @@
             <div class="account-container">
                 <i class="fa fa-user account-icon"></i>
                 <ul class="dropdown-menu">
-                    <li onclick="location.href = '../Benutzerverwaltung/benutzerseite.php'">Profil</li>
-                    <li onclick="location.href='../Rezeptverwaltung/RezHinzufügen.php'">TEST Rezepte anlegen</li>
-                    <li onclick="location.href='../Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten
+                    <li onclick="location.href = '../../pages/Benutzerverwaltung/benutzerseite.php'">Profil</li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezHinzufügen.php'">TEST Rezepte anlegen</li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten
                     </li>
-                    <li onclick="location.href='../Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
-                    <li onclick="location.href='../Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
                 </ul>
             </div>
         </div>
