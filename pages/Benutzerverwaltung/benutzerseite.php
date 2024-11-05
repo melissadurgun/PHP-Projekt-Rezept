@@ -43,13 +43,17 @@ include '../../includes/navigation.php';
 
     <!-- Benutzer-Willkommensnachricht und Menü -->
     <header>
+        <div class="section1">
+            <div class="willkommen">
         <h1>Willkommen, <?php echo htmlspecialchars($_SESSION['vorname']); ?>!</h1>
         <p>Schön, dass du wieder da bist.</p>
+        </div>
         <div class="button-container">
-            <a href="profilbearbeiten.php" class="button">Persönliche Daten bearbeiten</a>
-            <a href="rezeptanlegen.php" class="button">Rezept anlegen</a>
-            <a href="datenloeschen.php" class="button">Profil löschen</a>
-            <a href="logout.php" class="button">Logout</a>
+            <a href="../Benutzerverwaltung/" class="button">Persönliche Daten bearbeiten</a>
+            <a href="../Rezeptverwaltung/RezHinzufügen.php" class="button">Rezept anlegen</a>
+            <a href="../Benutzerverwaltung/datenloeschen.php" class="button">Profil löschen</a>
+            <a href="../Benutzerverwaltung/" class="button">Logout</a>
+        </div>
         </div>
     </header>
 
@@ -57,9 +61,9 @@ include '../../includes/navigation.php';
     <!-- Abschnitt für die Rezepte -->
     <section class="rezepte-section">
         <h2>Deine Rezepte</h2>
-        <div class="button-container">
+        <div class="button-container-rezepte">
             <!-- Button für neues Rezept hinzufügen -->
-            <a href="..\..\pages\Rezeptverwaltung\RezHinzufügen.php" class="button">Neues Rezept hinzufügen</a>
+            <a href="..\..\pages\Rezeptverwaltung\RezHinzufügen.php" class="button"> + Neues Rezept hinzufügen</a>
         </div>
         <div class="rezepte-container">
             <?php foreach ($rezepte as $rezept): ?>
@@ -68,8 +72,18 @@ include '../../includes/navigation.php';
                     <img src="<?php echo htmlspecialchars($rezept['bild_url'] ?: 'platzhalter.png'); ?>"
                         alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
                     <h3><?php echo htmlspecialchars($rezept['titel']); ?></h3>
+                    <div class="link-container-rezepte">
+                <a href="">
+                <i class="fa fa-trash-o">
+                <span> Löschen</span></a></i>
+                <a href="../../handlers/Rezeptverwaltung/RezDetailansichtHandler.php?id=">
+                <i class="fa fa-edit">
+                <span>Bearbeiten</span></a></i>
                 </div>
+                </div>
+                
             <?php endforeach; ?>
+            
         </div>
     </section>
 

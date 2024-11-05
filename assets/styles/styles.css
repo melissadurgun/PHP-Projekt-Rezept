@@ -520,14 +520,13 @@ a {
   display: block;
   text-align: center;
   padding: 10px;
-  background-color: #ff88004c;
   color: #333;
   text-decoration: none;
   border-radius: 0 0 10px 10px;
 }
 
 .link-container a:hover {
-  background-color: #ff55004c;
+  background-color: #049548c1;
 }
 
 .impressum {
@@ -552,24 +551,137 @@ footer {
 .section1 {
   background-color: #dbe1dc;
   border-radius: 15px;
-  padding: 10px;
+  padding: 50px;
   padding-top: 20px;
   padding-bottom: 20px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.section1 a {
+.section1 p {
+  text-align: left;
+}
+
+.button-container a {
+  color: black;
   text-decoration: none;
   border: 2px solid #7f9383;
   border-radius: 15px;
-  padding: 5px;
+  padding: 10px;
+}
+
+.button-container a:hover {
+  background-color: #04914f2b;
+}
+
+.button-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.button-container-rezepte {
+  margin-bottom: 30px;
+  margin-top: 30px;
+}
+
+.button-container-rezepte a {
+  color: black;
+  text-decoration: none;
+  border: 2px solid #7f9383;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.button-container-rezepte a:hover {
+  background-color: #04914f2b;
 }
 
 .rezepte-section {
   background-color: #dbe1dc;
   border-radius: 15px;
-  padding: 10px;
+  padding: 30px;
   padding-top: 20px;
   padding-bottom: 20px;
+  margin: 20px;
+}
+
+.fa-trash-o {
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid #7f9383;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.fa-trash-o span {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+}
+
+.fa-trash-o a {
+  color: black;
+  text-decoration: none;
+  border: 2px solid #7f9383;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.fa-edit {
+  cursor: pointer;
+  text-decoration: none;
+  border: 1px solid #7f9383;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.fa-edit span {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  color: black;
+}
+
+.fa-edit a {
+  color: black;
+  text-decoration: none;
+  border: 2px solid #7f9383;
+  border-radius: 15px;
+  padding: 10px;
+}
+
+.link-container-rezepte {
+  display: flex;
+  justify-content: space-around;
+}
+
+.link-container-rezepte a:hover {
+  background-color: #04914f2b;
+  border-radius: 15px;
+}
+
+.rezepte-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.rezept-kachel {
+  border: 1px solid #ccc;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 10px;
+  min-width: 24%;
+  max-width: 24%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.rezept-kachel img {
+  width: 300px;
+  border-radius: 15px;
+  height: 300px;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto;
 }
