@@ -3,9 +3,24 @@ session_start();
 
 // wenn Benutzer nicht eingeloggt --> weiterleiten an Login 
 if (!isset($_SESSION['user'])) {
-    header("Location: login.php");
+    header("Location: Login.php");
     exit;
 }
+
+//Requires
+    require_once('../../config/db.php');
+    require_once('../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php'); 
+
+    //Datenbankverbindung aufbauen
+    $DB = new DB();
+
+    //Rezepte aus Datenbank abrufen 
+    $user_id = $_SESSION['user_id'];
+    // Rezepte des Benutzers abrufen, inklusive rezept_id
+    $rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild_url FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
+    $rezepteQuery->execute([':user_id' => $user_id]);
+    $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -25,24 +40,6 @@ include '../../includes/navigation.php';
 
 <body>
 
-    <?php
-
-    //Requires
-    require_once('../../config/db.php');
-    require_once('../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php'); 
-
-    //Datenbankverbindung aufbauen
-    $DB = new DB();
-
-    //Rezepte aus Datenbank abrufen 
-    $user_id = $_SESSION['user_id'];
-    // Rezepte des Benutzers abrufen, inklusive rezept_id
-    $rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild_url FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
-    $rezepteQuery->execute([':user_id' => $user_id]);
-    $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
-
-    ?>
-
     <!-- Benutzer-Willkommensnachricht und Menü -->
     <header>
         <div class="section1">
@@ -51,10 +48,10 @@ include '../../includes/navigation.php';
                 <p>Schön, dass du wieder da bist.</p>
             </div>
             <div class="button-container">
-                <a href="../Benutzerverwaltung/profilbearbeiten.php" class="button">Persönliche Daten bearbeiten</a>
+                <a href="../Benutzerverwaltung/ProfilBearbeiten.php" class="button">Persönliche Daten bearbeiten</a>
                 <a href="../Rezeptverwaltung/RezHinzufügen.php" class="button">Rezept anlegen</a>
-                <a href="../Benutzerverwaltung/datenloeschen.php" class="button">Profil löschen</a>
-                <a href="../Benutzerverwaltung/logout.php" class="button">Logout</a>
+                <a href="../Benutzerverwaltung/ProfilLoeschen.php" class="button">Profil löschen</a>
+                <a href="../Benutzerverwaltung/Logout.php" class="button">Logout</a>
             </div>
         </div>
     </header>

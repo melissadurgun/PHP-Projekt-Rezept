@@ -21,11 +21,9 @@
             <div class="account-container">
                 <i class="fa fa-user account-icon"></i>
                 <ul class="dropdown-menu">
-                    <li onclick="location.href = '../../pages/Benutzerverwaltung/benutzerseite.php'">Profil</li>
-                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezHinzufügen.php'">TEST Rezepte anlegen</li>
-                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
-                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
-                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
+                    <li onclick="location.href = '../../pages/Benutzerverwaltung/Benutzerseite.php'">Profil</li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezHinzufügen.php'">Neues Rezept Anlegen</li>
+                    <li onclick="location.href='../../pages/Benutzerverwaltung/Logout.php'">Logout</li>
                 </ul>
             </div>
         </div>

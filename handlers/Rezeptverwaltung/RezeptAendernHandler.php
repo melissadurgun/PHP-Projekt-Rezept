@@ -22,6 +22,6 @@ class RezeptAendernHandler {
     //Zeigt das Formular, in welchem die Änderungen vorgenommen werden können. 
 
     //Speichert die geänderten Daten in der Datenbank 
-    function speicherAenderungen(){$rezeptID}
+    function speicherAenderungen($rezeptID){}
 
 } 
