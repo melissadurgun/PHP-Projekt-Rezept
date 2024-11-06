@@ -8,18 +8,18 @@ if (!isset($_SESSION['user'])) {
 }
 
 //Requires
-    require_once('../../config/db.php');
-    require_once('../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php'); 
+require_once('../../config/db.php');
+require_once('../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php');
 
-    //Datenbankverbindung aufbauen
-    $DB = new DB();
+//Datenbankverbindung aufbauen
+$DB = new DB();
 
-    //Rezepte aus Datenbank abrufen 
-    $user_id = $_SESSION['user_id'];
-    // Rezepte des Benutzers abrufen, inklusive rezept_id
-    $rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild_url FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
-    $rezepteQuery->execute([':user_id' => $user_id]);
-    $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
+//Rezepte aus Datenbank abrufen 
+$user_id = $_SESSION['user_id'];
+// Rezepte des Benutzers abrufen, inklusive rezept_id
+$rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild_url FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
+$rezepteQuery->execute([':user_id' => $user_id]);
+$rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -62,33 +62,36 @@ include '../../includes/navigation.php';
 
         <!-- Button für neues Rezept hinzufügen -->
         <div class="button-container-rezepte">
-            <a href="..\..\pages\Rezeptverwaltung\RezHinzufügen.php" class="button"> + Neues Rezept hinzufügen</a>
+            <a href="..\..\pages\Rezeptverwaltung\RezeptHinzufügen.php" class="button"> + Neues Rezept hinzufügen</a>
         </div>
 
         <!-- Anzeigen der Rezepte des Benutzers -->
         <div class="rezepte-container">
             <?php foreach ($rezepte as $rezept): ?>
-                <div class="rezept-kachel">
-                    <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
-                    <img src="<?php echo htmlspecialchars($rezept['bild_url'] ?: 'platzhalter.png'); ?>"
-                         alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
-                    <h3><?php echo htmlspecialchars($rezept['titel']); ?></h3>
-                    
-                    <div class="link-container-rezepte">
-                        <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
-                        <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept['rezept_id']; ?>"
-                           onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                            <i class="fa fa-trash-o"></i> <span> Löschen</span>
-                        </a>
-                        <a href="../../handlers/Rezeptverwaltung/RezDetailansichtHandler.php?id=<?php echo $rezept['rezept_id']; ?>">
-                            <i class="fa fa-edit"></i> <span>Bearbeiten</span>
-                        </a>
-                    </div>
+            <div class="rezept-kachel">
+                <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
+                <img src="<?php echo htmlspecialchars($rezept['bild_url'] ?: 'platzhalter.png'); ?>"
+                    alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
+                <h3><a
+                        href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo $rezept['rezept_id']; ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
+                </h3>
 
+                <div class="link-container-rezepte">
+                    <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
+                    <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept['rezept_id']; ?>"
+                        onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
+                        <i class="fa fa-trash-o"></i> <span> Löschen</span>
+                    </a>
+                    <a
+                        href="../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php?id=<?php echo $rezept['rezept_id']; ?>">
+                        <i class="fa fa-edit"></i> <span>Bearbeiten</span>
+                    </a>
                 </div>
+
+            </div>
             <?php endforeach; ?>
         </div>
-        
+
     </section>
 
 </body>

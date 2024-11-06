@@ -37,6 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['username']) && !empt
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,15 +56,15 @@ include '../../includes/navigation.php';
         <form action="Login.php" method="post">
             <label>Benutzername (E-Mail Adresse):</label>
             <input type="text" name="username" required>
-            
+
             <label>Passwort:</label>
             <input type="password" name="password" required>
-            
+
             <input type="submit" value="Anmelden">
         </form>
-        
+
         <p>Noch keinen Account? <a href="Registrieren.php">Hier registrieren</a></p>
-        
+
         <?php
         // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist
         if (!empty($errorMessage)) {
@@ -76,4 +77,5 @@ include '../../includes/navigation.php';
 <?php
 include '../../includes/footer.php';
 ?>
+
 </html>
