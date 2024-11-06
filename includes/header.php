@@ -22,7 +22,8 @@
                 <i class="fa fa-user account-icon"></i>
                 <ul class="dropdown-menu">
                     <li onclick="location.href = '../../pages/Benutzerverwaltung/Benutzerseite.php'">Profil</li>
-                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezHinzufügen.php'">Neues Rezept Anlegen</li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezeptHinzufügen.php'">Neues Rezept Anlegen
+                    </li>
                     <li onclick="location.href='../../pages/Benutzerverwaltung/Logout.php'">Logout</li>
                 </ul>
             </div>
@@ -33,7 +34,8 @@
         <div class="suchen">
             <form action="../../pages/Rezeptsuche/RezeptSuche.php" method="POST">
                 <i class="fa fa-search search-icon"></i>
-                <input type="text" name="search" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt" class="search-bar" />
+                <input type="text" name="search" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt"
+                    class="search-bar" />
             </form>
         </div>
     </header>

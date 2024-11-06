@@ -17,7 +17,7 @@
 
 <body>
     <div class="form">
-        <form action="..\..\handlers\Rezeptverwaltung\RezepteintragHandler.php" method="POST"
+        <form action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php" method="POST"
             enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">
@@ -126,27 +126,34 @@
     </div>
     <!-- Dynamisches Hinzufügen der Zutaten -->
     <script>
-        function zutatHinzufügen() {
-            const zutatenDiv = document.getElementById('zutaten');
-            const index = zutatenDiv.childElementCount / 3; // Calculate the next index for new ingredient fields
+    // Initialize the ingredient index as a global variable
+    let ingredientIndex = 1;
 
-            // Create new ingredient fields
-            const nameField = `<input type="text" name="zutaten[${index}][name]" placeholder="Zutat" required>`;
-            const mengeField =
-                `<input type="number" name="zutaten[${index}][menge]" placeholder="Menge" step="0.1" required>`;
-            const einheitField = `<select name="zutaten[${index}][einheit]">
-                             <option value="g">g</option>
-                             <option value="ml">ml</option>
-                             <option value="Stück">Stück</option>
-                             <option value="TL">TL</option>
-                             <option value="EL">EL</option>
-                             <option value="L">L</option>
-                             <option value="kg">kg</option>
-                          </select>`;
+    function zutatHinzufügen() {
+        const zutatenDiv = document.getElementById('zutaten');
 
-            zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
-        }
+        // Create new ingredient fields with the correct index
+        const nameField = `<input type="text" name="zutaten[${ingredientIndex}][name]" placeholder="Zutat" required>`;
+        const mengeField =
+            `<input type="number" name="zutaten[${ingredientIndex}][menge]" placeholder="Menge" step="0.1" required>`;
+        const einheitField = `<select name="zutaten[${ingredientIndex}][einheit]">
+                                <option value="g">g</option>
+                                <option value="ml">ml</option>
+                                <option value="Stück">Stück</option>
+                                <option value="TL">TL</option>
+                                <option value="EL">EL</option>
+                                <option value="L">L</option>
+                                <option value="kg">kg</option>
+                              </select>`;
+
+        // Append the new ingredient fields to the container
+        zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
+
+        // Increment the index for the next ingredient
+        ingredientIndex++;
+    }
     </script>
+
 </body>
 <?php
 include '../../includes/footer.php';

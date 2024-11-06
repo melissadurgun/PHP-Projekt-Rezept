@@ -1,40 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="..\..\assets\styles\styles.css">
-    <link rel="stylesheet" href="..\..\assets\styles\RezeptCreate.css">
-    <title>Document</title>
-</head>
-
 <?php
-include '../../includes/header.php';
-include '../../config/db.php';
 
-session_start(); // Start session to access session variables
+session_start();
+
+include '../../includes/header.php';
+require_once('../../config/db.php');
 
 // Check if user is logged in
-// if (!isset($_SESSION['user_id'])) {
-//     header("Location: \PHP-Projekt\pages\Benutzerverwaltung\login.php"); // Redirect to login if not logged in
-//     exit();
-// }
+if (!isset($_SESSION['user'])) {
+    header("Location: ..\..\pages\Benutzerverwaltung\login.php");
+    exit;
+}
 
-// Retrieve user_id from session
-// $user_id = $_SESSION['user_id'];
-
-//TEST
-$user_id = 1;
-
-// Create a new instance of the DB class
-$db = new DB('mariadb', 'Rezepte', 'root', '');
-
+//Datenbankverbindung
+$db = new DB();
 
 // Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // $user_id = $_SESSION['user_id'];
-    $user_id = 1;
+    $user_id = $_SESSION['user_id'];
     $titel = $_POST['titel'];
     $zubereitung = $_POST['zubereitung'];
     $zubereitungsdauer = $_POST['zubereitungsdauer'];
@@ -90,6 +72,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the ID of the last inserted recipe
     $rezept_id = $db->lastInsertId();
 
+    // //Debugging
+    // echo '<pre>';
+    // print_r($_POST['zutaten']);
+    // echo '</pre>';
+
     // Insert each ingredient into the zutaten table
     if (!empty($_POST['zutaten'])) {
         foreach ($_POST['zutaten'] as $zutat) {
@@ -97,21 +84,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $menge = $zutat['menge'] ?? 0;
             $einheit = $zutat['einheit'] ?? null;
 
-            $sql = "INSERT INTO zutaten (rezept_id, name, menge, einheit)
+            // Check that all fields have values before inserting
+            if (!empty($name) && !empty($menge) && !empty($einheit)) {
+                $sql = "INSERT INTO zutaten (rezept_id, name, menge, einheit)
                     VALUES (:rezept_id, :name, :menge, :einheit)";
-            $db->executeQuery($sql, [
-                ':rezept_id' => $rezept_id,
-                ':name' => $name,
-                ':menge' => $menge,
-                ':einheit' => $einheit
-            ]);
+                $db->executeQuery($sql, [
+                    ':rezept_id' => $rezept_id,
+                    ':name' => $name,
+                    ':menge' => $menge,
+                    ':einheit' => $einheit
+                ]);
+            }
         }
     }
 
     echo "Rezept und Zutaten erfolgreich gespeichert! <br> Redirecting...";
 
     // Redirect to the RezeptDetailAnsicht page
-    header("Location: ../../handlers/Rezeptverwaltung/RezDetailansichtHandler.php?rezept_id=" . $rezept_id);
+    header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
     exit(); // Ensure no further code is executed after the redirect
 }
 ?>
