@@ -23,19 +23,21 @@
                 <ul class="dropdown-menu">
                     <li onclick="location.href = '../../pages/Benutzerverwaltung/benutzerseite.php'">Profil</li>
                     <li onclick="location.href='../../pages/Rezeptverwaltung/RezHinzufügen.php'">TEST Rezepte anlegen</li>
-                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten
-                    </li>
+                    <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteBearbeiten.php'">Rezepte bearbeiten</li>
                     <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteLöschen.php'">Rezepte löschen</li>
                     <li onclick="location.href='../../pages/Rezeptverwaltung/RezepteAnzeigen.php'">Rezepte anzeigen</li>
                 </ul>
             </div>
         </div>
         <br>
-        <div class="suchen">
-            <i class="fa fa-search search-icon"></i>
-            <input type="text" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt" class="search-bar" />
-        </div>
 
+        <!-- Suchleiste als Formular für Weiterleitung zu Rezeptsuche.php -->
+        <div class="suchen">
+            <form action="../../pages/Rezeptsuche/RezeptSuche.php" method="POST">
+                <i class="fa fa-search search-icon"></i>
+                <input type="text" name="search" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt" class="search-bar" />
+            </form>
+        </div>
     </header>
 </body>
 

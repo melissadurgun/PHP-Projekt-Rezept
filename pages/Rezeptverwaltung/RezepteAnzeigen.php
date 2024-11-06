@@ -9,8 +9,8 @@
     <title>Alle Rezepte</title>
 </head>
 <?php
-include '../includes/header.php';
-include '../includes/navigation.php';
+include '../../includes/header.php';
+include '../../includes/navigation.php';
 ?>
 
 <body>
