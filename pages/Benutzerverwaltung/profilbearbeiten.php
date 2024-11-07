@@ -64,7 +64,7 @@ include '../../includes/navigation.php';
         <label for="password2">Passwort wiederholen:</label>
         <input type="password" id="password2" name="password2">
 
-        <input type="submit" value="Änderungen speichern">
+        <input type="submit" value="Änderungen speichern" class="save">
     </form>
 
     <?php

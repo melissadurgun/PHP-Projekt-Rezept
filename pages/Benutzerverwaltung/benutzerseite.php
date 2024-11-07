@@ -49,7 +49,6 @@ include '../../includes/navigation.php';
             </div>
             <div class="button-container">
                 <a href="../Benutzerverwaltung/ProfilBearbeiten.php" class="button">Persönliche Daten bearbeiten</a>
-                <a href="../Rezeptverwaltung/RezHinzufügen.php" class="button">Rezept anlegen</a>
                 <a href="../Benutzerverwaltung/ProfilLoeschen.php" class="button">Profil löschen</a>
                 <a href="../Benutzerverwaltung/Logout.php" class="button">Logout</a>
             </div>
@@ -80,11 +79,11 @@ include '../../includes/navigation.php';
                     <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
                     <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept['rezept_id']; ?>"
                         onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                        <i class="fa fa-trash-o"></i> <span> Löschen</span>
+                        <i class="fa fa-trash-o"> <span> Löschen</span></i>
                     </a>
                     <a
                         href="../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php?id=<?php echo $rezept['rezept_id']; ?>">
-                        <i class="fa fa-edit"></i> <span>Bearbeiten</span>
+                        <i class="fa fa-edit"><span>Bearbeiten</span></i> 
                     </a>
                 </div>
 

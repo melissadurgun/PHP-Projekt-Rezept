@@ -52,18 +52,21 @@ include '../../includes/navigation.php';
 
 <body>
     <div class="login-container">
+        <div class="login">
         <h2>Anmelden</h2>
-        <form action="Login.php" method="post">
+        <p>Noch keinen Account? <a href="Registrieren.php">Hier registrieren</a></p>
+        </div>
+        <form name="loginForm" action="Login.php" method="post">
             <label>Benutzername (E-Mail Adresse):</label>
             <input type="text" name="username" required>
 
             <label>Passwort:</label>
             <input type="password" name="password" required>
 
-            <input type="submit" value="Anmelden">
+            <input type="submit" value="Anmelden" class="anmelden">
         </form>
 
-        <p>Noch keinen Account? <a href="Registrieren.php">Hier registrieren</a></p>
+        
 
         <?php
         // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist

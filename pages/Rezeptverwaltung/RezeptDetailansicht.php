@@ -45,10 +45,9 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 </head>
 
 <body>
-    <header>
         <?php include '../../includes/header.php'; ?>
         <?php include '../../includes/navigation.php'; ?>
-    </header>
+
 
     <div class="rezept-detail-container">
         <div class="rezept-topbox">

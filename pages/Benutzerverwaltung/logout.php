@@ -25,10 +25,12 @@ include '../../includes/header.php';
 include '../../includes/navigation.php';
 ?>
 <body>
-    <div class="login-container">
+    <div class="logout">
         <h2>Du willst uns schon verlassen?</h2>
+        <div class="logout-buttons">
         <a href="Login.php">Melde dich hier erneut an!</a>
         <a href="../../pages/public/index.php">Zurück zur Startseite</a>
+        </div>
     </div>
 </body>
 <?php
