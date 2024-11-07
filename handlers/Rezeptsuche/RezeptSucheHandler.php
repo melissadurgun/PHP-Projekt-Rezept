@@ -1,16 +1,27 @@
 <?php
 require_once('../../config/db.php');
 
-class RezeptSucheHandler {
+class RezeptSucheHandler
+{
     private $DB;
 
-    public function __construct() {
+    public function __construct()
+    {
         // Datenbankverbindung aufbauen
         $this->DB = new DB();
     }
 
+    // Methode, um zu prüfen, ob Filter gesetzt sind
+    public function hasFilters($filters)
+    {
+        return !empty(array_filter($filters, function ($value) {
+            return $value !== 'keinFilter' && $value !== '';
+        }));
+    }
+
     // Methode, um Rezepte basierend auf Filterkriterien abzurufen
-    public function getRezepte($filters) {
+    public function getRezepte($filters)
+    {
         // Verwenden der buildSQLQuery-Methode für den SQL-String und die Parameter
         $queryData = $this->buildSQLQuery($filters);
         $sql = $queryData['sql'];
@@ -25,11 +36,17 @@ class RezeptSucheHandler {
     }
 
     // Methode zum Erstellen des SQL-Strings und der Parameter
-    private function buildSQLQuery($filters) {
-        $sql = 'SELECT titel, bild_url FROM rezept WHERE 1=1';
+    private function buildSQLQuery($filters)
+    {
+        $sql = 'SELECT * FROM rezept WHERE 1=1';
         $parameters = [];
 
-        // Filter hinzufügen, falls vorhanden
+        // Filter hinzufügen, falls vorhanden        
+        if (!empty($filters['zubereitungsdauer']) && $filters['zubereitungsdauer'] != 'keinFilter') {
+            $sql .= ' AND zubereitungsdauer = :zubereitungsdauer';
+            $parameters[':zubereitungsdauer'] = $filters['zubereitungsdauer'];
+        }
+
         if (!empty($filters['ernaehrung']) && $filters['ernaehrung'] != 'keinFilter') {
             $sql .= ' AND ernaehrung = :ernaehrung';
             $parameters[':ernaehrung'] = $filters['ernaehrung'];

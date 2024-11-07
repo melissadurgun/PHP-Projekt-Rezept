@@ -1,64 +1,75 @@
 <?php
-$rezeptDetail = new RezeptDetailHandler();
-$rezept = $handler->getRezeptDetails($rezept_id);
-$data = $rezeptDetail->getRecipeDetail($rezept_id);
+require_once('../../handlers/Rezeptsuche/RezeptSucheHandler.php');
 
-$rezeptSucheHandler = new RezeptSucheHandler();
+// Initialisieren des Suchhandlers
+$sucheHandler = new RezeptSucheHandler();
 
-if (!$data) {
-    die("Fehler beim Laden der Rezeptdetails.");
+// Filterkriterien abrufen (von der Suchleiste oder der Navigation)
+$filters = [
+    'zubereitungsdauer' => $_POST['zubereitungsdauer'] ?? 'keinFilter',
+    'ernaehrung' => $_POST['ernaehrung'] ?? 'keinFilter',
+    'schwierigkeitsgrad' => $_POST['schwierigkeitsgrad'] ?? 'keinFilter',
+    'mahlzeit' => $_POST['mahlzeit'] ?? 'keinFilter',
+    'kueche' => $_POST['kueche'] ?? 'keinFilter',
+    'search' => $_POST['search'] ?? ''
+];
+
+// Prüfen, ob Filter angewendet wurden
+if ($sucheHandler->hasFilters($filters)) {
+    // Filter sind gesetzt, gefilterte Rezepte abrufen
+    $rezepte = $sucheHandler->getRezepte($filters);
+} else {
+    // Keine Filter gesetzt, alle Rezepte abrufen
+    $rezepte = $sucheHandler->getRezepte([]);
 }
 
-// Extract data for easy access in the view
-$recipe = $data['recipe'];
-$ingredients = $data['ingredients'];
-
-// Prepare data for display
-$titel = htmlspecialchars($recipe['titel']);
-$username = htmlspecialchars($recipe['username']);
-$zubereitungsdauer = htmlspecialchars($recipe['zubereitungsdauer']);
-$schwierigkeitsgrad = htmlspecialchars($recipe['schwierigkeitsgrad']);
-$kueche = htmlspecialchars($recipe['kueche']);
-$ernaehrung = htmlspecialchars($recipe['ernaehrung']);
-$mahlzeitkategorie = htmlspecialchars($recipe['mahlzeitkategorie']);
-$bild_url = htmlspecialchars($recipe['bild_url']);
-$portionen = htmlspecialchars($recipe['portionen']);
-$zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 ?>
 
+<!DOCTYPE html>
+<html lang="de">
 
-<div class="recipe-container">
-    <div class="recipe-grid">
-        <!-- Recipe Card 1 -->
-        <div class="recipe-card">
-            <div class="recipe-image">
-                <img src="path/to/your/image.jpg" alt="Recipe Image">
-            </div>
-            <div class="recipe-info">
-                <h3 class="recipe-title">Titel Rezept Nummer 1</h3>
-                <div class="recipe-meta">
-                    <span class="meta-item"><i class="fa fa-clock-o"></i> 20min</span>
-                    <span class="meta-item"><i class="fa fa-signal"></i> Leicht</span>
-                    <span class="meta-item"><i class="fa fa-leaf"></i> Vegetarisch</span>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../assets/styles/styles.css">
+    <title>Rezept Übersicht</title>
+</head>
+
+<body>
+    <main>
+        <div class="rezepte-container">
+            <?php if (empty($rezepte)): ?>
+            <p>Keine Rezepte gefunden.</p>
+
+            <?php else: ?>
+            <?php foreach ($rezepte as $rezept): ?>
+
+            <div class="rezept-kachel">
+                <img src="../../assets/images/<?php echo htmlspecialchars($rezept['bild_url']); ?>"
+                    alt="<?php echo htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                <h3><a
+                        href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo htmlspecialchars($rezept['rezept_id']); ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
+                </h3>
+                <div class="link-container-rezepte">
+                    <span class="meta-item">
+                        <i class="fa fa-clock-o"></i> <?php echo htmlspecialchars($rezept['zubereitungsdauer']); ?>
+                        min
+                        <!-- Placeholder for actual time -->
+                    </span>
+                    <span class="meta-item">
+                        <i class="fa fa-signal"></i> <?php echo htmlspecialchars($rezept['schwierigkeitsgrad']); ?>
+                        <!-- Placeholder for actual difficulty -->
+                    </span>
+                    <span class="meta-item">
+                        <i class="fa fa-leaf"></i> <?php echo htmlspecialchars($rezept['ernaehrung']); ?>
+                        <!-- Placeholder for actual dietary info -->
+                    </span>
                 </div>
             </div>
+            <?php endforeach; ?>
+            <?php endif; ?>
         </div>
+    </main>
+</body>
 
-        <!-- Repeat Recipe Card for additional recipes -->
-        <div class="recipe-card">
-            <div class="recipe-image">
-                <img src="path/to/your/image.jpg" alt="Recipe Image">
-            </div>
-            <div class="recipe-info">
-                <h3 class="recipe-title">Titel Rezept Nummer 1</h3>
-                <div class="recipe-meta">
-                    <span class="meta-item"><i class="fa fa-clock-o"></i> 20min</span>
-                    <span class="meta-item"><i class="fa fa-signal"></i> Leicht</span>
-                    <span class="meta-item"><i class="fa fa-leaf"></i> Vegetarisch</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Add more recipe cards as needed -->
-    </div>
-</div>
+</html>

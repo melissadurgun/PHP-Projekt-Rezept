@@ -82,8 +82,8 @@ include '../../includes/navigation.php';
                         <i class="fa fa-trash-o"> <span> Löschen</span></i>
                     </a>
                     <a
-                        href="../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php?id=<?php echo $rezept['rezept_id']; ?>">
-                        <i class="fa fa-edit"><span>Bearbeiten</span></i> 
+                        href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept['rezept_id']; ?>">
+                        <i class="fa fa-edit"><span>Bearbeiten</span></i>
                     </a>
                 </div>
 
