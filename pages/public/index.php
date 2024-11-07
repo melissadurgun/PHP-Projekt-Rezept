@@ -13,31 +13,9 @@
 <?php
 include '../../includes/header.php';
 include '../../includes/navigation.php';
-?>
 
-<body>
-    <main>
-        <div class="recipe-cards">
-            <div class="recipe-card">
-                <img src="../../assets/images/NeusteRezepte.png" alt="Rezept 1" />
-                <div class="overlay">NEUESTE REZEPTE</div>
-            </div>
-            <div class="recipe-card">
-                <img src="../../assets/images/Sonntagskuchen.png" alt="Rezept 2" />
-                <div class="overlay">SONNTAGS-KUCHEN</div>
-            </div>
-            <div class="recipe-card">
-                <img src="../../assets/images/Vegetarian.png" alt="Rezept 3" />
-                <div class="overlay">VEGGIE HAUPTGERICHTE</div>
-            </div>
-            <div class="recipe-card">
-                <img src="../../assets/images/Italienisch.avif" alt="Rezept 4" />
-                <div class="overlay">ITALIENISCH</div>
-            </div>
-        </div>
-    </main>
-</body>
-<?php
+include '../../pages/Rezeptverwaltung/RezeptOverview.php';
 include '../../includes/footer.php';
 ?>
+
 </html>
