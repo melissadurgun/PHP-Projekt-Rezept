@@ -30,11 +30,14 @@ include '../../includes/navigation.php';
     <p>Dann verlieren wir nicht nur dich, sondern auch deine Arbeit.</p> 
     <p>Wenn du dein Profil löschst, werden alle deine Rezepte gelöscht. Deine Kommentare bleiben weiterhin bestehen.</p>
     <br>
-    <form action="../../handlers/Benutzerverwaltung/ProfilLoeschenHandler.php" method="POST">
+    <form name="delete" action="../../handlers/Benutzerverwaltung/ProfilLoeschenHandler.php" method="POST">
         <input type="hidden" name="confirm_delete" value="1">
+        <div class="button-container">
         <button type="submit" class="button">Ja, Profil löschen</button>
+        <a href="Benutzerseite.php">Zurück zur Benutzerseite</a>
+    </div>
     </form>
-    <a href="Benutzerseite.php" class="button">Zurück zur Benutzerseite</a>
+    
 </div>
 </body>
 

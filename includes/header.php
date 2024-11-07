@@ -31,13 +31,11 @@
         <br>
 
         <!-- Suchleiste als Formular für Weiterleitung zu Rezeptsuche.php -->
-        <div class="suchen">
-            <form action="../../pages/Rezeptsuche/RezeptSuche.php" method="POST">
+            <form name ="Suchleiste" action="../../pages/Rezeptsuche/RezeptSuche.php" method="POST">
                 <i class="fa fa-search search-icon"></i>
                 <input type="text" name="search" placeholder="Dein perfekter Biss ist nur ein Rezept entfernt"
                     class="search-bar" />
             </form>
-        </div>
     </header>
 </body>
 

@@ -8,16 +8,16 @@
     <link rel="stylesheet" href="../../assets/styles/RezeptCreate.css">
     <link rel="stylesheet" href="../../assets/styles/styles.css">
 </head>
-<header>
+
     <?php
     include '../../includes/header.php';
     include '../../includes/navigation.php';
     ?>
-</header>
+
 
 <body>
     <div class="form">
-        <form action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php" method="POST"
+        <form name="RezeptHinzufügenForm" action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php" method="POST"
             enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">
