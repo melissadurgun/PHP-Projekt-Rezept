@@ -72,11 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the ID of the last inserted recipe
     $rezept_id = $db->lastInsertId();
 
-    // //Debugging
-    // echo '<pre>';
-    // print_r($_POST['zutaten']);
-    // echo '</pre>';
-
     // Insert each ingredient into the zutaten table
     if (!empty($_POST['zutaten'])) {
         foreach ($_POST['zutaten'] as $zutat) {

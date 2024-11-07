@@ -43,7 +43,7 @@ label {
   /* Adjust width as needed */
   height: 100px;
   /* Adjust height as needed */
-  background-image: url("/PHP-Projekt/assets/images/ImagePlaceholder.jpg");
+  background-image: url("../images/ImagePlaceholder.jpg");
   /* Path to the image */
   background-size: cover;
   /* Cover to fill the area */

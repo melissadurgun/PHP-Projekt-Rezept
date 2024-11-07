@@ -21,6 +21,9 @@ if (!$data) {
 $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
+//Check if its own recipe
+$isOwner = ($recipe['user_id'] == $_SESSION['user_id']);
+
 // Prepare data for display
 $titel = htmlspecialchars($recipe['titel']);
 $username = htmlspecialchars($recipe['username']);
@@ -45,8 +48,8 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 </head>
 
 <body>
-        <?php include '../../includes/header.php'; ?>
-        <?php include '../../includes/navigation.php'; ?>
+    <?php include '../../includes/header.php'; ?>
+    <?php include '../../includes/navigation.php'; ?>
 
 
     <div class="rezept-detail-container">
@@ -56,7 +59,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
             </div>
             <div class="rezept-info">
                 <h1><?php echo $titel; ?></h1>
-                <p>Rezept von <?php echo $username; ?></p>
+                <p>Rezept von <?php echo $username; ?></p> <br><br>
                 <div class="icon-container1">
                     <p><i class="fa fa-clock-o"></i> <?php echo $zubereitungsdauer; ?> Minuten</p>
                     <p><i class="fa fa-signal"></i> <?php echo $schwierigkeitsgrad; ?></p>
@@ -83,6 +86,13 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
                 </ul>
             </div>
         </div>
+        <!-- Display "Rezept bearbeiten" button only if the user is the recipe owner -->
+        <?php if ($isOwner): ?>
+        <div class="edit-button-container">
+            <a href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept_id; ?>"
+                class="edit-button">Rezept bearbeiten</a>
+        </div>
+        <?php endif; ?>
     </div>
 
     <footer>

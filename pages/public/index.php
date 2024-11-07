@@ -15,7 +15,7 @@ include '../../includes/header.php';
 include '../../includes/navigation.php';
 ?>
 
-<body>
+<!-- <body>
     <main>
         <div class="recipe-cards">
             <div class="recipe-card">
@@ -36,8 +36,10 @@ include '../../includes/navigation.php';
             </div>
         </div>
     </main>
-</body>
+</body> -->
 <?php
+include '../../pages/Rezeptverwaltung/RezeptOverview.php';
 include '../../includes/footer.php';
 ?>
+
 </html>

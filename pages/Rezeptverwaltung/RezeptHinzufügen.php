@@ -62,10 +62,9 @@
                 <div class="zutaten">
                     <label>Zutaten</label>
                     <div class="zutaten-row" id="zutaten">
-                        <input type="text" id="zutat" name="zutat" placeholder="Zutat">
-                        <input type="number" id="menge" name="menge" placeholder="Menge" required>
-                        <!-- TODO! Handler has to be able to read einheit-->
-                        <select id="zutaten" name="zutaten" required>
+                        <input type="text" name="zutaten[0][name]" placeholder="Zutat" required>
+                        <input type="number" name="zutaten[0][menge]" placeholder="Menge" step="0.1" required>
+                        <select name="zutaten[0][einheit]" required>
                             <option value="g">g</option>
                             <option value="ml">ml</option>
                             <option value="Stück">Stück</option>
@@ -77,7 +76,6 @@
                     </div>
                     <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
                 </div>
-
                 <div class="additional-options">
                     <div>
                         <label for="mahlzeitkategorie">Menüart</label>
@@ -126,17 +124,17 @@
     </div>
     <!-- Dynamisches Hinzufügen der Zutaten -->
     <script>
-    // Initialize the ingredient index as a global variable
-    let ingredientIndex = 1;
+        // Initialize the ingredient index as a global variable
+        let ingredientIndex = 1;
 
-    function zutatHinzufügen() {
-        const zutatenDiv = document.getElementById('zutaten');
+        function zutatHinzufügen() {
+            const zutatenDiv = document.getElementById('zutaten');
 
-        // Create new ingredient fields with the correct index
-        const nameField = `<input type="text" name="zutaten[${ingredientIndex}][name]" placeholder="Zutat" required>`;
-        const mengeField =
-            `<input type="number" name="zutaten[${ingredientIndex}][menge]" placeholder="Menge" step="0.1" required>`;
-        const einheitField = `<select name="zutaten[${ingredientIndex}][einheit]">
+            // Create new ingredient fields with the correct index
+            const nameField = `<input type="text" name="zutaten[${ingredientIndex}][name]" placeholder="Zutat" required>`;
+            const mengeField =
+                `<input type="number" name="zutaten[${ingredientIndex}][menge]" placeholder="Menge" step="0.1" required>`;
+            const einheitField = `<select name="zutaten[${ingredientIndex}][einheit]">
                                 <option value="g">g</option>
                                 <option value="ml">ml</option>
                                 <option value="Stück">Stück</option>
@@ -146,12 +144,12 @@
                                 <option value="kg">kg</option>
                               </select>`;
 
-        // Append the new ingredient fields to the container
-        zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
+            // Append the new ingredient fields to the container
+            zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
 
-        // Increment the index for the next ingredient
-        ingredientIndex++;
-    }
+            // Increment the index for the next ingredient
+            ingredientIndex++;
+        }
     </script>
 
 </body>
