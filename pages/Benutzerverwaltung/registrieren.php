@@ -29,6 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,30 +43,34 @@ include '../../includes/navigation.php';
 ?>
 
 <body>
-<div class="login-container">
-    <h2>Neu hier?</h2>
-    <p>Registrieren Sie sich!</p><br>
+    <div class="login-container">
+        <div>
+            <h2>Neu hier?</h2>
 
-    <form action="registrieren.php" method="post">
-        <label for="vorname">Vorname:</label>
-        <input type="text" id="reg_vorname" name="reg_vorname" required>
+            <p>Registrieren Sie sich!</p><br><br><br>
+            <p>Schon registriert? <button class="anmelden" onclick="window.location.href='Login.php'">Dann klicke
+                    hier.</button></p>
+        </div>
 
-        <label for="nachname">Nachname:</label>
-        <input type="text" id="reg_nachname" name="reg_nachname" required>
+        <form action="registrieren.php" method="post">
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="reg_vorname" name="reg_vorname" required>
 
-        <label for="username">E-Mail Adresse:</label>
-        <input type="text" id="reg_username" name="reg_username" required>
+            <label for="nachname">Nachname:</label>
+            <input type="text" id="reg_nachname" name="reg_nachname" required>
 
-        <label for="password">Passwort:</label>
-        <input type="password" id="reg_password1" name="reg_password1" required> 
+            <label for="username">E-Mail Adresse:</label>
+            <input type="text" id="reg_username" name="reg_username" required>
 
-        <label>Passwort wiederholen:</label>
-        <input type="password" id="reg_password2" name="reg_password2" required>
+            <label for="password">Passwort:</label>
+            <input type="password" id="reg_password1" name="reg_password1" required>
 
-        <input type="submit" value="Anmelden">
-    </form>
+            <label>Passwort wiederholen:</label>
+            <input type="password" id="reg_password2" name="reg_password2" required>
 
-    <p>Schon angemeldet? <a href="Login.php">Dann klicke hier.</a></p>
+            <input type="submit" value="Anmelden" class="anmelden">
+        </form>
+    </div>
 
     <?php
     // Fehlermeldung anzeigen, wenn vorhanden
@@ -73,10 +78,11 @@ include '../../includes/navigation.php';
         echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
     }
     ?>
-</div>
+    </div>
 </body>
 
 <?php
 include '../../includes/footer.php';
 ?>
+
 </html>

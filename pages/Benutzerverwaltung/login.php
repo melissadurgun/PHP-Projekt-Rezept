@@ -53,8 +53,9 @@ include '../../includes/navigation.php';
 <body>
     <div class="login-container">
         <div class="login">
-        <h2>Anmelden</h2>
-        <p>Noch keinen Account? <a href="Registrieren.php">Hier registrieren</a></p>
+            <h2>Anmelden</h2>
+            <p>Noch keinen Account? <button class="anmelden" onclick="window.location.href = 'Registrieren.php'">Hier
+                    registrieren.</button></p>
         </div>
         <form name="loginForm" action="Login.php" method="post">
             <label>Benutzername (E-Mail Adresse):</label>
@@ -66,7 +67,7 @@ include '../../includes/navigation.php';
             <input type="submit" value="Anmelden" class="anmelden">
         </form>
 
-        
+
 
         <?php
         // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist

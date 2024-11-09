@@ -37,37 +37,39 @@ if ($sucheHandler->hasFilters($filters)) {
 
 <body>
     <main>
-        <div class="rezepte-container">
-            <?php if (empty($rezepte)): ?>
-            <p>Keine Rezepte gefunden.</p>
+        <div class="rezepte-section">
+            <div class="rezepte-container">
+                <?php if (empty($rezepte)): ?>
+                <p>Keine Rezepte gefunden.</p>
 
-            <?php else: ?>
-            <?php foreach ($rezepte as $rezept): ?>
+                <?php else: ?>
+                <?php foreach ($rezepte as $rezept): ?>
 
-            <div class="rezept-kachel">
-                <img src="../../assets/images/<?php echo htmlspecialchars($rezept['bild_url']); ?>"
-                    alt="<?php echo htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
-                <h3><a
-                        href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo htmlspecialchars($rezept['rezept_id']); ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
-                </h3>
-                <div class="link-container-rezepte">
-                    <span class="meta-item">
-                        <i class="fa fa-clock-o"></i> <?php echo htmlspecialchars($rezept['zubereitungsdauer']); ?>
-                        min
-                        <!-- Placeholder for actual time -->
-                    </span>
-                    <span class="meta-item">
-                        <i class="fa fa-signal"></i> <?php echo htmlspecialchars($rezept['schwierigkeitsgrad']); ?>
-                        <!-- Placeholder for actual difficulty -->
-                    </span>
-                    <span class="meta-item">
-                        <i class="fa fa-leaf"></i> <?php echo htmlspecialchars($rezept['ernaehrung']); ?>
-                        <!-- Placeholder for actual dietary info -->
-                    </span>
+                <div class="rezept-kachel">
+                    <img src="../../assets/images/<?php echo htmlspecialchars($rezept['bild_url']); ?>"
+                        alt="<?php echo htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                    <h3><a
+                            href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo htmlspecialchars($rezept['rezept_id']); ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
+                    </h3>
+                    <div class="link-container-rezepte">
+                        <span class="meta-item">
+                            <i class="fa fa-clock-o"></i> <?php echo htmlspecialchars($rezept['zubereitungsdauer']); ?>
+                            min
+                            <!-- Placeholder for actual time -->
+                        </span>
+                        <span class="meta-item">
+                            <i class="fa fa-signal"></i> <?php echo htmlspecialchars($rezept['schwierigkeitsgrad']); ?>
+                            <!-- Placeholder for actual difficulty -->
+                        </span>
+                        <span class="meta-item">
+                            <i class="fa fa-leaf"></i> <?php echo htmlspecialchars($rezept['ernaehrung']); ?>
+                            <!-- Placeholder for actual dietary info -->
+                        </span>
+                    </div>
                 </div>
+                <?php endforeach; ?>
+                <?php endif; ?>
             </div>
-            <?php endforeach; ?>
-            <?php endif; ?>
         </div>
     </main>
 </body>

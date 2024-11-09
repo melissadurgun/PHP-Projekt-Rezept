@@ -7,18 +7,19 @@
     <title>Recipe Form</title>
     <link rel="stylesheet" href="../../assets/styles/RezeptCreate.css">
     <link rel="stylesheet" href="../../assets/styles/styles.css">
+    <script></script>
 </head>
 
-    <?php
-    include '../../includes/header.php';
-    include '../../includes/navigation.php';
-    ?>
+<?php
+include '../../includes/header.php';
+include '../../includes/navigation.php';
+?>
 
 
 <body>
     <div class="form">
-        <form name="RezeptHinzufügenForm" action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php" method="POST"
-            enctype="multipart/form-data">
+        <form class="RezeptHinzufügenForm" action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php"
+            method="POST" enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">
                     <!-- feature needs to be implemented: add picture -->
@@ -61,18 +62,20 @@
 
                 <div class="zutaten">
                     <label>Zutaten</label>
-                    <div class="zutaten-row" id="zutaten">
-                        <input type="text" name="zutaten[0][name]" placeholder="Zutat" required>
-                        <input type="number" name="zutaten[0][menge]" placeholder="Menge" step="0.1" required>
-                        <select name="zutaten[0][einheit]" required>
-                            <option value="g">g</option>
-                            <option value="ml">ml</option>
-                            <option value="Stück">Stück</option>
-                            <option value="TL">TL</option>
-                            <option value="EL">EL</option>
-                            <option value="L">L</option>
-                            <option value="kg">kg</option>
-                        </select>
+                    <div class="zutaten-container" id="zutaten">
+                        <div class="zutaten-row">
+                            <input type="text" name="zutaten[0][name]" placeholder="Zutat" required>
+                            <input type="number" name="zutaten[0][menge]" placeholder="Menge" step="0.1" required>
+                            <select name="zutaten[0][einheit]" required>
+                                <option value="g">g</option>
+                                <option value="ml">ml</option>
+                                <option value="Stück">Stück</option>
+                                <option value="TL">TL</option>
+                                <option value="EL">EL</option>
+                                <option value="L">L</option>
+                                <option value="kg">kg</option>
+                            </select>
+                        </div>
                     </div>
                     <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
                 </div>
@@ -86,7 +89,6 @@
                             <option value="Abendessen">Abendessen</option>
                             <option value="Dessert">Dessert</option>
                             <option value="Snack">Snack</option>
-                            <option value="Beilage">Beilage</option>
                         </select>
                     </div>
                     <div>
@@ -117,40 +119,13 @@
                     <a href="../Benutzerverwaltung/benutzerseite.php">
                         <button type="button" class="back">Zurück zum Profil</button>
                     </a>
-                    <button type="submit" name="submit">Rezept speichern</button>
+                    <button type="submit" class="rezeptSpeichern">Rezept speichern</button>
                 </div>
             </div>
         </form>
     </div>
     <!-- Dynamisches Hinzufügen der Zutaten -->
-    <script>
-        // Initialize the ingredient index as a global variable
-        let ingredientIndex = 1;
-
-        function zutatHinzufügen() {
-            const zutatenDiv = document.getElementById('zutaten');
-
-            // Create new ingredient fields with the correct index
-            const nameField = `<input type="text" name="zutaten[${ingredientIndex}][name]" placeholder="Zutat" required>`;
-            const mengeField =
-                `<input type="number" name="zutaten[${ingredientIndex}][menge]" placeholder="Menge" step="0.1" required>`;
-            const einheitField = `<select name="zutaten[${ingredientIndex}][einheit]">
-                                <option value="g">g</option>
-                                <option value="ml">ml</option>
-                                <option value="Stück">Stück</option>
-                                <option value="TL">TL</option>
-                                <option value="EL">EL</option>
-                                <option value="L">L</option>
-                                <option value="kg">kg</option>
-                              </select>`;
-
-            // Append the new ingredient fields to the container
-            zutatenDiv.insertAdjacentHTML('beforeend', nameField + mengeField + einheitField);
-
-            // Increment the index for the next ingredient
-            ingredientIndex++;
-        }
-    </script>
+    <script src="..\..\handlers\Rezeptverwaltung\ZutatenHandler.js.php"></script>
 
 </body>
 <?php

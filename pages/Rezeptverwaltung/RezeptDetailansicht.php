@@ -21,8 +21,7 @@ if (!$data) {
 $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
-//Check if its own recipe
-$isOwner = ($recipe['user_id'] == $_SESSION['user_id']);
+
 
 // Prepare data for display
 $titel = htmlspecialchars($recipe['titel']);
@@ -44,7 +43,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titel; ?> - Rezeptdetails</title>
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css">
+    <!-- <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css"> -->
 </head>
 
 <body>
@@ -87,7 +86,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
             </div>
         </div>
         <!-- Display "Rezept bearbeiten" button only if the user is the recipe owner -->
-        <?php if ($isOwner): ?>
+        <?php if ($recipe['user_id'] == $_SESSION['user_id']): ?>
         <div class="edit-button-container">
             <a href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept_id; ?>"
                 class="edit-button">Rezept bearbeiten</a>
