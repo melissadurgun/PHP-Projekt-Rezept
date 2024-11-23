@@ -1,10 +1,11 @@
-<?php 
+<?php
 
-// Überprüfen, ob die Rezept-ID vorhanden ist
-if (!isset($rezept_id)) {
-    echo "Ungültige Anfrage. Keine Rezept-ID gefunden.";
-    exit;
+// Überprüfen, ob die Rezept-ID über GET verfügbar ist
+if (!isset($_GET['rezept_id'])) {
+    die("Ungültige Anfrage. Keine Rezept-ID gefunden.");
 }
+
+$rezept_id = intval($_GET['rezept_id']); // Rezept-ID aus GET erhalten
 
 require_once('../../handlers/Bewertung/BewertungenAnzeigenHandler.php');
 $handler = new BewertungenAnzeigenHandler();
@@ -17,12 +18,7 @@ list($durchschnitt, $totalBewertungen) = $handler->berechneDurchschnittlicheBewe
     <h2>Rezeptbewertungen</h2>
 
     <div class="average-rating">
-    <p>Durchschnittliche Bewertung: <strong><?php echo $durchschnitt; ?> / 5</strong> (<?php echo $totalBewertungen; ?> Bewertungen)</p>
-    <!-- Button, der ein Formular umschließt, um POST-Übertragung zu ermöglichen -->
-    <form method="POST" action="RezeptBewerten.php" style="display: inline;">
-        <input type="hidden" name="rezept_id" value="<?php echo $rezept_id; ?>">
-        <button type="submit">Rezept bewerten</button>
-    </form>
+        <p>Durchschnittliche Bewertung: <strong><?php echo $durchschnitt; ?> / 5</strong> (<?php echo $totalBewertungen; ?> Bewertungen)</p>
     </div>
 
     <h3>Alle Bewertungen:</h3>

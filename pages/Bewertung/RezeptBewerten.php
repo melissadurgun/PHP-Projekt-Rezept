@@ -1,33 +1,35 @@
-<!-- Bereitstellen eines Formulars, um Rezept zu bewerten. Dazu auch verwenden des RezeptBewertenHandlers.php --> 
-
 <?php
 session_start();
 require_once('../../handlers/Bewertung/RezeptBewertenHandler.php');
 
-// Parameter rezept_id wird aus der Rezept-Detail-Seite übernommen --> so wird auch das richtige Rezept bewertet 
-$rezept_id = isset($_POST['rezept_id']) ? intval($_POST['rezept_id']) : 0;
+// Sicherstellen, dass rezept_id per GET übergeben wurde
+if (!isset($_GET['rezept_id'])) {
+    die("Rezept-ID nicht angegeben.");
+}
 
-//Prüfen, ob alle Felder im Bewertungs-Formular ausgefüllt sind 
+$rezept_id = intval($_GET['rezept_id']); // `rezept_id` aus GET
+
+// Prüfen, ob alle Felder im Bewertungs-Formular ausgefüllt sind
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['kommentar']) && isset($_POST['star'])) {
 
-    //Ausgefüllte Felder in Variablen speichern 
+    // Ausgefüllte Felder in Variablen speichern
     $kommentar = htmlspecialchars(trim($_POST['kommentar']));
     $star = htmlspecialchars(trim($_POST['star']));
     $username = !empty($_SESSION['user']) ? $_SESSION['vorname'] : htmlspecialchars(trim($_POST['reg_vorname']));
 
-    //Wenn also alle Daten vorhanden 
+    // Wenn also alle Daten vorhanden sind
     if ($rezept_id && $kommentar && $star && $username) {
 
-        // dann rufe den RezeptBewertenHandler auf 
+        // RezeptBewertenHandler aufrufen
         $handler = new RezeptBewertenHandler();
 
-        //Sichern der Daten ausführen
+        // Sichern der Daten ausführen
         if ($handler->saveBewertung($rezept_id, $username, $star, $kommentar)) {
-            //wenn true zurückgegeben wird, dann weiterleiten auf die Rezept-Seite 
-            header("Location: DetailBewertung.php?id=" . $rezept_id);
-            exit;
+            // Erfolgreiche Speicherung, Weiterleitung zur Rezeptdetailansicht
+            header("Location: ../../pages/Rezeptverwaltung/RezeptDetailAnsicht.php?rezept_id=" . $rezept_id);
+            exit; // Beendet das Skript nach der Weiterleitung
         } else {
-            //ansonsten ausgeben einer Fehlermeldung 
+            // Fehlermeldung ausgeben
             echo "<p>Fehler beim Speichern der Bewertung. Bitte versuchen Sie es erneut.</p>";
         }
     } else {
@@ -36,9 +38,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['kommentar']) && isset(
 }
 ?>
 
-<!-- HTML zur Darstellung des Rezept-Bewerten-Formulars --> 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -54,7 +55,7 @@ include '../../includes/navigation.php';
 <body>
 <div class="container">
     <h2>Rezept bewerten</h2>
-    <form method="POST" action="RezeptBewerten.php">
+    <form method="POST" action="RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>">
         <input type="hidden" name="rezept_id" value="<?php echo $rezept_id; ?>">
 
         <?php
