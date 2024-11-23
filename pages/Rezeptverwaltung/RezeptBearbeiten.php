@@ -185,7 +185,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="rezept-bottombox">
                 <div class="rezept-zubereitung">
                     <h2>Zubereitung</h2>
-                    <textarea name="instructions"><?php echo $zubereitung; ?></textarea>
+                    <textarea name="instructions"><?php echo htmlspecialchars($zubereitung); ?></textarea>
                 </div>
                 <div class="rezept-zutaten">
                     <h2>Zutaten für <input type="number" name="portionen" value="<?php echo $portionen; ?>"> Portionen
