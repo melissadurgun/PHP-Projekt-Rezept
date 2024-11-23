@@ -298,18 +298,12 @@ label {
 .file-label {
   display: inline-block;
   width: 100px;
-  /* Adjust width as needed */
   height: 100px;
-  /* Adjust height as needed */
-  background-image: url("/PHP-Projekt/assets/images/ImagePlaceholder.jpg");
-  /* Path to the image */
   background-size: cover;
-  /* Cover to fill the area */
   background-position: center;
   cursor: pointer;
-  /* Pointer cursor for interactivity */
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 15px;
 }
 
 /* Optionally add hover effect */

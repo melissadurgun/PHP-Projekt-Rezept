@@ -24,9 +24,12 @@ include '../../includes/navigation.php';
                 <div class="recipe-header">
                     <!-- feature needs to be implemented: add picture -->
                     <div class="image-placeholder">
-                        <input type="file" id="file" name="file" accept="image/*" style="display: none;" required>
-                        <label for="file" class="file-label"></label>
-                        <!-- <img src="\PHP-Projekt\assets\images\ImagePlaceholder.jpg" alt="Recipe Image"> -->
+                        <input type="file" id="file" name="file" accept="image/*" style="display: none;" required
+                            onchange="previewImage(event)">
+                        <label for="file" class="file-label">
+                            <img class="preview" id="preview" src="../../assets/images/ImagePlaceholder.jpg"
+                                alt="Recipe Image" style="width: 100%; height: auto; cursor: pointer;">
+                        </label>
                     </div>
                     <div class="titel">
                         <label for="titel">Titel</label>
@@ -125,7 +128,10 @@ include '../../includes/navigation.php';
         </form>
     </div>
     <!-- Dynamisches Hinzufügen der Zutaten -->
-    <script src="..\..\handlers\Rezeptverwaltung\ZutatenHandler.js.php"></script>
+    <script src="..\..\js\zutatHinzufügen.js"></script>
+    <script src="..\..\js\imagePreview.js"></script>
+    <script src="..\..\js\formValidation.js"></script>
+
 
 </body>
 <?php
