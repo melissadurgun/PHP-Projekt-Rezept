@@ -28,7 +28,6 @@ if (isset($_SESSION['user_id'])){
     $isOwner = false; 
 }
 
-
 // Prepare data for display
 $titel = htmlspecialchars($recipe['titel']);
 $username = htmlspecialchars($recipe['username']);
@@ -50,7 +49,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titel; ?> - Rezeptdetails</title>
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css">
+    <!-- <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css"> -->
 </head>
 
 <body>

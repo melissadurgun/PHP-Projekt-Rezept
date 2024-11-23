@@ -24,11 +24,6 @@ if (!$data) {
 $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
-//Check if its own recipe
-if ($recipe['user_id'] == $_SESSION['user_id']) {
-
-}
-
 // Prepare data for display
 $titel = htmlspecialchars($recipe['titel']);
 $username = htmlspecialchars($recipe['username']);
@@ -39,7 +34,7 @@ $ernaehrung = htmlspecialchars($recipe['ernaehrung']);
 $mahlzeitkategorie = htmlspecialchars($recipe['mahlzeitkategorie']);
 $bild_url = htmlspecialchars($recipe['bild_url']);
 $portionen = htmlspecialchars($recipe['portionen']);
-$zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
+$zubereitung = htmlspecialchars($recipe['zubereitung']);
 
 ####################################################
 // Hauptlogik zur Verarbeitung der Aktualisierung
@@ -73,11 +68,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if ($isUpdated) {
         header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
-        exit(); // Ensure no further code is executed after the redirect
+        exit();
     } else {
         echo "Fehler beim Aktualisieren des Rezepts.";
-        error_log("Failed to update recipe: " . $e->getMessage());
-
     }
 }
 ?>
@@ -89,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titel; ?> - Rezeptdetails</title>
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css">
+    <!-- <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css"> -->
 </head>
 
 <body>
@@ -100,11 +93,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="" method="POST">
             <div class="rezept-topbox">
                 <div class="rezept-bild">
-                    <img src="<?php echo htmlspecialchars($recipe['bild_url']); ?>"
-                        alt="Bild von <?php echo htmlspecialchars($recipe['titel']); ?>">
+                    <img src="<?php echo $recipe['bild_url']; ?>" alt="Bild von <?php echo $recipe['titel']; ?>">
                 </div>
                 <div class="rezept-info">
-                    <h1><input type="text" name="title" value="<?php echo htmlspecialchars($recipe['titel']); ?>"></h1>
+                    <h1><input type="text" name="title" value="<?php echo $recipe['titel']; ?>"></h1>
                     <div class="icon-container1">
                         <p><i class="fa fa-clock-o"></i> <input type="number" name="zubereitungsdauer"
                                 value="<?php echo $zubereitungsdauer; ?>"> Minuten</p>
@@ -190,38 +182,47 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <div class="rezept-zutaten">
                     <h2>Zutaten für <input type="number" name="portionen" value="<?php echo $portionen; ?>"> Portionen
                     </h2>
-                    <ul>
-                        <?php foreach ($ingredients as $index => $ingredient): ?>
-                        <li>
-                            <input type="text" name="ingredients[<?php echo $index; ?>][name]"
-                                value="<?php echo htmlspecialchars($ingredient['name']); ?>">
-                            <input type="text" name="ingredients[<?php echo $index; ?>][menge]"
-                                value="<?php echo htmlspecialchars($ingredient['menge']); ?>">
-                            <select name="ingredients[<?php echo $index; ?>][einheit]">
-                                <option value="g" <?php if ($ingredient['einheit'] == 'g')
-                                        echo 'selected'; ?>>g</option>
-                                <option value="ml" <?php if ($ingredient['einheit'] == 'ml')
-                                        echo 'selected'; ?>>ml</option>
-                                <option value="Stück" <?php if ($ingredient['einheit'] == 'Stück')
-                                        echo 'selected'; ?>>Stück</option>
-                                <option value="TL" <?php if ($ingredient['einheit'] == 'TL')
-                                        echo 'selected'; ?>>TL</option>
-                                <option value="EL" <?php if ($ingredient['einheit'] == 'EL')
-                                        echo 'selected'; ?>>EL</option>
-                                <option value="L" <?php if ($ingredient['einheit'] == 'L')
-                                        echo 'selected'; ?>>L</option>
-                                <option value="kg" <?php if ($ingredient['einheit'] == 'kg')
-                                        echo 'selected'; ?>>kg</option>
-                            </select>
-                        </li>
-                        <?php endforeach; ?>
-                    </ul>
+                    <div class="zutaten">
+                        <div class="zutaten-container" id="zutaten">
+                            <ul>
+                                <?php foreach ($ingredients as $index => $ingredient): ?>
+                                    <li class="zutaten">
+                                        <div class="zutaten-row">
+                                            <input type="text" name="ingredients[<?php echo $index; ?>][name]"
+                                                value="<?php echo htmlspecialchars($ingredient['name']); ?>">
+                                            <input type="text" name="ingredients[<?php echo $index; ?>][menge]"
+                                                value="<?php echo htmlspecialchars($ingredient['menge']); ?>">
+                                            <select name="ingredients[<?php echo $index; ?>][einheit]">
+                                                <option value="g" <?php if ($ingredient['einheit'] == 'g')
+                                                    echo 'selected'; ?>>g</option>
+                                                <option value="ml" <?php if ($ingredient['einheit'] == 'ml')
+                                                    echo 'selected'; ?>>ml</option>
+                                                <option value="Stück" <?php if ($ingredient['einheit'] == 'Stück')
+                                                    echo 'selected'; ?>>Stück</option>
+                                                <option value="TL" <?php if ($ingredient['einheit'] == 'TL')
+                                                    echo 'selected'; ?>>TL</option>
+                                                <option value="EL" <?php if ($ingredient['einheit'] == 'EL')
+                                                    echo 'selected'; ?>>EL</option>
+                                                <option value="L" <?php if ($ingredient['einheit'] == 'L')
+                                                    echo 'selected'; ?>>L</option>
+                                                <option value="kg" <?php if ($ingredient['einheit'] == 'kg')
+                                                    echo 'selected'; ?>>kg</option>
+                                            </select>
+                                        </div>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </div>
+                        <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
+                    </div>
                 </div>
                 <button type="submit">Rezept aktualisieren</button>
             </div>
 
         </form>
     </div>
+    <script src="..\..\js\zutatHinzufügen.js"></script>
+
 
     <footer>
         <?php include '../../includes/footer.php'; ?>

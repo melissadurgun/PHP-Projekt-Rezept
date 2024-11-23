@@ -11,6 +11,8 @@
 <body>
     <nav>
         <ul class="filter">
+            <li style="font-weight:bold;" onclick="window.location.href = '../../pages/public/index.php'">Startseite
+            </li>
             <li>Mahlzeit
                 <ul>
                     <li>
