@@ -616,7 +616,7 @@ footer {
   margin: 20px;
 }
 
-.fa-trash-o :not(#delete-zutat) {
+.fa-trash-o {
   cursor: pointer;
   text-decoration: none;
   border: 1px solid #7f9383;

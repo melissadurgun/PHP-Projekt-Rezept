@@ -3,7 +3,6 @@ session_start();
 require_once("../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php");
 require_once("../../handlers/Rezeptverwaltung/RezeptBearbeitenHandler.php");
 
-
 // Initialize the handler
 $rezeptDetail = new RezeptDetailHandler();
 $rezeptBearbeitenHandler = new RezeptBearbeitenHandler();
@@ -32,9 +31,15 @@ $schwierigkeitsgrad = htmlspecialchars($recipe['schwierigkeitsgrad']);
 $kueche = htmlspecialchars($recipe['kueche']);
 $ernaehrung = htmlspecialchars($recipe['ernaehrung']);
 $mahlzeitkategorie = htmlspecialchars($recipe['mahlzeitkategorie']);
-$bild_url = htmlspecialchars($recipe['bild_url']);
 $portionen = htmlspecialchars($recipe['portionen']);
 $zubereitung = htmlspecialchars($recipe['zubereitung']);
+$bild = $recipe['bild']; // Bilddaten aus der Datenbank (BLOB)
+
+// Bilddaten vorbereiten
+$bild_src = $recipe['bild'] 
+    ? $recipe['bild'] 
+    : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden
+
 
 ####################################################
 // Hauptlogik zur Verarbeitung der Aktualisierung
@@ -62,8 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $neue_schwierigkeitsgrad,
         $neue_mahlzeitkategorie,
         $neue_kueche,
-        $bild_url,
-        $neue_zutaten
+        $ingredients
     );
 
     if ($isUpdated) {
@@ -82,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titel; ?> - Rezeptdetails</title>
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <!-- <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css"> -->
 </head>
 
 <body>
@@ -93,82 +96,48 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <form action="" method="POST">
             <div class="rezept-topbox">
                 <div class="rezept-bild">
-                    <img src="<?php echo $recipe['bild_url']; ?>" alt="Bild von <?php echo $recipe['titel']; ?>">
+                    <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>" style="max-width: 100%; height: auto;">
                 </div>
                 <div class="rezept-info">
                     <h1><input type="text" name="title" value="<?php echo $recipe['titel']; ?>"></h1>
                     <div class="icon-container1">
-                        <p><i class="fa fa-clock-o"></i> <input type="number" name="zubereitungsdauer"
-                                value="<?php echo $zubereitungsdauer; ?>"> Minuten</p>
+                        <p><i class="fa fa-clock-o"></i>
+                            <input type="number" name="zubereitungsdauer" value="<?php echo $zubereitungsdauer; ?>"> Minuten
+                        </p>
                         <p><i class="fa fa-signal"></i>
                             <select name="schwierigkeitsgrad">
-                                <option value="Leicht" <?php if ($schwierigkeitsgrad == 'Leicht')
-                                    echo 'selected'; ?>>
-                                    Leicht</option>
-                                <option value="Mittel" <?php if ($schwierigkeitsgrad == 'Mittel')
-                                    echo 'selected'; ?>>
-                                    Mittel</option>
-                                <option value="Schwer" <?php if ($schwierigkeitsgrad == 'Schwer')
-                                    echo 'selected'; ?>>
-                                    Schwer</option>
+                                <option value="Leicht" <?php if ($schwierigkeitsgrad == 'Leicht') echo 'selected'; ?>>Leicht</option>
+                                <option value="Mittel" <?php if ($schwierigkeitsgrad == 'Mittel') echo 'selected'; ?>>Mittel</option>
+                                <option value="Schwer" <?php if ($schwierigkeitsgrad == 'Schwer') echo 'selected'; ?>>Schwer</option>
                             </select>
                         </p>
                     </div>
                     <div class="icon-container2">
                         <p><i class="fa fa-globe"></i>
                             <select name="kueche">
-                                <option value="Amerikanisch" <?php if ($kueche == 'Amerikanisch')
-                                    echo 'selected'; ?>>
-                                    Amerikanisch</option>
-                                <option value="Italienisch" <?php if ($kueche == 'Italienisch')
-                                    echo 'selected'; ?>>
-                                    Italienisch</option>
-                                <option value="Indisch" <?php if ($kueche == 'Indisch')
-                                    echo 'selected'; ?>>Indisch
-                                </option>
-                                <option value="Asiatisch" <?php if ($kueche == 'Asiatisch')
-                                    echo 'selected'; ?>>
-                                    Asiatisch</option>
-                                <option value="Orientalisch" <?php if ($kueche == 'Orientalisch')
-                                    echo 'selected'; ?>>
-                                    Orientalisch</option>
-                                <option value="Deutsch" <?php if ($kueche == 'Deutsch')
-                                    echo 'selected'; ?>>Deutsch
-                                </option>
+                                <option value="Amerikanisch" <?php if ($kueche == 'Amerikanisch') echo 'selected'; ?>>Amerikanisch</option>
+                                <option value="Italienisch" <?php if ($kueche == 'Italienisch') echo 'selected'; ?>>Italienisch</option>
+                                <option value="Indisch" <?php if ($kueche == 'Indisch') echo 'selected'; ?>>Indisch</option>
+                                <option value="Asiatisch" <?php if ($kueche == 'Asiatisch') echo 'selected'; ?>>Asiatisch</option>
+                                <option value="Orientalisch" <?php if ($kueche == 'Orientalisch') echo 'selected'; ?>>Orientalisch</option>
+                                <option value="Deutsch" <?php if ($kueche == 'Deutsch') echo 'selected'; ?>>Deutsch</option>
                             </select>
                         </p>
                         <p><i class="fa fa-leaf"></i>
                             <select name="ernaehrung">
-                                <option value="Vegan" <?php if ($ernaehrung == 'Vegan')
-                                    echo 'selected'; ?>>Vegan
-                                </option>
-                                <option value="Vegetarisch" <?php if ($ernaehrung == 'Vegetarisch')
-                                    echo 'selected'; ?>>
-                                    Vegetarisch</option>
-                                <option value="Fleisch" <?php if ($ernaehrung == 'Fleisch')
-                                    echo 'selected'; ?>>Fleisch
-                                </option>
-                                <option value="Fisch" <?php if ($ernaehrung == 'Fisch')
-                                    echo 'selected'; ?>>Fisch
-                                </option>
+                                <option value="Vegan" <?php if ($ernaehrung == 'Vegan') echo 'selected'; ?>>Vegan</option>
+                                <option value="Vegetarisch" <?php if ($ernaehrung == 'Vegetarisch') echo 'selected'; ?>>Vegetarisch</option>
+                                <option value="Fleisch" <?php if ($ernaehrung == 'Fleisch') echo 'selected'; ?>>Fleisch</option>
+                                <option value="Fisch" <?php if ($ernaehrung == 'Fisch') echo 'selected'; ?>>Fisch</option>
                             </select>
                         </p>
                         <p><i class="fa fa-cutlery"></i>
                             <select name="mahlzeitkategorie">
-                                <option value="Frühstück" <?php if ($mahlzeitkategorie == 'Frühstück')
-                                    echo 'selected'; ?>>Frühstück</option>
-                                <option value="Mittagessen" <?php if ($mahlzeitkategorie == 'Mittagessen')
-                                    echo 'selected'; ?>>Mittagessen
-                                </option>
-                                <option value="Abendessen" <?php if ($mahlzeitkategorie == 'Abendessen')
-                                    echo 'selected'; ?>>Abendessen
-                                </option>
-                                <option value="Dessert" <?php if ($mahlzeitkategorie == 'Dessert')
-                                    echo 'selected'; ?>>
-                                    Dessert</option>
-                                <option value="Snack" <?php if ($mahlzeitkategorie == 'Snack')
-                                    echo 'selected'; ?>>Snack
-                                </option>
+                                <option value="Frühstück" <?php if ($mahlzeitkategorie == 'Frühstück') echo 'selected'; ?>>Frühstück</option>
+                                <option value="Mittagessen" <?php if ($mahlzeitkategorie == 'Mittagessen') echo 'selected'; ?>>Mittagessen</option>
+                                <option value="Abendessen" <?php if ($mahlzeitkategorie == 'Abendessen') echo 'selected'; ?>>Abendessen</option>
+                                <option value="Dessert" <?php if ($mahlzeitkategorie == 'Dessert') echo 'selected'; ?>>Dessert</option>
+                                <option value="Snack" <?php if ($mahlzeitkategorie == 'Snack') echo 'selected'; ?>>Snack</option>
                             </select>
                         </p>
                     </div>
@@ -180,50 +149,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <textarea name="instructions"><?php echo htmlspecialchars($zubereitung); ?></textarea>
                 </div>
                 <div class="rezept-zutaten">
-                    <h2>Zutaten für <input type="number" name="portionen" value="<?php echo $portionen; ?>"> Portionen
-                    </h2>
+                    <h2>Zutaten für <input type="number" name="portionen" value="<?php echo $portionen; ?>"> Portionen</h2>
                     <div class="zutaten">
                         <div class="zutaten-container" id="zutaten">
                             <ul>
                                 <?php foreach ($ingredients as $index => $ingredient): ?>
                                     <li class="zutaten">
                                         <div class="zutaten-row">
-                                            <input type="text" name="ingredients[<?php echo $index; ?>][name]"
-                                                value="<?php echo htmlspecialchars($ingredient['name']); ?>">
-                                            <input type="text" name="ingredients[<?php echo $index; ?>][menge]"
-                                                value="<?php echo htmlspecialchars($ingredient['menge']); ?>">
+                                            <input type="text" name="ingredients[<?php echo $index; ?>][name]" value="<?php echo htmlspecialchars($ingredient['name']); ?>">
+                                            <input type="text" name="ingredients[<?php echo $index; ?>][menge]" value="<?php echo htmlspecialchars($ingredient['menge']); ?>">
                                             <select name="ingredients[<?php echo $index; ?>][einheit]">
-                                                <option value="g" <?php if ($ingredient['einheit'] == 'g')
-                                                    echo 'selected'; ?>>g</option>
-                                                <option value="ml" <?php if ($ingredient['einheit'] == 'ml')
-                                                    echo 'selected'; ?>>ml</option>
-                                                <option value="Stück" <?php if ($ingredient['einheit'] == 'Stück')
-                                                    echo 'selected'; ?>>Stück</option>
-                                                <option value="TL" <?php if ($ingredient['einheit'] == 'TL')
-                                                    echo 'selected'; ?>>TL</option>
-                                                <option value="EL" <?php if ($ingredient['einheit'] == 'EL')
-                                                    echo 'selected'; ?>>EL</option>
-                                                <option value="L" <?php if ($ingredient['einheit'] == 'L')
-                                                    echo 'selected'; ?>>L</option>
-                                                <option value="kg" <?php if ($ingredient['einheit'] == 'kg')
-                                                    echo 'selected'; ?>>kg</option>
+                                                <option value="g" <?php if ($ingredient['einheit'] == 'g') echo 'selected'; ?>>g</option>
+                                                <option value="ml" <?php if ($ingredient['einheit'] == 'ml') echo 'selected'; ?>>ml</option>
+                                                <option value="Stück" <?php if ($ingredient['einheit'] == 'Stück') echo 'selected'; ?>>Stück</option>
+                                                <option value="TL" <?php if ($ingredient['einheit'] == 'TL') echo 'selected'; ?>>TL</option>
+                                                <option value="EL" <?php if ($ingredient['einheit'] == 'EL') echo 'selected'; ?>>EL</option>
+                                                <option value="L" <?php if ($ingredient['einheit'] == 'L') echo 'selected'; ?>>L</option>
+                                                <option value="kg" <?php if ($ingredient['einheit'] == 'kg') echo 'selected'; ?>>kg</option>
                                             </select>
                                         </div>
                                     </li>
                                 <?php endforeach; ?>
                             </ul>
                         </div>
-                        <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
                     </div>
                 </div>
                 <button type="submit">Rezept aktualisieren</button>
             </div>
-
         </form>
     </div>
-    <script src="..\..\js\zutatHinzufügen.js"></script>
-
-
     <footer>
         <?php include '../../includes/footer.php'; ?>
     </footer>

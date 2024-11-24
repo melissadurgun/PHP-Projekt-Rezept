@@ -103,23 +103,43 @@ $rezepte = $sucheHandler->getRezepte($filters);
     </div>
 </header>
 
-<!-- Abschnitt für die Rezepte -->
 <section class="rezepte-section">
-    <h2>Suchergebnisse:</h2>
     <div class="rezepte-container">
-        <?php foreach ($rezepte as $rezept): ?>
-            <div class="rezept-kachel">
-                <img src="<?= $rezept['bild']; ?>" alt="<?= htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
-                <h3><?= htmlspecialchars($rezept['titel']); ?></h3>
-                <div class="link-container-rezepte">
-                    <a href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?= htmlspecialchars($rezept['rezept_id']); ?>">
-                        <i class="fa fa-trash-o"><span> Mehr erfahren</span></i>
-                    </a>
+        <?php if (empty($rezepte)): ?>
+            <p>Keine Rezepte gefunden.</p>
+        <?php else: ?>
+            <?php foreach ($rezepte as $rezept): ?>
+                <div class="rezept-kachel">
+                    <?php if (!empty($rezept['bild'])): ?>
+                        <img src="data:image/jpeg;base64,<?= base64_encode($rezept['bild']); ?>" 
+                             alt="<?= htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                    <?php else: ?>
+                        <img src="../../assets/images/ImagePlaceholder.jpg" 
+                             alt="<?= htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                    <?php endif; ?>
+                    <h3>
+                        <a href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?= htmlspecialchars($rezept['rezept_id']); ?>">
+                            <?= htmlspecialchars($rezept['titel']); ?>
+                        </a>
+                    </h3>
+                    <div class="link-container-rezepte">
+                        <span class="meta-item">
+                            <i class="fa fa-clock-o"></i> <?= htmlspecialchars($rezept['zubereitungsdauer']); ?> min
+                        </span>
+                        <span class="meta-item">
+                            <i class="fa fa-signal"></i> <?= htmlspecialchars($rezept['schwierigkeitsgrad']); ?>
+                        </span>
+                        <span class="meta-item">
+                            <i class="fa fa-leaf"></i> <?= htmlspecialchars($rezept['ernaehrung']); ?>
+                        </span>
+                    </div>
                 </div>
-            </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
     </div>
 </section>
+
+
 
 </body>
 <?php

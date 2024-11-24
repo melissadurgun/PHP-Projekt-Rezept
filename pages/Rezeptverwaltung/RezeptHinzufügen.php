@@ -7,7 +7,6 @@
     <title>Recipe Form</title>
     <link rel="stylesheet" href="../../assets/styles/RezeptCreate.css">
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <script></script>
 </head>
 
 <?php
@@ -15,14 +14,12 @@ include '../../includes/header.php';
 include '../../includes/navigation.php';
 ?>
 
-
 <body>
     <div class="form">
         <form class="RezeptHinzufügenForm" action="..\..\pages\BildTest\Hinzufügen.php"
             method="POST" enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">
-                    <!-- feature needs to be implemented: add picture -->
                     <div class="image-placeholder">
                         <input type="file" id="file" name="file" accept="image/*" style="display: none;" required
                             onchange="previewImage(event)">
@@ -49,7 +46,6 @@ include '../../includes/navigation.php';
                     </div>
                     <div>
                         <label for="schwierigkeitsgrad">Schwierigkeitsgrad</label>
-                        <!-- TODO! Handler has to be able to read schwierigkeitsgrad-->
                         <select id="schwierigkeitsgrad" name="schwierigkeitsgrad" required>
                             <option value="Leicht">Leicht</option>
                             <option value="Mittel">Mittel</option>
@@ -82,10 +78,11 @@ include '../../includes/navigation.php';
                     </div>
                     <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
                 </div>
+
+                <!-- Felder für Menüart, Ernährung und Küche -->
                 <div class="additional-options">
                     <div>
                         <label for="mahlzeitkategorie">Menüart</label>
-                        <!-- TODO! Handler has to be able to read -->
                         <select id="mahlzeitkategorie" name="mahlzeitkategorie" required>
                             <option value="Frühstück">Frühstück</option>
                             <option value="Mittagessen">Mittagessen</option>
@@ -96,7 +93,6 @@ include '../../includes/navigation.php';
                     </div>
                     <div>
                         <label for="ernaehrung">Ernährung</label>
-                        <!-- TODO! Handler has to be able to read -->
                         <select id="ernaehrung" name="ernaehrung" required>
                             <option value="Vegan">Vegan</option>
                             <option value="Vegetarisch">Vegetarisch</option>
@@ -106,7 +102,6 @@ include '../../includes/navigation.php';
                     </div>
                     <div>
                         <label for="kueche">Küche</label>
-                        <!-- TODO! Handler has to be able to read -->
                         <select id="kueche" name="kueche" required>
                             <option value="Amerikanisch">Amerikanisch</option>
                             <option value="Italienisch">Italienisch</option>
@@ -127,15 +122,11 @@ include '../../includes/navigation.php';
             </div>
         </form>
     </div>
-    <!-- Dynamisches Hinzufügen der Zutaten -->
     <script src="..\..\js\zutatHinzufügen.js"></script>
     <script src="..\..\js\imagePreview.js"></script>
     <script src="..\..\js\formValidation.js"></script>
-
-
 </body>
 <?php
 include '../../includes/footer.php';
 ?>
-
 </html>

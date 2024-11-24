@@ -34,12 +34,14 @@ class RezeptSucheHandler
         // Ergebnisse abrufen
         $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
 
-        // Base64-kodierte Bilder hinzufügen
+        // Bilder verarbeiten, falls vorhanden
         foreach ($rezepte as &$rezept) {
             if (!empty($rezept['bild'])) {
-                $rezept['bild'] = 'data:image/jpeg;base64,' . base64_encode($rezept['bild']);
+                // Bild bleibt roh; Verarbeitung erfolgt in der Ansicht
+                $rezept['bild'] = $rezept['bild'];
             } else {
-                $rezept['bild'] = '../../assets/images/ImagePlaceholder.jpg'; // Fallback-Bild
+                // Fallback-Bild wird in der Ansicht festgelegt
+                $rezept['bild'] = null;
             }
         }
 

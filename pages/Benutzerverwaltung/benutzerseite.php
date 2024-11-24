@@ -17,7 +17,7 @@ $DB = new DB();
 //Rezepte aus Datenbank abrufen 
 $user_id = $_SESSION['user_id'];
 // Rezepte des Benutzers abrufen, inklusive rezept_id
-$rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild_url FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
+$rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
 $rezepteQuery->execute([':user_id' => $user_id]);
 $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
 
@@ -69,7 +69,7 @@ include '../../includes/navigation.php';
             <?php foreach ($rezepte as $rezept): ?>
             <div class="rezept-kachel">
                 <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
-                <img src="<?php echo htmlspecialchars($rezept['bild_url'] ?: 'platzhalter.png'); ?>"
+                <img src="<?php echo htmlspecialchars($rezept['bild'] ?: 'platzhalter.png'); ?>"
                     alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
                 <h3><a
                         href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo $rezept['rezept_id']; ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>

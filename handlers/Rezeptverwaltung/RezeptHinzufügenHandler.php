@@ -11,10 +11,9 @@ if (!isset($_SESSION['user'])) {
     exit;
 }
 
-//Datenbankverbindung
+// Datenbankverbindung
 $db = new DB();
 
-// Check if the form was submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user_id = $_SESSION['user_id'];
     $titel = $_POST['titel'];
@@ -27,37 +26,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $kueche = $_POST['kueche'];
 
     // Bildverarbeitung
-
+    $bild_content = null;
     if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
         $bild = $_FILES['file'];
-
-        echo 'Bild erhalten';
-
-        // Zielverzeichnis und Dateiname festlegen
-        $upload_dir = __DIR__ . '/../../uploads/'; // Absoluter Pfad zum uploads-Ordner
-        $bild_name = uniqid() . '-' . basename($bild['name']);
-        $bild_path = $upload_dir . $bild_name;
-
-        echo 'Bildname geändert';
-
-        // Bild speichern
-        if (move_uploaded_file($bild['tmp_name'], $bild_path)) {
-            $bild_url = '../../uploads/' . $bild_name; // Pfad für die Datenbank
-
-            echo 'Bild gespeichert';
-        } else {
-            echo "Fehler beim Hochladen des Bildes.";
-            exit();
-        }
+        $bild_content = file_get_contents($bild['tmp_name']); // Bildinhalt lesen
     } else {
-        echo "Fehler beim speichern des Bildes <br>" . $_FILES['file']['error'];
+        echo "Fehler beim Hochladen des Bildes: " . $_FILES['file']['error'];
+        exit();
     }
 
-    // Insert the recipe into the rezept table, including user_id
-    $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild_url)
-            VALUES (:user_id, :titel, :zubereitung, :zubereitungsdauer, :portionen, :ernaehrung, :schwierigkeitsgrad, :mahlzeitkategorie, :kueche, :bild_url)";
+    // Insert the recipe into the rezept table
+    $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild)
+            VALUES (:user_id, :titel, :zubereitung, :zubereitungsdauer, :portionen, :ernaehrung, :schwierigkeitsgrad, :mahlzeitkategorie, :kueche, :bild)";
     $db->executeQuery($sql, [
-        ':user_id' => $user_id,  // Bind the user ID from session
+        ':user_id' => $user_id,
         ':titel' => $titel,
         ':zubereitung' => $zubereitung,
         ':zubereitungsdauer' => $zubereitungsdauer,
@@ -66,23 +48,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ':schwierigkeitsgrad' => $schwierigkeitsgrad,
         ':mahlzeitkategorie' => $mahlzeitkategorie,
         ':kueche' => $kueche,
-        ':bild_url' => $bild_url
+        ':bild' => $bild_content
     ]);
 
-    // Get the ID of the last inserted recipe
     $rezept_id = $db->lastInsertId();
 
-    // Insert each ingredient into the zutaten table
+    // Insert ingredients into the zutaten table
     if (!empty($_POST['zutaten'])) {
         foreach ($_POST['zutaten'] as $zutat) {
             $name = $zutat['name'] ?? '';
             $menge = $zutat['menge'] ?? 0;
             $einheit = $zutat['einheit'] ?? null;
 
-            // Check that all fields have values before inserting
             if (!empty($name) && !empty($menge) && !empty($einheit)) {
                 $sql = "INSERT INTO zutaten (rezept_id, name, menge, einheit)
-                    VALUES (:rezept_id, :name, :menge, :einheit)";
+                        VALUES (:rezept_id, :name, :menge, :einheit)";
                 $db->executeQuery($sql, [
                     ':rezept_id' => $rezept_id,
                     ':name' => $name,
@@ -93,12 +73,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo "Rezept und Zutaten erfolgreich gespeichert! <br> Redirecting...";
-
-    // Redirect to the RezeptDetailAnsicht page
+    echo "Rezept und Zutaten erfolgreich gespeichert!";
     header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
-    exit(); // Ensure no further code is executed after the redirect
+    exit();
 }
 ?>
-
-</html>
