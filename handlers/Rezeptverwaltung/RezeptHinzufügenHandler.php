@@ -6,6 +6,7 @@
  * Wird verwendet in Kombination mit RezeptHinzufügen.php. 
  */
 
+ session_start(); 
 require_once('../../config/db.php');
 
 class RezeptHinzufügenHandler {
