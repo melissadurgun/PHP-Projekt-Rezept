@@ -12,7 +12,7 @@ class RezeptDetailHandler
 
     public function getRecipeDetail($rezept_id)
     {
-        // Fetch the recipe details
+        // Fetch the recipe details, including the BLOB image
         $query = "SELECT r.*, u.username FROM rezept r
                   JOIN user u ON r.user_id = u.user_id
                   WHERE r.rezept_id = :rezept_id";
@@ -22,6 +22,13 @@ class RezeptDetailHandler
 
         if (!$recipe) {
             die("Rezept nicht gefunden.");
+        }
+
+        // Convert the BLOB image to a Base64 string if it exists
+        if ($recipe['bild']) {
+            $recipe['bild'] = 'data:image/jpeg;base64,' . base64_encode($recipe['bild']);
+        } else {
+            $recipe['bild'] = null; // Kein Bild vorhanden
         }
 
         // Fetch the ingredients

@@ -22,7 +22,7 @@ class RezeptSucheHandler
     // Methode, um Rezepte basierend auf Filterkriterien abzurufen
     public function getRezepte($filters)
     {
-        // Verwenden der buildSQLQuery-Methode für den SQL-String und die Parameter
+        // SQL-Query und Parameter dynamisch erstellen
         $queryData = $this->buildSQLQuery($filters);
         $sql = $queryData['sql'];
         $parameters = $queryData['parameters'];
@@ -32,13 +32,25 @@ class RezeptSucheHandler
         $rezepteQuery->execute($parameters);
 
         // Ergebnisse abrufen
-        return $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
+        $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
+
+        // Base64-kodierte Bilder hinzufügen
+        foreach ($rezepte as &$rezept) {
+            if (!empty($rezept['bild'])) {
+                $rezept['bild'] = 'data:image/jpeg;base64,' . base64_encode($rezept['bild']);
+            } else {
+                $rezept['bild'] = '../../assets/images/ImagePlaceholder.jpg'; // Fallback-Bild
+            }
+        }
+
+        return $rezepte;
     }
 
     // Methode zum Erstellen des SQL-Strings und der Parameter
     private function buildSQLQuery($filters)
     {
-        $sql = 'SELECT * FROM rezept WHERE 1=1';
+        $sql = 'SELECT rezept_id, titel, zubereitungsdauer, schwierigkeitsgrad, ernaehrung, mahlzeitkategorie, kueche, bild
+                FROM rezept WHERE 1=1';
         $parameters = [];
 
         // Filter hinzufügen, falls vorhanden        
@@ -78,4 +90,3 @@ class RezeptSucheHandler
         return ['sql' => $sql, 'parameters' => $parameters];
     }
 }
-?>

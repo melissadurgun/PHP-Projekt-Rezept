@@ -109,13 +109,11 @@ $rezepte = $sucheHandler->getRezepte($filters);
     <div class="rezepte-container">
         <?php foreach ($rezepte as $rezept): ?>
             <div class="rezept-kachel">
-                <img src="<?php echo htmlspecialchars($rezept['bild_url'] ?: 'platzhalter.png'); ?>"
-                    alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
-                <h3><?php echo htmlspecialchars($rezept['titel']); ?></h3>
+                <img src="<?= $rezept['bild']; ?>" alt="<?= htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                <h3><?= htmlspecialchars($rezept['titel']); ?></h3>
                 <div class="link-container-rezepte">
-                    <a href="">
-                        <i class="fa fa-trash-o">
-                        <span> Mehr erfahren</span></i>
+                    <a href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?= htmlspecialchars($rezept['rezept_id']); ?>">
+                        <i class="fa fa-trash-o"><span> Mehr erfahren</span></i>
                     </a>
                 </div>
             </div>

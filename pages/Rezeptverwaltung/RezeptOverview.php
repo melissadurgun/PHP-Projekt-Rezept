@@ -41,29 +41,32 @@ if ($sucheHandler->hasFilters($filters)) {
             <div class="rezepte-container">
                 <?php if (empty($rezepte)): ?>
                 <p>Keine Rezepte gefunden.</p>
-
                 <?php else: ?>
                 <?php foreach ($rezepte as $rezept): ?>
-
                 <div class="rezept-kachel">
-                    <img src="../../assets/images/<?php echo htmlspecialchars($rezept['bild_url']); ?>"
-                        alt="<?php echo htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
-                    <h3><a
-                            href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo htmlspecialchars($rezept['rezept_id']); ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
+                    <?php if (!empty($rezept['bild'])): ?>
+                    <!-- Base64-kodiertes Bild anzeigen -->
+                    <img src="data:image/jpeg;base64,<?= base64_encode($rezept['bild']); ?>"
+                        alt="<?= htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                    <?php else: ?>
+                    <!-- Fallback-Bild anzeigen -->
+                    <img src="../../assets/images/ImagePlaceholder.jpg"
+                        alt="<?= htmlspecialchars($rezept['titel']); ?>" class="recipe-image">
+                    <?php endif; ?>
+                    <h3>
+                        <a href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?= htmlspecialchars($rezept['rezept_id']); ?>">
+                            <?= htmlspecialchars($rezept['titel']); ?>
+                        </a>
                     </h3>
                     <div class="link-container-rezepte">
                         <span class="meta-item">
-                            <i class="fa fa-clock-o"></i> <?php echo htmlspecialchars($rezept['zubereitungsdauer']); ?>
-                            min
-                            <!-- Placeholder for actual time -->
+                            <i class="fa fa-clock-o"></i> <?= htmlspecialchars($rezept['zubereitungsdauer']); ?> min
                         </span>
                         <span class="meta-item">
-                            <i class="fa fa-signal"></i> <?php echo htmlspecialchars($rezept['schwierigkeitsgrad']); ?>
-                            <!-- Placeholder for actual difficulty -->
+                            <i class="fa fa-signal"></i> <?= htmlspecialchars($rezept['schwierigkeitsgrad']); ?>
                         </span>
                         <span class="meta-item">
-                            <i class="fa fa-leaf"></i> <?php echo htmlspecialchars($rezept['ernaehrung']); ?>
-                            <!-- Placeholder for actual dietary info -->
+                            <i class="fa fa-leaf"></i> <?= htmlspecialchars($rezept['ernaehrung']); ?>
                         </span>
                     </div>
                 </div>

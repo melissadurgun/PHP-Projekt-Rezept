@@ -18,7 +18,7 @@ include '../../includes/navigation.php';
 
 <body>
     <div class="form">
-        <form class="RezeptHinzufügenForm" action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php"
+        <form class="RezeptHinzufügenForm" action="..\..\pages\BildTest\Hinzufügen.php"
             method="POST" enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">

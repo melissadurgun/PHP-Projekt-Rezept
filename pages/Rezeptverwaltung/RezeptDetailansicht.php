@@ -22,7 +22,7 @@ $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
 // Prüfen, ob der eingeloggte Benutzer der Besitzer des Rezepts ist
-if (isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
     $isOwner = ($recipe['user_id'] == $_SESSION['user_id']);
 } else {
     $isOwner = false; 
@@ -36,9 +36,13 @@ $schwierigkeitsgrad = htmlspecialchars($recipe['schwierigkeitsgrad']);
 $kueche = htmlspecialchars($recipe['kueche']);
 $ernaehrung = htmlspecialchars($recipe['ernaehrung']);
 $mahlzeitkategorie = htmlspecialchars($recipe['mahlzeitkategorie']);
-$bild_url = htmlspecialchars($recipe['bild_url']);
 $portionen = htmlspecialchars($recipe['portionen']);
 $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
+
+// Bilddaten vorbereiten
+$bild_src = $recipe['bild'] 
+    ? $recipe['bild'] 
+    : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden
 ?>
 
 <!DOCTYPE html>
@@ -60,7 +64,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
     <div class="rezept-detail-container">
         <div class="rezept-topbox">
             <div class="rezept-bild">
-                <img src="<?php echo $bild_url; ?>" alt="Bild von <?php echo $titel; ?>">
+                <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>" style="max-width: 100%; height: auto;">
             </div>
             <div class="rezept-info">
                 <h1><?php echo $titel; ?></h1>
