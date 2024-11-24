@@ -23,6 +23,13 @@ class RezeptBearbeitenHandler
     //Funktion, um zu überprüfen, ob der eingeloggte Benutzer der Besitzer des Rezepts ist
     public function isUserRecipeOwner($rezept_id, $user_id)
     {
+        // Eingaben validieren
+        $rezept_id = filter_var($rezept_id, FILTER_VALIDATE_INT);
+        $user_id = filter_var($user_id, FILTER_VALIDATE_INT);
+        if ($rezept_id === false || $user_id === false) {
+            return false;
+        }
+
         $query = "SELECT 1 FROM rezept WHERE rezept_id = :rezept_id AND user_id = :user_id";
         $stmt = $this->DB->prepare($query);
         $stmt->bindValue(':rezept_id', $rezept_id, PDO::PARAM_INT);
@@ -33,12 +40,33 @@ class RezeptBearbeitenHandler
         return $stmt->fetch() !== false;
     }
 
-   //Funktion um Rezept zu aktualisieren 
+    //Funktion um Rezept zu aktualisieren 
     public function updateRecipe($rezept_id, $title, $zubereitung, $zubereitungsdauer, $portionen, $ernaehrung, $schwierigkeitsgrad, $mahlzeitkategorie, $kueche, $zutaten)
     {
         try {
+            // Eingaben validieren
+            $rezept_id = filter_var($rezept_id, FILTER_VALIDATE_INT);
+            $zubereitungsdauer = filter_var($zubereitungsdauer, FILTER_VALIDATE_INT);
+            $portionen = filter_var($portionen, FILTER_VALIDATE_INT);
 
-            // Beginne eine Transaktion(damit entweder alles geändert wird oder nichts)
+            if ($rezept_id === false || $zubereitungsdauer === false || $portionen === false) {
+                throw new Exception("Ungültige Eingaben für Rezeptdetails.");
+            }
+
+            $title = htmlspecialchars(trim($title), ENT_QUOTES, 'UTF-8');
+            $zubereitung = htmlspecialchars(trim($zubereitung), ENT_QUOTES, 'UTF-8');
+            $ernaehrung = htmlspecialchars(trim($ernaehrung), ENT_QUOTES, 'UTF-8');
+            $schwierigkeitsgrad = htmlspecialchars(trim($schwierigkeitsgrad), ENT_QUOTES, 'UTF-8');
+            $mahlzeitkategorie = htmlspecialchars(trim($mahlzeitkategorie), ENT_QUOTES, 'UTF-8');
+            $kueche = htmlspecialchars(trim($kueche), ENT_QUOTES, 'UTF-8');
+
+            foreach ($zutaten as &$ingredient) {
+                $ingredient['name'] = htmlspecialchars(trim($ingredient['name']), ENT_QUOTES, 'UTF-8');
+                $ingredient['menge'] = filter_var($ingredient['menge'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+                $ingredient['einheit'] = htmlspecialchars(trim($ingredient['einheit']), ENT_QUOTES, 'UTF-8');
+            }
+
+            // Beginne eine Transaktion
             $this->DB->beginTransaction();
 
             // Aktualisiere die Hauptdetails des Rezepts
@@ -86,7 +114,6 @@ class RezeptBearbeitenHandler
             $this->DB->commit();
 
             return true;
-            
         } catch (Exception $e) {
             // Rollback, falls ein Fehler auftritt
             $this->DB->rollBack();

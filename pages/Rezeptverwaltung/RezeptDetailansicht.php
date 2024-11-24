@@ -11,10 +11,10 @@ require_once("../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php");
 // Rezept Handler initialisieren
 $rezeptDetail = new RezeptDetailHandler();
 
-// Rezept-ID aus der URL abrufen
-$rezept_id = $_GET['rezept_id'] ?? null;
+// Rezept-ID aus der URL abrufen und validieren
+$rezept_id = filter_input(INPUT_GET, 'rezept_id', FILTER_VALIDATE_INT);
 if (!$rezept_id) {
-    die("Rezept-ID nicht angegeben.");
+    die("Ungültige Rezept-ID.");
 }
 
 //Mithilfe des Handlers Daten eines Rezepts auslesen 
@@ -46,33 +46,33 @@ $portionen = htmlspecialchars($recipe['portionen']);
 $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 
 // Bilddaten vorbereiten
-$bild_src = $recipe['bild'] 
-    ? $recipe['bild'] 
+$bild_src = $recipe['bild']
+    ? $recipe['bild']
     : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden
 ?>
 
-<!-- HTML, um das Rezept anzuzeigen --> 
+<!-- HTML, um das Rezept anzuzeigen -->
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titel; ?> - Rezeptdetails</title>
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <!-- <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css"> -->
 </head>
 
- <?php 
-    require_once('../../includes/header.php'); 
-    require_once('../../includes/navigation.php'); 
- ?>
+<?php
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
+?>
 
 <body>
     <div class="rezept-detail-container">
-        <!-- Topbox mit Bild, Name und den Kategorien --> 
+        <!-- Topbox mit Bild, Name und den Kategorien -->
         <div class="rezept-topbox">
             <div class="rezept-bild">
-                <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>" style="max-width: 100%; height: auto;">
+                <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>">
             </div>
             <div class="rezept-info">
                 <h1><?php echo $titel; ?></h1>
@@ -90,7 +90,7 @@ $bild_src = $recipe['bild']
             </div>
         </div>
 
-        <!-- Bottombox mit Zubereitung und Zutaten --> 
+        <!-- Bottombox mit Zubereitung und Zutaten -->
         <div class="rezept-bottombox">
             <div class="rezept-zubereitung">
                 <h2>Zubereitung</h2>
@@ -109,7 +109,7 @@ $bild_src = $recipe['bild']
 
         <!-- Buttons nur anzeigen, wenn der User Ersteller des Rezepts ist -->
         <?php if ($isOwner): ?>
-            <div class="link-container-rezepte">
+            <div class="userbuttons-container-rezepte">
                 <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
                 <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept_id; ?>"
                     onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
@@ -136,6 +136,7 @@ $bild_src = $recipe['bild']
     ?>
 </body>
 <?php
-require_once('../../includes/footer.php'); 
+require_once('../../includes/footer.php');
 ?>
+
 </html>

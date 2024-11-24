@@ -9,10 +9,10 @@ class DB extends PDO
     public function __construct()
     {
         //---Code für XAMPP - auskommentieren, wenn Docker benutzt wird 
-        //$db = 'localhost'; 
+        $host = 'localhost';
 
         //---Code für Docker - auskommentieren, wenn XAMPP benutzt wird 
-        $host = "db";
+        // $host = "db";
 
         //---Gemeinsamer Code - nicht auskommentieren
         $dbname = 'rezepte';
@@ -33,9 +33,9 @@ class DB extends PDO
     // eigene Methode, um eine Query auszuführen 
     public function executeQuery($sql, $params = [])
     {
-        $stmt = $this->prepare($sql); 
-        $stmt->execute($params);      
-        return $stmt;                 
+        $stmt = $this->prepare($sql);
+        $stmt->execute($params);
+        return $stmt;
     }
 }
 ?>
