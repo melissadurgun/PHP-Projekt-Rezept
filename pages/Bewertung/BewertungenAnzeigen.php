@@ -14,7 +14,7 @@ $handler = new BewertungenAnzeigenHandler();
 list($durchschnitt, $totalBewertungen) = $handler->berechneDurchschnittlicheBewertung($rezept_id);
 ?>
 
-<div class="container">
+<div class="bewertung-container">
     <h2>Rezeptbewertungen</h2>
 
     <div class="average-rating">

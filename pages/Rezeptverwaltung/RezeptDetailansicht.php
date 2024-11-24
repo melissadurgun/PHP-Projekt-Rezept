@@ -99,7 +99,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
                     <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
                     <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept_id; ?>"
                         onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                        <i class="fa fa-trash-o"> <span> Löschen</span></i>
+                        <i class="fa fa-trash"> <span> Löschen</span></i>
                     </a>
                     <a
                         href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept_id; ?>">
@@ -111,10 +111,10 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
     </div>
 
     <!-- Rezept bewerten Link -->
-    <div class="container">
+    <div class="bewerten-container">
         <h2>Rezeptbewertungen</h2>
         <!-- "Rezept bewerten"-Button als Link zu RezeptBewerten.php mit GET über die URL -->
-        <a href="../../pages/Bewertung/RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>" class="button">Rezept bewerten</a>
+        <a href="../../pages/Bewertung/RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>" class="bewerten-button">Rezept bewerten</a>
     </div>
 
     <!-- Bewertungen Ansehen -->
