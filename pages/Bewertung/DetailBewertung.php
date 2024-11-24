@@ -30,7 +30,7 @@ $zutaten = $handler->getZutaten($rezept_id);
 
 <body>
 
-<div class="container">
+<div class="bewertung-container">
     <header>
         <h1><?php echo htmlspecialchars($rezept['titel']); ?></h1>
     </header>

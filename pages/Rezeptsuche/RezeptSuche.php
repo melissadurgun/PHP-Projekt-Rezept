@@ -114,7 +114,7 @@ $rezepte = $sucheHandler->getRezepte($filters);
                 <h3><?php echo htmlspecialchars($rezept['titel']); ?></h3>
                 <div class="link-container-rezepte">
                     <a href="">
-                        <i class="fa fa-trash-o">
+                        <i class="fa fa-trash">
                         <span> Mehr erfahren</span></i>
                     </a>
                 </div>

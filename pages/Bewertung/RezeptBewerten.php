@@ -53,7 +53,7 @@ include '../../includes/navigation.php';
 ?>
 
 <body>
-<div class="container">
+<div class="bewertung-container">
     <h2>Rezept bewerten</h2>
     <form method="POST" action="RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>">
         <input type="hidden" name="rezept_id" value="<?php echo $rezept_id; ?>">
