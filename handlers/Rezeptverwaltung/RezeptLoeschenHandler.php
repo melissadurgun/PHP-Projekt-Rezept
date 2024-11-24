@@ -3,12 +3,10 @@
  * Der Handler bietet eine Klasse, die Funktionen für das Löschen von Rezepten bereitstellt.
  * Wird bei Ausführung des 'Rezept löschen'-Buttons verwendet. 
  * 
- * Eine Überprüfung des Benutzers ist nicht nötig, da Löschen nur in der Benutzeransicht möglich. 
+ * Eine Überprüfung des Benutzers ist nicht nötig, da Löschen nur in der Benutzeransicht möglich/Löschen-Buttons werden nur 
+ * angezeigt, wenn User eingeloggt und Besitzer eines Rezepts ist.  
  * Damit wird bereits sichergestellt, dass nur die vom Benutzer erstellten Rezepte gelöscht werden können. 
  *  */ 
- 
-  
-
 
 require_once('../../config/db.php'); 
 
@@ -17,11 +15,12 @@ class RezeptLoeschenHandler {
     // Variablendeklaration
     private $DB;
 
+     // Datenbankverbindung aufbauen
     public function __construct() {
-        // Datenbankverbindung aufbauen
         $this->DB = new DB(); 
     }
 
+    //Löschen von allen Daten eines Rezepts
     public function executeLoescheRezept($rezeptid) {
         $this->loescheBewertungen($rezeptid); 
         $this->loescheZutaten($rezeptid); 

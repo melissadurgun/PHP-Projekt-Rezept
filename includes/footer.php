@@ -1,3 +1,5 @@
+<!--Der Footer ist auf der Webseite unten zu sehen und beinhaltet Informationen zu Adresse, Kontakt und Webseite. -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,7 +28,7 @@
         </div>
     </div>
     <br>
-        <p>&copy bite | Diese Webseite ist Teil eines Studentenprojekts der DHBW Stuttgart</p>
+        <p>&copy bite | Diese Webseite ist Teil eines Studentenprojekts der DHBW Stuttgart.</p>
 </footer>
 
 </html>

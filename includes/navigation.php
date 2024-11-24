@@ -1,3 +1,5 @@
+<!-- Navigation ist unterhalb des Headers platziert und beinhaltet die verschiedenen Kategorien. --> 
+
 <!DOCTYPE html>
 <html lang="en">
 

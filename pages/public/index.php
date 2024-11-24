@@ -1,3 +1,4 @@
+<!-- die Index.php ist die Startseite, wird z.B. durch den Klick auf das bite-Logo aufgerufen. --> 
 <!DOCTYPE html>
 <html lang="de">
 
@@ -8,38 +9,12 @@
     <link rel="stylesheet" href="../../assets/styles/styles.css">
     <title>Leckere Rezepte</title>
 </head>
-
-<!-- Header ausgelagert -->
+<!-- die Seite setzt sich aus den folgenden vier Bestandteilen zusammen, in denen jeweils ein gewisser Teil implementiert ist --> 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
-?>
-
-<!-- <body>
-    <main>
-        <div class="recipe-cards">
-            <div class="recipe-card">
-                <img src="../../assets/images/NeusteRezepte.png" alt="Rezept 1" />
-                <div class="overlay">NEUESTE REZEPTE</div>
-            </div>
-            <div class="recipe-card">
-                <img src="../../assets/images/Sonntagskuchen.png" alt="Rezept 2" />
-                <div class="overlay">SONNTAGS-KUCHEN</div>
-            </div>
-            <div class="recipe-card">
-                <img src="../../assets/images/Vegetarian.png" alt="Rezept 3" />
-                <div class="overlay">VEGGIE HAUPTGERICHTE</div>
-            </div>
-            <div class="recipe-card">
-                <img src="../../assets/images/Italienisch.avif" alt="Rezept 4" />
-                <div class="overlay">ITALIENISCH</div>
-            </div>
-        </div>
-    </main>
-</body> -->
-<?php
-include '../../pages/Rezeptverwaltung/RezeptOverview.php';
-include '../../includes/footer.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php');
+require_once('../../pages/Rezeptverwaltung/RezeptOverview.php'); 
+require_once('../../includes/footer.php');
 ?>
 
 </html>

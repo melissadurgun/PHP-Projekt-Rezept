@@ -1,13 +1,19 @@
 <?php
+/**
+ * Die Klasse RezeptSucheHandler stellt Funktionen für die Rezeptsuche bereit. 
+ * 
+ * Wird verwendet in Pages: RezeptSuche.php. 
+ */
+
 require_once('../../config/db.php');
 
 class RezeptSucheHandler
 {
     private $DB;
 
+    //Datenbankverbindung aufbauen 
     public function __construct()
     {
-        // Datenbankverbindung aufbauen
         $this->DB = new DB();
     }
 
@@ -22,7 +28,7 @@ class RezeptSucheHandler
     // Methode, um Rezepte basierend auf Filterkriterien abzurufen
     public function getRezepte($filters)
     {
-        // Verwenden der buildSQLQuery-Methode für den SQL-String und die Parameter
+        // SQL-Query und Parameter dynamisch erstellen
         $queryData = $this->buildSQLQuery($filters);
         $sql = $queryData['sql'];
         $parameters = $queryData['parameters'];
@@ -32,13 +38,27 @@ class RezeptSucheHandler
         $rezepteQuery->execute($parameters);
 
         // Ergebnisse abrufen
-        return $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
+        $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
+
+        // Bilder verarbeiten, falls vorhanden
+        foreach ($rezepte as &$rezept) {
+            if (!empty($rezept['bild'])) {
+                // Bild bleibt roh; Verarbeitung erfolgt in der Ansicht
+                $rezept['bild'] = $rezept['bild'];
+            } else {
+                // Fallback-Bild wird in der Ansicht festgelegt
+                $rezept['bild'] = null;
+            }
+        }
+
+        return $rezepte;
     }
 
     // Methode zum Erstellen des SQL-Strings und der Parameter
     private function buildSQLQuery($filters)
     {
-        $sql = 'SELECT * FROM rezept WHERE 1=1';
+        $sql = 'SELECT rezept_id, titel, zubereitungsdauer, schwierigkeitsgrad, ernaehrung, mahlzeitkategorie, kueche, bild
+                FROM rezept WHERE 1=1';
         $parameters = [];
 
         // Filter hinzufügen, falls vorhanden        
@@ -78,4 +98,3 @@ class RezeptSucheHandler
         return ['sql' => $sql, 'parameters' => $parameters];
     }
 }
-?>

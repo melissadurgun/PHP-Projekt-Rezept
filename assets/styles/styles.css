@@ -9,6 +9,7 @@ header {
   text-align: center;
   padding: 20px;
 }
+
 /*Header*/
 .header-container {
   display: flex;
@@ -605,6 +606,7 @@ footer {
   margin: 20px;
 }
 
+
 .fa-trash:not(#delete-zutat) {
   cursor: pointer;
   text-decoration: none;
@@ -664,6 +666,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .rezept-kachel {
@@ -758,6 +761,17 @@ footer {
   margin: 20px;
 }
 
+.login-container>* {
+  flex: 1 1 300px;
+  /* Kinder-Elemente haben mindestens 300px Breite, passen sich aber an */
+  max-width: 400px;
+  /* Begrenze die maximale Breite */
+  margin: 10px;
+  /* Gleichmäßiger Abstand zwischen Elementen */
+  box-sizing: border-box;
+  /* Padding und Border werden in die Breite einbezogen */
+}
+
 .logout {
   background-color: #dbe1dc;
   border-radius: 15px;
@@ -814,6 +828,17 @@ footer {
   flex-wrap: wrap;
   justify-content: space-evenly;
   margin: 20px;
+}
+
+.profile-container>* {
+  flex: 1 1 300px;
+  /* Kinder-Elemente haben mindestens 300px Breite, passen sich aber an */
+  max-width: 400px;
+  /* Begrenze die maximale Breite */
+  margin: 10px;
+  /* Gleichmäßiger Abstand zwischen Elementen */
+  box-sizing: border-box;
+  /* Padding und Border werden in die Breite einbezogen */
 }
 
 /* 
@@ -1003,4 +1028,37 @@ input[type="submit"] {
   display: flex;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+/*Error-Container fürs Anzeigen der Error-Message*/
+.error-container {
+  display: flex;
+  /* Aktiviert Flexbox */
+  align-items: center;
+  /* Vertikale Zentrierung */
+  justify-content: center;
+  /* Horizontale Zentrierung */
+  background-color: transparent;
+  /* Durchsichtiger Hintergrund */
+  border: none;
+  /* Kein Rahmen */
+  padding: 10px 15px;
+  /* Innenabstand für etwas schmaleren Container */
+  max-width: 300px;
+  /* Maximale Breite reduziert */
+  margin: 20px auto;
+  /* Zentrierung des Containers */
+  text-align: center;
+  /* Zentrierter Text */
+}
+
+.error-message {
+  margin: 0;
+  /* Entfernt Standard-Abstand des p-Tags */
+  color: #d90429;
+  /* Rötlichere Schriftfarbe */
+  font-size: 14px;
+  /* Schriftgröße */
+  font-weight: bold;
+  /* Fettschrift */
 }

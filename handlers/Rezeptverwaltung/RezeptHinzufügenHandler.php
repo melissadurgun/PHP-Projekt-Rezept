@@ -1,89 +1,80 @@
 <?php
 
-session_start();
+/**
+ * Die Klasse RezeptHinzufügenHandler wird verwendet, um ein neues Rezept in die Datenbank einzufügen. 
+ * 
+ * Wird verwendet in Kombination mit RezeptHinzufügen.php. 
+ */
 
-include '../../includes/header.php';
+ session_start(); 
 require_once('../../config/db.php');
 
-// Check if user is logged in
-if (!isset($_SESSION['user'])) {
-    header("Location: ..\..\pages\Benutzerverwaltung\login.php");
-    exit;
-}
+class RezeptHinzufügenHandler {
 
-//Datenbankverbindung
-$db = new DB();
+    //Variablendeklaration
+    private $db;
 
-// Check if the form was submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user_id = $_SESSION['user_id'];
-    $titel = $_POST['titel'];
-    $zubereitung = $_POST['zubereitung'];
-    $zubereitungsdauer = $_POST['zubereitungsdauer'];
-    $portionen = $_POST['portionen'];
-    $ernaehrung = $_POST['ernaehrung'];
-    $schwierigkeitsgrad = $_POST['schwierigkeitsgrad'];
-    $mahlzeitkategorie = $_POST['mahlzeitkategorie'];
-    $kueche = $_POST['kueche'];
-
-    // Bildverarbeitung
-
-    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-        $bild = $_FILES['file'];
-
-        echo 'Bild erhalten';
-
-        // Zielverzeichnis und Dateiname festlegen
-        $upload_dir = __DIR__ . '/../../uploads/'; // Absoluter Pfad zum uploads-Ordner
-        $bild_name = uniqid() . '-' . basename($bild['name']);
-        $bild_path = $upload_dir . $bild_name;
-
-        echo 'Bildname geändert';
-
-        // Bild speichern
-        if (move_uploaded_file($bild['tmp_name'], $bild_path)) {
-            $bild_url = '../../uploads/' . $bild_name; // Pfad für die Datenbank
-
-            echo 'Bild gespeichert';
-        } else {
-            echo "Fehler beim Hochladen des Bildes.";
-            exit();
-        }
-    } else {
-        echo "Fehler beim speichern des Bildes <br>" . $_FILES['file']['error'];
+    //Datenbankverbindung aufbauen 
+    public function __construct() {
+        $this->db = new DB();
     }
 
-    // Insert the recipe into the rezept table, including user_id
-    $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild_url)
-            VALUES (:user_id, :titel, :zubereitung, :zubereitungsdauer, :portionen, :ernaehrung, :schwierigkeitsgrad, :mahlzeitkategorie, :kueche, :bild_url)";
-    $db->executeQuery($sql, [
-        ':user_id' => $user_id,  // Bind the user ID from session
-        ':titel' => $titel,
-        ':zubereitung' => $zubereitung,
-        ':zubereitungsdauer' => $zubereitungsdauer,
-        ':portionen' => $portionen,
-        ':ernaehrung' => $ernaehrung,
-        ':schwierigkeitsgrad' => $schwierigkeitsgrad,
-        ':mahlzeitkategorie' => $mahlzeitkategorie,
-        ':kueche' => $kueche,
-        ':bild_url' => $bild_url
-    ]);
+    // Rezept speichern
+    public function saveRezept($data, $file) {
 
-    // Get the ID of the last inserted recipe
-    $rezept_id = $db->lastInsertId();
+        // Validierung der Benutzersession
+        if (!isset($_SESSION['user_id'])) {
+            throw new Exception("Benutzer nicht eingeloggt.");
+        }
+        $user_id = $_SESSION['user_id'];
 
-    // Insert each ingredient into the zutaten table
-    if (!empty($_POST['zutaten'])) {
-        foreach ($_POST['zutaten'] as $zutat) {
+        // Bildverarbeitung
+        $bild_content = $this->processImage($file);
+
+        // Rezept-Datenbankeintrag
+        $sql = "INSERT INTO rezept (user_id, titel, zubereitung, zubereitungsdauer, portionen, ernaehrung, schwierigkeitsgrad, mahlzeitkategorie, kueche, bild)
+                VALUES (:user_id, :titel, :zubereitung, :zubereitungsdauer, :portionen, :ernaehrung, :schwierigkeitsgrad, :mahlzeitkategorie, :kueche, :bild)";
+        $this->db->executeQuery($sql, [
+            ':user_id' => $user_id,
+            ':titel' => $data['titel'],
+            ':zubereitung' => $data['zubereitung'],
+            ':zubereitungsdauer' => $data['zubereitungsdauer'],
+            ':portionen' => $data['portionen'],
+            ':ernaehrung' => $data['ernaehrung'],
+            ':schwierigkeitsgrad' => $data['schwierigkeitsgrad'],
+            ':mahlzeitkategorie' => $data['mahlzeitkategorie'],
+            ':kueche' => $data['kueche'],
+            ':bild' => $bild_content
+        ]);
+
+        $rezept_id = $this->db->lastInsertId();
+
+        // Zutaten speichern
+        $this->saveZutaten($rezept_id, $data['zutaten'] ?? []);
+
+        return $rezept_id;
+    }
+
+    // Bildverarbeitung
+    private function processImage($file) {
+        if (isset($file['file']) && $file['file']['error'] === UPLOAD_ERR_OK) {
+            return file_get_contents($file['file']['tmp_name']);
+        } else {
+            throw new Exception("Fehler beim Hochladen des Bildes: " . ($file['file']['error'] ?? 'Unbekannter Fehler'));
+        }
+    }
+
+    // Zutaten speichern
+    private function saveZutaten($rezept_id, $zutaten) {
+        foreach ($zutaten as $zutat) {
             $name = $zutat['name'] ?? '';
             $menge = $zutat['menge'] ?? 0;
             $einheit = $zutat['einheit'] ?? null;
 
-            // Check that all fields have values before inserting
             if (!empty($name) && !empty($menge) && !empty($einheit)) {
                 $sql = "INSERT INTO zutaten (rezept_id, name, menge, einheit)
-                    VALUES (:rezept_id, :name, :menge, :einheit)";
-                $db->executeQuery($sql, [
+                        VALUES (:rezept_id, :name, :menge, :einheit)";
+                $this->db->executeQuery($sql, [
                     ':rezept_id' => $rezept_id,
                     ':name' => $name,
                     ':menge' => $menge,
@@ -92,13 +83,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
     }
-
-    echo "Rezept und Zutaten erfolgreich gespeichert! <br> Redirecting...";
-
-    // Redirect to the RezeptDetailAnsicht page
-    header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
-    exit(); // Ensure no further code is executed after the redirect
 }
-?>
 
-</html>
+// Hauptlogik -- außerhalb von der Klasse, da in RezeptHinzufügen.php action="RezeptHinzufügenHandler.php"
+try {
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $handler = new RezeptHinzufügenHandler();
+        $rezept_id = $handler->saveRezept($_POST, $_FILES);
+
+        // Erfolgreich speichern, Weiterleitung
+        header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
+        exit();
+    }
+} catch (Exception $e) {
+    echo "Fehler: " . $e->getMessage();
+    exit();
+}

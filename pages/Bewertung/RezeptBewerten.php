@@ -1,4 +1,9 @@
 <?php
+/**
+ * Seite ermöglicht es, ein Rezept zu bewerten. 
+ */
+
+
 session_start();
 require_once('../../handlers/Bewertung/RezeptBewertenHandler.php');
 
@@ -6,7 +11,6 @@ require_once('../../handlers/Bewertung/RezeptBewertenHandler.php');
 if (!isset($_GET['rezept_id'])) {
     die("Rezept-ID nicht angegeben.");
 }
-
 $rezept_id = intval($_GET['rezept_id']); // `rezept_id` aus GET
 
 // Prüfen, ob alle Felder im Bewertungs-Formular ausgefüllt sind
@@ -38,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['kommentar']) && isset(
 }
 ?>
 
+<!-- HTML Formular, in welches die Bewertung eingegeben werden kann --> 
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -70,15 +75,15 @@ include '../../includes/navigation.php';
 
         <label>Bewertung:</label>
         <div class="stars">
-            <input class="star star-5" id="star-5" type="radio" name="star" value="5" required />
+            <input class="star star-5" id="star-5" type="radio" name="star" value="5" required />5 Sterne
             <label class="star star-5" for="star-5"></label>
-            <input class="star star-4" id="star-4" type="radio" name="star" value="4" />
+            <input class="star star-4" id="star-4" type="radio" name="star" value="4" />4 Sterne
             <label class="star star-4" for="star-4"></label>
-            <input class="star star-3" id="star-3" type="radio" name="star" value="3" />
+            <input class="star star-3" id="star-3" type="radio" name="star" value="3" />3 Sterne
             <label class="star star-3" for="star-3"></label>
-            <input class="star star-2" id="star-2" type="radio" name="star" value="2" />
+            <input class="star star-2" id="star-2" type="radio" name="star" value="2" />2 Sterne
             <label class="star star-2" for="star-2"></label>
-            <input class="star star-1" id="star-1" type="radio" name="star" value="1" />
+            <input class="star star-1" id="star-1" type="radio" name="star" value="1" />1 Stern
             <label class="star star-1" for="star-1"></label>
         </div>
 

@@ -1,14 +1,26 @@
 <?php
+
+/**
+ * Die Klasse ProfilBearbeitenHandler stellt Funktionen bereit, die genutzt werden, um die Daten des Nutzers wie
+ * Name oder Passwort zu verändern. 
+ * 
+ * Wird verwendet in Pages: ProfilBearbeiten.php. 
+ */
 require_once('../../config/db.php');
 
-class ProfilBearbeitenHandler {
+class ProfilBearbeitenHandler
+{
     private $DB;
 
-    public function __construct() {
+    //Datenbankverbindung im Konstruktor aufbauen 
+    public function __construct()
+    {
         $this->DB = new DB();
     }
 
-    public function updateProfile($user_id, $vorname, $nachname, $username, $password1 = null, $password2 = null) {
+    //Funktion, die die Daten des Nutzers ändert 
+    public function updateProfile($user_id, $vorname, $nachname, $username, $password1 = null, $password2 = null)
+    {
         // Wenn beide Passwörter vorhanden sind, prüfen, ob sie übereinstimmen
         if ($password1 && $password1 !== $password2) {
             return "Die eingegebenen Passwörter stimmen nicht überein.";
@@ -23,16 +35,17 @@ class ProfilBearbeitenHandler {
 
         // SQL-Abfrage für das Update ohne Passwort
         $updateQuery = "UPDATE user SET vorname = :vorname, nachname = :nachname, username = :username";
-        
+
         // Passwort nur dann hinzufügen, wenn es geändert wurde
         $params = [':vorname' => $vorname, ':nachname' => $nachname, ':username' => $username, ':user_id' => $user_id];
         if ($password1) {
             $updateQuery .= ", password = :password";
             $params[':password'] = password_hash($password1, PASSWORD_DEFAULT);
         }
-        
+
         $updateQuery .= " WHERE user_id = :user_id";
-        
+
+        //Ausführen der Änderungen in der Datenbank 
         $stmt = $this->DB->prepare($updateQuery);
         $stmt->execute($params);
 

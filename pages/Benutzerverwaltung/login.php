@@ -1,14 +1,15 @@
 <?php
+/**
+ * Auf der Login-Seite wird das Login-Formular des Benutzers angezeigt. 
+ * 
+ */
+
+
 session_start();
 require_once('../../handlers/Benutzerverwaltung/LoginHandler.php');
 
 // Erstellen eines LoginHandler-Objekts
 $loginHandler = new LoginHandler();
-
-// Benutzer ausloggen, wenn `logout`-Parameter gesetzt ist
-if (isset($_REQUEST['logout'])) {
-    $loginHandler->logout();
-}
 
 // Benutzer zur Benutzerseite weiterleiten, wenn er bereits eingeloggt ist
 if ($loginHandler->isLoggedIn()) {
@@ -46,11 +47,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['username']) && !empt
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
 ?>
 
 <body>
+    <!-- HTML für das Login-Formular --> 
     <div class="login-container">
         <div class="login">
             <h2>Anmelden</h2>
@@ -72,7 +74,8 @@ include '../../includes/navigation.php';
         <?php
         // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist
         if (!empty($errorMessage)) {
-            echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
+            echo '<div class="error-container">
+                    <p class="error-message">' . htmlspecialchars($errorMessage) . '<p></div>';
         }
         ?>
     </div>

@@ -1,3 +1,5 @@
+<!-- Der Header ist zu Beginn jeder Seite zu sehen und beinhaltet das Logo, den Profil-Icon und die Suchleiste. --> 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -13,7 +15,7 @@
     <header>
         <div class="header-container">
             <div class="logo">
-                <a href="../../pages/public/index.php">
+                <a href="../../pages/public/Index.php">
                     <img src="../../assets/images/LogoLight1.png" alt="logo">
                 </a>
             </div>

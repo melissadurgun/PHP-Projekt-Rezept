@@ -1,9 +1,15 @@
 <?php
+/**
+ * Die Klasse stellt einen BewertungenAnzeigenHandler mit Funktionen zum Abrufen der Bewertugnen eines Rezepts bereit. 
+ * 
+ * Wird verwendet in Pages: BewertungenAnzeigen.php. 
+ */
 require_once('../../config/db.php');
 
 class BewertungenAnzeigenHandler {
     private $DB;
 
+    //Datenbankverbindung aufbauen 
     public function __construct() {
         $this->DB = new DB();
     }
