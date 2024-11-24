@@ -3,27 +3,27 @@ session_start();
 require_once("../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php");
 require_once("../../handlers/Rezeptverwaltung/RezeptBearbeitenHandler.php");
 
-// Initialize the handler
+// Rezept-ID validieren
+$rezept_id = filter_input(INPUT_GET, 'rezept_id', FILTER_VALIDATE_INT);
+if (!$rezept_id) {
+    die("Ungültige Rezept-ID.");
+}
+
+// Handler-Initialisierung
 $rezeptDetail = new RezeptDetailHandler();
 $rezeptBearbeitenHandler = new RezeptBearbeitenHandler();
 
-// Check if the `rezept_id` parameter is provided in the URL
-$rezept_id = $_GET['rezept_id'] ?? null;
-if (!$rezept_id) {
-    die("Rezept-ID nicht angegeben.");
-}
-
+// Rezeptdaten abrufen
 $data = $rezeptDetail->getRecipeDetail($rezept_id);
-
 if (!$data) {
     die("Fehler beim Laden der Rezeptdetails.");
 }
 
-// Extract data for easy access in the view
+// Rezept- und Zutaten-Daten extrahieren
 $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
-// Prepare data for display
+// Eingaben bereinigen und vorbereiten
 $titel = htmlspecialchars($recipe['titel']);
 $username = htmlspecialchars($recipe['username']);
 $zubereitungsdauer = htmlspecialchars($recipe['zubereitungsdauer']);
@@ -40,23 +40,27 @@ $bild_src = $recipe['bild']
     ? $recipe['bild']
     : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden
 
+// Formularverarbeitung
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Eingaben validieren und bereinigen
+    $neuer_titel = htmlspecialchars(trim($_POST['title']));
+    $neue_zubereitungsdauer = filter_input(INPUT_POST, 'zubereitungsdauer', FILTER_VALIDATE_INT);
+    $neue_schwierigkeitsgrad = htmlspecialchars(trim($_POST['schwierigkeitsgrad']));
+    $neue_kueche = htmlspecialchars(trim($_POST['kueche']));
+    $neue_ernaehrung = htmlspecialchars(trim($_POST['ernaehrung']));
+    $neue_mahlzeitkategorie = htmlspecialchars(trim($_POST['mahlzeitkategorie']));
+    $neue_portionen = filter_input(INPUT_POST, 'portionen', FILTER_VALIDATE_INT);
+    $neue_anweisungen = htmlspecialchars(trim($_POST['instructions']));
+    $neue_zutaten = $_POST['ingredients'] ?? [];
 
-####################################################
-// Hauptlogik zur Verarbeitung der Aktualisierung
+    // Zutaten validieren
+    foreach ($neue_zutaten as &$zutat) {
+        $zutat['name'] = htmlspecialchars(trim($zutat['name']));
+        $zutat['menge'] = htmlspecialchars(trim($zutat['menge']));
+        $zutat['einheit'] = htmlspecialchars(trim($zutat['einheit']));
+    }
 
-// Process form submission
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $neuer_titel = $_POST['title'];
-    $neue_zutaten = $_POST['ingredients'];
-    $neue_anweisungen = $_POST['instructions'];
-    $neue_zubereitungsdauer = $_POST['zubereitungsdauer'];
-    $neue_schwierigkeitsgrad = $_POST['schwierigkeitsgrad'];
-    $neue_kueche = $_POST['kueche'];
-    $neue_ernaehrung = $_POST['ernaehrung'];
-    $neue_mahlzeitkategorie = $_POST['mahlzeitkategorie'];
-    $neue_portionen = $_POST['portionen'];
-
-    // Update the recipe using the handler
+    // Rezept aktualisieren
     $isUpdated = $rezeptBearbeitenHandler->updateRecipe(
         $rezept_id,
         $neuer_titel,
@@ -67,16 +71,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $neue_schwierigkeitsgrad,
         $neue_mahlzeitkategorie,
         $neue_kueche,
-        $ingredients
+        $neue_zutaten
     );
 
     if ($isUpdated) {
         header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
         exit();
     } else {
-        echo "Fehler beim Aktualisieren des Rezepts.";
+        echo "<p style='color:red;'>Fehler beim Aktualisieren des Rezepts.</p>";
     }
 }
+?>
+
 ?>
 <!DOCTYPE html>
 <html lang="de">
@@ -89,15 +95,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 
 <body>
-    <?php include '../../includes/header.php'; ?>
-    <?php include '../../includes/navigation.php'; ?>
+    <?php require_once('../../includes/header.php'); ?>
+    <?php require_once('../../includes/navigation.php'); ?>
 
     <div class="rezept-detail-container">
         <form action="" method="POST">
             <div class="rezept-topbox">
                 <div class="rezept-bild">
-                    <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>"
-                        style="max-width: 100%; height: auto;">
+                    <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>">
                 </div>
                 <div class="rezept-info">
                     <h1><input type="text" name="title" value="<?php echo $recipe['titel']; ?>"></h1>
@@ -223,10 +228,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
     </div>
-    <script src="..\..\js\zutatHinzufügen.js"></script>
+    <script src="..\..\js\zutatHinzufügen.js.php"></script>
 
     <footer>
-        <?php include '../../includes/footer.php'; ?>
+        <?php require_once('../../includes/footer.php'); ?>
     </footer>
 </body>
 

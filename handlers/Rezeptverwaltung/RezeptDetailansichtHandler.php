@@ -1,5 +1,5 @@
 <?php
-include '../../config/db.php';
+require_once('../../config/db.php');
 
 class RezeptDetailHandler
 {
@@ -12,32 +12,40 @@ class RezeptDetailHandler
 
     public function getRecipeDetail($rezept_id)
     {
-        // Fetch the recipe details, including the BLOB image
+        // Eingabe validieren
+        $rezept_id = filter_var($rezept_id, FILTER_VALIDATE_INT);
+        if ($rezept_id === false) {
+            die("Ungültige Rezept-ID."); // Alternativ: Rückgabe einer Fehlermeldung
+        }
+
+        // Rezeptdetails abrufen, einschließlich Benutzername
         $query = "SELECT r.*, u.username FROM rezept r
                   JOIN user u ON r.user_id = u.user_id
                   WHERE r.rezept_id = :rezept_id";
         $stmt = $this->db->prepare($query);
-        $stmt->execute([':rezept_id' => $rezept_id]);
+        $stmt->bindParam(':rezept_id', $rezept_id, PDO::PARAM_INT);
+        $stmt->execute();
         $recipe = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if (!$recipe) {
-            die("Rezept nicht gefunden.");
+            die("Rezept nicht gefunden."); // Alternativ: Rückgabe einer Fehlermeldung
         }
 
-        // Convert the BLOB image to a Base64 string if it exists
-        if ($recipe['bild']) {
+        // BLOB-Bild in Base64-String konvertieren, falls vorhanden
+        if (!empty($recipe['bild'])) {
             $recipe['bild'] = 'data:image/jpeg;base64,' . base64_encode($recipe['bild']);
         } else {
             $recipe['bild'] = null; // Kein Bild vorhanden
         }
 
-        // Fetch the ingredients
-        $queryIngredients = "SELECT * FROM zutaten WHERE rezept_id = :rezept_id";
+        // Zutaten abrufen
+        $queryIngredients = "SELECT name, menge, einheit FROM zutaten WHERE rezept_id = :rezept_id";
         $stmtIngredients = $this->db->prepare($queryIngredients);
-        $stmtIngredients->execute([':rezept_id' => $rezept_id]);
+        $stmtIngredients->bindParam(':rezept_id', $rezept_id, PDO::PARAM_INT);
+        $stmtIngredients->execute();
         $ingredients = $stmtIngredients->fetchAll(PDO::FETCH_ASSOC);
 
-        // Prepare data to pass to the view
+        // Daten für die Ansicht vorbereiten
         return [
             'recipe' => $recipe,
             'ingredients' => $ingredients

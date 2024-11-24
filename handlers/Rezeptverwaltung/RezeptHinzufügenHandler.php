@@ -2,7 +2,7 @@
 
 session_start();
 
-include '../../includes/header.php';
+require_once('../../includes/header.php');
 require_once('../../config/db.php');
 
 // Check if user is logged in

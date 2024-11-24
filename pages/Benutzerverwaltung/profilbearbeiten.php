@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -40,43 +41,47 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 ?>
 
 <body>
-<div class="profile-container">
-    <h2>Profil bearbeiten</h2>
+    <div class="profile-container">
+        <h2>Profil bearbeiten</h2>
 
-    <form action="profilbearbeiten.php" method="post">
-        <label for="vorname">Vorname:</label>
-        <input type="text" id="vorname" name="vorname" value="<?php echo htmlspecialchars($_SESSION['vorname']); ?>" required>
+        <form action="profilbearbeiten.php" method="post">
+            <label for="vorname">Vorname:</label>
+            <input type="text" id="vorname" name="vorname" value="<?php echo htmlspecialchars($_SESSION['vorname']); ?>"
+                required>
 
-        <label for="nachname">Nachname:</label>
-        <input type="text" id="nachname" name="nachname" value="<?php echo htmlspecialchars($_SESSION['nachname']); ?>" required>
+            <label for="nachname">Nachname:</label>
+            <input type="text" id="nachname" name="nachname"
+                value="<?php echo htmlspecialchars($_SESSION['nachname']); ?>" required>
 
-        <label for="username">E-Mail Adresse:</label>
-        <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['user']); ?>" required>
+            <label for="username">E-Mail Adresse:</label>
+            <input type="text" id="username" name="username" value="<?php echo htmlspecialchars($_SESSION['user']); ?>"
+                required>
 
-        <label for="password1">Neues Passwort:</label>
-        <input type="password" id="password1" name="password1">
+            <label for="password1">Neues Passwort:</label>
+            <input type="password" id="password1" name="password1">
 
-        <label for="password2">Passwort wiederholen:</label>
-        <input type="password" id="password2" name="password2">
+            <label for="password2">Passwort wiederholen:</label>
+            <input type="password" id="password2" name="password2">
 
-        <input type="submit" value="Änderungen speichern" class="save">
-    </form>
+            <input type="submit" value="Änderungen speichern" class="save">
+        </form>
 
-    <?php
-    // Fehlermeldung anzeigen, falls vorhanden
-    if (!empty($errorMessage)) {
-        echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
-    }
-    ?>
-</div>
+        <?php
+        // Fehlermeldung anzeigen, falls vorhanden
+        if (!empty($errorMessage)) {
+            echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
+        }
+        ?>
+    </div>
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php');
 ?>
+
 </html>

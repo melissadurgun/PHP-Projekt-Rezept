@@ -10,13 +10,13 @@
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 ?>
 
 <body>
     <div class="form">
-        <form class="RezeptHinzufügenForm" action="..\..\pages\BildTest\Hinzufügen.php"
+        <form class="RezeptHinzufügenForm" action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php"
             method="POST" enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">
@@ -122,11 +122,11 @@ include '../../includes/navigation.php';
             </div>
         </form>
     </div>
-    <script src="..\..\js\zutatHinzufügen.js"></script>
-    <script src="..\..\js\imagePreview.js"></script>
-    <script src="..\..\js\formValidation.js"></script>
+    <script src="..\..\js\zutatHinzufügen.js.php"></script>
+    <script src="..\..\js\imagePreview.js.php"></script>
 </body>
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php');
 ?>
+
 </html>

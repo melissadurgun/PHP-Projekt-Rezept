@@ -40,6 +40,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['kommentar']) && isset(
 
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -48,49 +49,50 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['kommentar']) && isset(
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 ?>
 
 <body>
-<div class="bewertung-container">
-    <h2>Rezept bewerten</h2>
-    <form method="POST" action="RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>">
-        <input type="hidden" name="rezept_id" value="<?php echo $rezept_id; ?>">
+    <div class="bewertung-container">
+        <h2>Rezept bewerten</h2>
+        <form method="POST" action="RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>">
+            <input type="hidden" name="rezept_id" value="<?php echo $rezept_id; ?>">
 
-        <?php
-        if (!empty($_SESSION['user'])) {
-            echo '<label>Dein Name:</label>';
-            echo '<p>' . htmlspecialchars($_SESSION['vorname']) . '</p>';
-        } else {
-            echo '<label for="reg_vorname">Dein Name:</label>';
-            echo '<input type="text" id="reg_vorname" name="reg_vorname" required>';
-        }
-        ?>
+            <?php
+            if (!empty($_SESSION['user'])) {
+                echo '<label>Dein Name:</label>';
+                echo '<p>' . htmlspecialchars($_SESSION['vorname']) . '</p>';
+            } else {
+                echo '<label for="reg_vorname">Dein Name:</label>';
+                echo '<input type="text" id="reg_vorname" name="reg_vorname" required>';
+            }
+            ?>
 
-        <label>Bewertung:</label>
-        <div class="stars">
-            <input class="star star-5" id="star-5" type="radio" name="star" value="5" required />5 Sterne
-            <label class="star star-5" for="star-5"></label>
-            <input class="star star-4" id="star-4" type="radio" name="star" value="4" />4 Sterne
-            <label class="star star-4" for="star-4"></label>
-            <input class="star star-3" id="star-3" type="radio" name="star" value="3" />3 Sterne
-            <label class="star star-3" for="star-3"></label>
-            <input class="star star-2" id="star-2" type="radio" name="star" value="2" />2 Sterne
-            <label class="star star-2" for="star-2"></label>
-            <input class="star star-1" id="star-1" type="radio" name="star" value="1" />1 Stern
-            <label class="star star-1" for="star-1"></label>
-        </div>
+            <label>Bewertung:</label>
+            <div class="stars">
+                <input class="star star-5" id="star-5" type="radio" name="star" value="5" required />5 Sterne
+                <label class="star star-5" for="star-5"></label>
+                <input class="star star-4" id="star-4" type="radio" name="star" value="4" />4 Sterne
+                <label class="star star-4" for="star-4"></label>
+                <input class="star star-3" id="star-3" type="radio" name="star" value="3" />3 Sterne
+                <label class="star star-3" for="star-3"></label>
+                <input class="star star-2" id="star-2" type="radio" name="star" value="2" />2 Sterne
+                <label class="star star-2" for="star-2"></label>
+                <input class="star star-1" id="star-1" type="radio" name="star" value="1" />1 Stern
+                <label class="star star-1" for="star-1"></label>
+            </div>
 
-        <label for="kommentar">Kommentar:</label>
-        <textarea name="kommentar" id="kommentar" required></textarea>
+            <label for="kommentar">Kommentar:</label>
+            <textarea name="kommentar" id="kommentar" required></textarea>
 
-        <input type="submit" value="Bewertung absenden">
-    </form>
-</div>
+            <input type="submit" value="Bewertung absenden">
+        </form>
+    </div>
 
-<?php
-include '../../includes/footer.php';
-?>
+    <?php
+    require_once('../../includes/footer.php');
+    ?>
 </body>
+
 </html>

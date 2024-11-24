@@ -12,6 +12,7 @@ if (!isset($_SESSION['user'])) {
 
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,29 +21,30 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 ?>
 
 <body>
-<div class="login-container">
-    <h2>Möchtest du dein Profil wirklich löschen, <?php echo htmlspecialchars($_SESSION['vorname']); ?>?</h2>
-    <p>Dann verlieren wir nicht nur dich, sondern auch deine Arbeit.</p> 
-    <p>Wenn du dein Profil löschst, werden alle deine Rezepte gelöscht. Deine Kommentare bleiben weiterhin bestehen.</p>
-    <br>
-    <form name="delete" action="../../handlers/Benutzerverwaltung/ProfilLoeschenHandler.php" method="POST">
-        <input type="hidden" name="confirm_delete" value="1">
-        <div class="button-container">
-        <button type="submit" class="button">Ja, Profil löschen</button>
-        <a href="Benutzerseite.php">Zurück zur Benutzerseite</a>
+    <div class="login-container">
+        <h2>Möchtest du dein Profil wirklich löschen, <?php echo htmlspecialchars($_SESSION['vorname']); ?>?</h2>
+        <p>Dann verlieren wir nicht nur dich, sondern auch deine Arbeit.</p>
+        <p>Wenn du dein Profil löschst, werden alle deine Rezepte gelöscht. Deine Kommentare bleiben weiterhin bestehen.
+        </p>
+        <br>
+        <form name="delete" action="../../handlers/Benutzerverwaltung/ProfilLoeschenHandler.php" method="POST">
+            <input type="hidden" name="confirm_delete" value="1">
+            <div class="button-container">
+                <button type="submit" class="button">Ja, Profil löschen</button>
+                <a href="Benutzerseite.php">Zurück zur Benutzerseite</a>
+            </div>
+        </form>
+
     </div>
-    </form>
-    
-</div>
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php');
 ?>
 
 </html>

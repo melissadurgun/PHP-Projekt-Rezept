@@ -7,8 +7,8 @@ if (!isset($_SESSION['user'])) {
 }
 
 require_once('../../handlers/Bewertung/DetailBewHandler.php');
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 
 //ACHTUNG! hier 6 durch 0 tauschen 
 $rezept_id = isset($_GET['id']) ? intval($_GET['id']) : 6;
@@ -89,13 +89,13 @@ $zutaten = $handler->getZutaten($rezept_id);
                 <?php
                 // Übergabe der rezept_id an BewertungenAnzeigen.php
                 $rezept_id = $rezept['rezept_id'];
-                include '../../pages/Bewertung/BewertungenAnzeigen.php';
+                require_once('../../pages/Bewertung/BewertungenAnzeigen.php');
                 ?>
             </section>
     </div>
 
     <?php
-    include '../../includes/footer.php';
+    require_once('../../includes/footer.php');
     ?>
 
 </body>

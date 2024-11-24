@@ -11,8 +11,8 @@
 
 <!-- Header ausgelagert -->
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 ?>
 
 <!-- <body>
@@ -38,8 +38,8 @@ include '../../includes/navigation.php';
     </main>
 </body> -->
 <?php
-include '../../pages/Rezeptverwaltung/RezeptOverview.php';
-include '../../includes/footer.php';
+require_once('../../pages/Rezeptverwaltung/RezeptOverview.php');
+require_once('../../includes/footer.php');
 ?>
 
 </html>

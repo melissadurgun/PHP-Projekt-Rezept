@@ -5,14 +5,14 @@ require_once("../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php");
 // Rezept Handler initialisieren
 $rezeptDetail = new RezeptDetailHandler();
 
-// Rezept-ID aus der URL abrufen
-$rezept_id = $_GET['rezept_id'] ?? null;
+// Rezept-ID aus der URL abrufen und validieren
+$rezept_id = filter_input(INPUT_GET, 'rezept_id', FILTER_VALIDATE_INT);
 if (!$rezept_id) {
-    die("Rezept-ID nicht angegeben.");
+    die("Ungültige Rezept-ID.");
 }
 
+// Rezeptdetails abrufen
 $data = $rezeptDetail->getRecipeDetail($rezept_id);
-
 if (!$data) {
     die("Fehler beim Laden der Rezeptdetails.");
 }
@@ -22,13 +22,9 @@ $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
 // Prüfen, ob der eingeloggte Benutzer der Besitzer des Rezepts ist
-if (isset($_SESSION['user_id'])) {
-    $isOwner = ($recipe['user_id'] == $_SESSION['user_id']);
-} else {
-    $isOwner = false;
-}
+$isOwner = isset($_SESSION['user_id']) && $recipe['user_id'] == $_SESSION['user_id'];
 
-// Prepare data for display
+// Daten für die Ansicht vorbereiten
 $titel = htmlspecialchars($recipe['titel']);
 $username = htmlspecialchars($recipe['username']);
 $zubereitungsdauer = htmlspecialchars($recipe['zubereitungsdauer']);
@@ -42,8 +38,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 // Bilddaten vorbereiten
 $bild_src = $recipe['bild']
     ? $recipe['bild']
-    : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden
-?>
+    : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden ?>
 
 <!DOCTYPE html>
 <html lang="de">
@@ -53,13 +48,11 @@ $bild_src = $recipe['bild']
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $titel; ?> - Rezeptdetails</title>
     <link rel="stylesheet" href="../../assets/styles/styles.css">
-    <!-- <link rel="stylesheet" href="../../assets/styles/RezDetailStyles.css"> -->
 </head>
 
 <body>
-    <?php include '../../includes/header.php'; ?>
-    <?php include '../../includes/navigation.php'; ?>
-
+    <?php require_once '../../includes/header.php'; ?>
+    <?php require_once '../../includes/navigation.php'; ?>
 
     <div class="rezept-detail-container">
         <div class="rezept-topbox">
@@ -69,7 +62,6 @@ $bild_src = $recipe['bild']
             <div class="rezept-info">
                 <h1><?php echo $titel; ?></h1>
                 <p>Rezept von <?php echo $username; ?></p>
-                <br><br>
                 <div class="icon-container1">
                     <p><i class="fa fa-clock-o"></i> <?php echo $zubereitungsdauer; ?> Minuten</p>
                     <p><i class="fa fa-signal"></i> <?php echo $schwierigkeitsgrad; ?></p>
@@ -98,38 +90,33 @@ $bild_src = $recipe['bild']
             </div>
         </div>
 
-        <!-- Display "Rezept bearbeiten" und "Rezept löschen" button only if the user is the recipe owner -->
+        <!-- "Rezept bearbeiten" und "Rezept löschen" nur anzeigen, wenn der Benutzer der Besitzer ist -->
         <?php if ($isOwner): ?>
             <div class="userbuttons-container-rezepte">
-                <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
                 <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept_id; ?>"
                     onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                    <i class="fa fa-trash"> <span> Löschen</span></i>
+                    <i class="fa fa-trash"> <span>Löschen</span></i>
                 </a>
                 <a href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept_id; ?>">
                     <i class="fa fa-edit"><span>Bearbeiten</span></i>
                 </a>
             </div>
-
         <?php endif; ?>
     </div>
 
-    <!-- Rezept bewerten Link -->
     <div class="bewerten-container">
         <h2>Rezeptbewertungen</h2>
-        <!-- "Rezept bewerten"-Button als Link zu RezeptBewerten.php mit GET über die URL -->
         <a href="../../pages/Bewertung/RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>"
             class="bewerten-button">Rezept bewerten</a>
     </div>
 
-    <!-- Bewertungen Ansehen -->
     <?php
-    // BewertungenAnzeigen.php einbinden
+    // Bewertungen anzeigen
     require_once('../../pages/Bewertung/BewertungenAnzeigen.php');
     ?>
 
     <footer>
-        <?php include '../../includes/footer.php'; ?>
+        <?php require_once('../../includes/footer.php'); ?>
     </footer>
 </body>
 

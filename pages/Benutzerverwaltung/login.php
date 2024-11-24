@@ -46,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['username']) && !empt
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php');
+require_once('../../includes/navigation.php');
 ?>
 
 <body>
@@ -79,7 +79,7 @@ include '../../includes/navigation.php';
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php');
 ?>
 
 </html>
