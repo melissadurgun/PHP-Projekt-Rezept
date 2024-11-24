@@ -1,17 +1,21 @@
-<!-- Seite wird aufgerufen, wenn der Benutzer auf Logout klickt. 
- Sorgt dafür, dass die aktuelle Session zerstört wird und Benutzer somit abgemeldet ist. --> 
-
-
 <?php
+/**
+ * Seite wird aufgerufen, wenn der Benutzer den Logout wünscht. 
+ * Ruft den LoginHandler und dessen Funktion logout() auf. 
+ */
+
+
 session_start();
 require_once('../../handlers/Benutzerverwaltung/LoginHandler.php');
 
 // Instanz von LoginHandler erstellen 
 $loginHandler = new LoginHandler();
+
 //aufrufen der Funktion Logout und damit Ausloggen des Benutzers 
 $loginHandler->logout();
 ?>
 
+<!-- HTML-Teil --> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,8 +25,8 @@ $loginHandler->logout();
     <title>Logout</title>
 </head>
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
 ?>
 <body>
     <div class="logout">
@@ -34,6 +38,6 @@ include '../../includes/navigation.php';
     </div>
 </body>
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 </html>

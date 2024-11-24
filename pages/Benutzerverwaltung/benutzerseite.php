@@ -1,4 +1,10 @@
 <?php
+/**
+ * Auf der Benutzerseite werden die Rezepte eines Benutzers angezeigt. Zudem sind weitere Funktionen wie das 
+ * Ändern der Benutzerdaten und das Löschen des gesamten Profils verlinkt. 
+ */
+
+ //Session beginnen, um den User einzuloggen
 session_start();
 
 // wenn Benutzer nicht eingeloggt --> weiterleiten an Login 
@@ -16,11 +22,11 @@ $DB = new DB();
 
 //Rezepte aus Datenbank abrufen 
 $user_id = $_SESSION['user_id'];
+
 // Rezepte des Benutzers abrufen, inklusive rezept_id
 $rezepteQuery = $DB->prepare('SELECT rezept_id, titel, bild FROM rezept WHERE user_id = :user_id ORDER BY rezept_id DESC');
 $rezepteQuery->execute([':user_id' => $user_id]);
 $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
 <!DOCTYPE html>
@@ -34,8 +40,8 @@ $rezepte = $rezepteQuery->fetchAll(PDO::FETCH_ASSOC);
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
 ?>
 
 <body>
@@ -68,6 +74,7 @@ include '../../includes/navigation.php';
         <div class="rezepte-container">
             <?php foreach ($rezepte as $rezept): ?>
             <div class="rezept-kachel">
+
                 <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
                 <?php if (!empty($rezept['bild'])): ?>
                 <img 
@@ -76,7 +83,7 @@ include '../../includes/navigation.php';
                     class="recipe-image">
                 <?php else: ?>
                 <img 
-                    src="../../assets/images/platzhalter.png" 
+                    src="../../assets/images/Platzhalter.jpg" 
                     alt="Platzhalterbild" 
                     class="recipe-image">
                 <?php endif; ?>
@@ -84,8 +91,8 @@ include '../../includes/navigation.php';
                         href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo $rezept['rezept_id']; ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
                 </h3>
 
+                <!--Buttons zum Löschen und Bearbeiten des Rezepts --> 
                 <div class="link-container-rezepte">
-                    <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
                     <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept['rezept_id']; ?>"
                         onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
                         <i class="fa fa-trash"> <span>Löschen</span></i>
@@ -105,7 +112,7 @@ include '../../includes/navigation.php';
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 
 </html>

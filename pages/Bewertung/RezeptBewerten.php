@@ -1,4 +1,9 @@
 <?php
+/**
+ * Seite ermöglicht es, ein Rezept zu bewerten. 
+ */
+
+
 session_start();
 require_once('../../handlers/Bewertung/RezeptBewertenHandler.php');
 
@@ -6,7 +11,6 @@ require_once('../../handlers/Bewertung/RezeptBewertenHandler.php');
 if (!isset($_GET['rezept_id'])) {
     die("Rezept-ID nicht angegeben.");
 }
-
 $rezept_id = intval($_GET['rezept_id']); // `rezept_id` aus GET
 
 // Prüfen, ob alle Felder im Bewertungs-Formular ausgefüllt sind
@@ -38,6 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['kommentar']) && isset(
 }
 ?>
 
+<!-- HTML Formular, in welches die Bewertung eingegeben werden kann --> 
 <!DOCTYPE html>
 <html lang="de">
 <head>

@@ -1,28 +1,38 @@
 <?php
+/**
+ * Die Klasse LoginHandler stellt Funktionen bereit, die im Zusammenhang mit dem Ein- und Ausloggen der Benutzer
+ * benötigt werden. 
+ * 
+ * Wird verwendet in den Pages: Login.php & Logout.php 
+ * 
+ */
+
 require_once('../../config/db.php');
 
 class LoginHandler
 {
     private $DB;
 
+    //Konstruktor etabliert Datenbankverbindung 
     public function __construct()
     {
         $this->DB = new DB();
     }
 
+    //Funktion loggt den Benutzer aus 
     public function logout()
     {
-
         session_unset();
         session_destroy();
     }
 
+    //Funktion prüft, ob Benutzer eingeloggt ist
     public function isLoggedIn()
     {
-        // Prüfen, ob der Benutzer eingeloggt ist
         return isset($_SESSION['user']);
     }
 
+    //Funktion führt den Login des Benutzers durch 
     public function login($username, $password)
     {
         // Abfrage des Benutzers in der Datenbank vorbereiten

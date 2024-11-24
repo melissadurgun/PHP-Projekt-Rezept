@@ -1,9 +1,10 @@
 <?php
 /**
  * Der Handler bietet eine Klasse, die Funktionen für das Ändern von Rezepten bereitstellt.
- * Wird bei Ausführung des 'Rezept ändern'-Buttons verwendet. 
+ * Wird verwendet in Pages: RezeptBearbeiten.php. 
  * 
- * Eine Überprüfung des Benutzers ist nicht nötig, da Änderungen nur in der Benutzeransicht möglich sind. 
+ * Eine Überprüfung des Benutzers ist nicht nötig, da Änderungen nur in der Benutzeransicht möglich sind bzw. der
+ * Ändern-Button nur angezeigt wird, wenn der User eingeloggt und 'Besitzer' des Rezepts ist. 
  * Damit wird bereits sichergestellt, dass nur die vom Benutzer erstellten Rezepte geändert werden können.
  */
 
@@ -13,15 +14,13 @@ class RezeptBearbeitenHandler
 {
     private $DB;
 
+    // Datenbankverbindung aufbauen
     public function __construct()
     {
-        // Datenbankverbindung aufbauen
         $this->DB = new DB();
     }
 
-    /**
-     * Funktion, um zu überprüfen, ob der eingeloggte Benutzer der Besitzer des Rezepts ist
-     */
+    //Funktion, um zu überprüfen, ob der eingeloggte Benutzer der Besitzer des Rezepts ist
     public function isUserRecipeOwner($rezept_id, $user_id)
     {
         $query = "SELECT 1 FROM rezept WHERE rezept_id = :rezept_id AND user_id = :user_id";
@@ -34,13 +33,12 @@ class RezeptBearbeitenHandler
         return $stmt->fetch() !== false;
     }
 
-    /**
-     * Funktion, um ein Rezept zu aktualisieren
-     */
+   //Funktion um Rezept zu aktualisieren 
     public function updateRecipe($rezept_id, $title, $zubereitung, $zubereitungsdauer, $portionen, $ernaehrung, $schwierigkeitsgrad, $mahlzeitkategorie, $kueche, $zutaten)
     {
         try {
-            // Beginne eine Transaktion
+
+            // Beginne eine Transaktion(damit entweder alles geändert wird oder nichts)
             $this->DB->beginTransaction();
 
             // Aktualisiere die Hauptdetails des Rezepts
@@ -88,6 +86,7 @@ class RezeptBearbeitenHandler
             $this->DB->commit();
 
             return true;
+            
         } catch (Exception $e) {
             // Rollback, falls ein Fehler auftritt
             $this->DB->rollBack();
@@ -96,3 +95,4 @@ class RezeptBearbeitenHandler
         }
     }
 }
+?>

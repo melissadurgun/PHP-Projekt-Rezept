@@ -1,18 +1,28 @@
 <?php
+/**
+ * Die Klasse stellt Grundfunktionen bereit, um eine Datenbankverbindung aufzubauen. 
+ * Beim Benutzen von Docker muss der Code für XAMPP, beim Benutzen von XAMPP der Code von Docker auskommentiert werden.
+ */
+
 class DB extends PDO
 {
     public function __construct()
     {
-        // Use 'localhost' by default, or 'db' if specified in an environment variable
+        //---Code für XAMPP - auskommentieren, wenn Docker benutzt wird 
+        //$db = 'localhost'; 
+
+        //---Code für Docker - auskommentieren, wenn XAMPP benutzt wird 
         $host = "db";
+
+        //---Gemeinsamer Code - nicht auskommentieren
         $dbname = 'rezepte';
         $user = 'root';
         $password = '';
 
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
 
+        //Aufbau einer Connection 
         try {
-            // Call the PDO constructor to establish the connection
             parent::__construct($dsn, $user, $password);
             $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
@@ -20,12 +30,12 @@ class DB extends PDO
         }
     }
 
-    // Custom query method to avoid conflict with PDO::query
+    // eigene Methode, um eine Query auszuführen 
     public function executeQuery($sql, $params = [])
     {
-        $stmt = $this->prepare($sql); // Prepare the SQL statement
-        $stmt->execute($params);      // Execute with parameters
-        return $stmt;                 // Return the statement object for further use
+        $stmt = $this->prepare($sql); 
+        $stmt->execute($params);      
+        return $stmt;                 
     }
 }
 ?>

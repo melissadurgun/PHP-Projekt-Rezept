@@ -1,3 +1,32 @@
+<?php
+/**
+ * Die Seite wird bei der Rezeptsuche verwendet und bietet ein Freitextfeld sowie diverse Filtermöglichkeiten. 
+ * 
+ */
+
+
+session_start(); 
+
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
+
+require_once('../../handlers/Rezeptsuche/RezeptSucheHandler.php');
+
+// Filter aus dem POST-Request abrufen 
+$filters = [
+    'ernaehrung' => $_POST['ernaehrung'] ?? null,
+    'schwierigkeitsgrad' => $_POST['schwierigkeitsgrad'] ?? null,
+    'mahlzeit' => $_POST['mahlzeit'] ?? null,
+    'kueche' => $_POST['kueche'] ?? null,
+    'search' => $_POST['search'] ?? null, // Nur POST für die Suche verwenden
+];
+
+// Rezepte mit dem Handler abrufen
+$sucheHandler = new RezeptSucheHandler();
+$rezepte = $sucheHandler->getRezepte($filters);
+?>
+
+<!-- HTML-Teil, um die Suchoptionen und Ergebnisse anzuzeigen --> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,28 +48,6 @@
         });
     </script>
 </head>
-
-<?php
-session_start(); 
-
-include '../../includes/header.php';
-include '../../includes/navigation.php';
-
-require_once('../../handlers/Rezeptsuche/RezeptSucheHandler.php');
-
-// Filter aus dem POST-Request abrufen 
-$filters = [
-    'ernaehrung' => $_POST['ernaehrung'] ?? null,
-    'schwierigkeitsgrad' => $_POST['schwierigkeitsgrad'] ?? null,
-    'mahlzeit' => $_POST['mahlzeit'] ?? null,
-    'kueche' => $_POST['kueche'] ?? null,
-    'search' => $_POST['search'] ?? null, // Nur POST für die Suche verwenden
-];
-
-// Rezepte mit dem Handler abrufen
-$sucheHandler = new RezeptSucheHandler();
-$rezepte = $sucheHandler->getRezepte($filters);
-?>
 
 <body>
 
@@ -103,6 +110,7 @@ $rezepte = $sucheHandler->getRezepte($filters);
     </div>
 </header>
 
+<!-- Anzeigen der Rezepte --> 
 <section class="rezepte-section">
     <div class="rezepte-container">
         <?php if (empty($rezepte)): ?>
@@ -140,10 +148,8 @@ $rezepte = $sucheHandler->getRezepte($filters);
     </div>
 </section>
 
-
-
 </body>
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 </html>

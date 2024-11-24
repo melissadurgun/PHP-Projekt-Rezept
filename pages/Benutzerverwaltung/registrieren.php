@@ -1,4 +1,10 @@
 <?php
+/**
+ * Die Seite zeigt ein Formular, in welches der Benutzer seine Daten bei der Registrierung eingibt. 
+ * 
+ */
+
+
 session_start();
 require_once('../../handlers/Benutzerverwaltung/RegistrierenHandler.php');
 
@@ -21,12 +27,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Weiterleitung zur Benutzerseite, wenn die Registrierung erfolgreich war
     if (empty($errorMessage)) {
-        header('Location: benutzerseite.php');
+        header('Location: Benutzerseite.php');
         exit();
     }
 }
 ?>
 
+<!-- HTML, um das Formular anzuzeigen --> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -38,8 +45,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
 ?>
 
 <body>
@@ -85,7 +92,7 @@ include '../../includes/navigation.php';
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 
 </html>

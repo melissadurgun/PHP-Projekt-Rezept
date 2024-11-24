@@ -1,10 +1,15 @@
 <?php
+/**
+ * Die Seite ermöglicht es dem Benutzer, seine Benutzerdaten zu bearbeiten. 
+ */
+
+
 session_start();
 require_once('../../handlers/Benutzerverwaltung/ProfilBearbeitenHandler.php');
 
-// Überprüfen, ob der Benutzer eingeloggt ist
+// Überprüfen, ob der Benutzer eingeloggt ist --> unangemeldet = Login 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: Login.php");
     exit();
 }
 
@@ -24,12 +29,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Weiterleitung zur Benutzerseite, wenn die Aktualisierung erfolgreich war
     if (empty($errorMessage)) {
-        header('Location: benutzerseite.php');
+        header('Location: Benutzerseite.php');
         exit();
     }
 }
 ?>
 
+<!-- HTML Teil mit Formular, um Daten zu bearbeiten --> 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -40,8 +46,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
 ?>
 
 <body>
@@ -67,16 +73,18 @@ include '../../includes/navigation.php';
         <input type="submit" value="Änderungen speichern" class="save">
     </form>
 
-    <?php
-    // Fehlermeldung anzeigen, falls vorhanden
-    if (!empty($errorMessage)) {
-        echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
-    }
+     <?php
+        // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist
+        if (!empty($errorMessage)) {
+            echo '<div class="error-container">
+                    <p class="error-message">' . htmlspecialchars($errorMessage) . '<p></div>';
+        }
     ?>
+    
 </div>
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 </html>

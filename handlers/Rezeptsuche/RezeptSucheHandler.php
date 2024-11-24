@@ -1,13 +1,19 @@
 <?php
+/**
+ * Die Klasse RezeptSucheHandler stellt Funktionen für die Rezeptsuche bereit. 
+ * 
+ * Wird verwendet in Pages: RezeptSuche.php. 
+ */
+
 require_once('../../config/db.php');
 
 class RezeptSucheHandler
 {
     private $DB;
 
+    //Datenbankverbindung aufbauen 
     public function __construct()
     {
-        // Datenbankverbindung aufbauen
         $this->DB = new DB();
     }
 

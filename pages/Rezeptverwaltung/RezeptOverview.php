@@ -1,4 +1,10 @@
 <?php
+/**
+ * RezeptOverview, um alle Rezepte anzuzeigen (wird z.B. auf der Startseite verwendet). 
+ * 
+ */
+
+
 require_once('../../handlers/Rezeptsuche/RezeptSucheHandler.php');
 
 // Initialisieren des Suchhandlers
@@ -22,9 +28,9 @@ if ($sucheHandler->hasFilters($filters)) {
     // Keine Filter gesetzt, alle Rezepte abrufen
     $rezepte = $sucheHandler->getRezepte([]);
 }
-
 ?>
 
+<!--HTML Teil --> 
 <!DOCTYPE html>
 <html lang="de">
 
@@ -37,6 +43,7 @@ if ($sucheHandler->hasFilters($filters)) {
 
 <body>
     <main>
+        <!-- Section, um die Rezeote anzuzeigen --> 
         <div class="rezepte-section">
             <div class="rezepte-container">
                 <?php if (empty($rezepte)): ?>

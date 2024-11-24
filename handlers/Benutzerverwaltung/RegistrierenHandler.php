@@ -9,6 +9,7 @@ require_once('../../config/db.php');
 class RegistrierenHandler {
     private $DB;
 
+    //Aufbauen der Datenbankverbindung 
     public function __construct() {
         $this->DB = new DB();
     }

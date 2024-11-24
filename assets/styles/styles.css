@@ -830,6 +830,17 @@ footer {
   margin: 20px;
 }
 
+.profile-container>* {
+  flex: 1 1 300px;
+  /* Kinder-Elemente haben mindestens 300px Breite, passen sich aber an */
+  max-width: 400px;
+  /* Begrenze die maximale Breite */
+  margin: 10px;
+  /* Gleichmäßiger Abstand zwischen Elementen */
+  box-sizing: border-box;
+  /* Padding und Border werden in die Breite einbezogen */
+}
+
 /* 
 ######################################
 ### Rezept Detailansicht##############

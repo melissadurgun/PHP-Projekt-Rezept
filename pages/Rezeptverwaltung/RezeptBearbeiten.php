@@ -1,29 +1,33 @@
 <?php
+/**
+ * Die Seite stellt ein Formular bereit, mit welchem sich die Daten eines Rezepts ändern lassen. 
+ * 
+ */
+
+
 session_start();
 require_once("../../handlers/Rezeptverwaltung/RezeptDetailansichtHandler.php");
 require_once("../../handlers/Rezeptverwaltung/RezeptBearbeitenHandler.php");
 
-// Initialize the handler
+// Initialisieren des Handlers 
 $rezeptDetail = new RezeptDetailHandler();
 $rezeptBearbeitenHandler = new RezeptBearbeitenHandler();
 
-// Check if the `rezept_id` parameter is provided in the URL
+// Rezept_id aus der URL abfragen 
 $rezept_id = $_GET['rezept_id'] ?? null;
 if (!$rezept_id) {
     die("Rezept-ID nicht angegeben.");
 }
 
+//Details des rezepts mithilfe des Handlers abrufen 
 $data = $rezeptDetail->getRecipeDetail($rezept_id);
-
 if (!$data) {
     die("Fehler beim Laden der Rezeptdetails.");
 }
 
-// Extract data for easy access in the view
+// Daten extrahieren, um sie anzeigen zu können 
 $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
-
-// Prepare data for display
 $titel = htmlspecialchars($recipe['titel']);
 $username = htmlspecialchars($recipe['username']);
 $zubereitungsdauer = htmlspecialchars($recipe['zubereitungsdauer']);
@@ -40,11 +44,7 @@ $bild_src = $recipe['bild']
     ? $recipe['bild'] 
     : "../../assets/images/ImagePlaceholder.jpg"; // Fallback-Bild, falls kein Bild vorhanden
 
-
-####################################################
-// Hauptlogik zur Verarbeitung der Aktualisierung
-
-// Process form submission
+// Wenn Formular abgesendet 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $neuer_titel = $_POST['title'];
     $neue_zutaten = $_POST['ingredients'];
@@ -56,7 +56,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $neue_mahlzeitkategorie = $_POST['mahlzeitkategorie'];
     $neue_portionen = $_POST['portionen'];
 
-    // Update the recipe using the handler
+    // Dann Daten mithilfe des Handlers ändern 
     $isUpdated = $rezeptBearbeitenHandler->updateRecipe(
         $rezept_id,
         $neuer_titel,
@@ -78,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 ?>
+
+<!-- Formular zum Anzeigen der Rezeptdaten --> 
 <!DOCTYPE html>
 <html lang="de">
 
@@ -88,12 +90,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="../../assets/styles/styles.css">
 </head>
 
-<body>
-    <?php include '../../includes/header.php'; ?>
-    <?php include '../../includes/navigation.php'; ?>
+<?php 
+    require_once('../../includes/header.php'); 
+    require_once('../../includes/navigation.php'); 
+?>
 
+<body>
     <div class="rezept-detail-container">
         <form action="" method="POST">
+            <!-- in der Topbox werden Bild, Name und Dauer, Küche, Ernährung sowie Kategorie angezeigt --> 
             <div class="rezept-topbox">
                 <div class="rezept-bild">
                     <img src="<?php echo $bild_src; ?>" alt="Bild von <?php echo $titel; ?>" style="max-width: 100%; height: auto;">
@@ -143,6 +148,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
+            <!-- in der unteren Box werden Zubereitung und Zutaten angezeigt --> 
             <div class="rezept-bottombox">
                 <div class="rezept-zubereitung">
                     <h2>Zubereitung</h2>
@@ -178,9 +184,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
         </form>
     </div>
-    <footer>
-        <?php include '../../includes/footer.php'; ?>
-    </footer>
 </body>
-
+<?php
+require_once('../../includes/footer.php'); 
+?>
 </html>

@@ -1,7 +1,8 @@
 <?php
 /**
- * Klasse stellt Funktionen zum Speichern von Bewertungen bereit. 
- * Wird von der page RezeptBewerten.php verwendet. 
+ * Klasse stellt einen RezeptBewertenHandler miz Funktionen zum Speichern von Bewertungen bereit. 
+ * 
+ * Wird verwendet in Pages: RezeptBewerten.php 
  */
 require_once('../../config/db.php');
 
@@ -28,3 +29,4 @@ class RezeptBewertenHandler {
         ]);
     }
 }
+?>

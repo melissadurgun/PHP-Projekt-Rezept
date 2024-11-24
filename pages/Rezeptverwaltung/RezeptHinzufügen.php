@@ -1,16 +1,21 @@
 <?php
+/**
+ * Seite zeig ein leeres Formular an, mit welchem ein neues Rezept hinzugefügt werden kann. 
+ * 
+ */
+
 
 session_start();
 
-// Check if user is logged in
+// wenn Benutzer nicht angemeldet --> weiterleiten an Login.php 
 if (!isset($_SESSION['user'])) {
     $_SESSION['error_message'] = "Du musst dich anmelden, um Rezepte hinzuzufügen.";
     header("Location: ..\..\pages\Benutzerverwaltung\Login.php");
-    exit;
+    exit();
 }
-
 ?>
 
+<!-- HTML-Teil für das Formular --> 
 <!DOCTYPE html>
 <html lang="en">
 
@@ -22,9 +27,9 @@ if (!isset($_SESSION['user'])) {
     <link rel="stylesheet" href="../../assets/styles/styles.css">
 </head>
 
-<?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+ <?php 
+    require_once('../../includes/header.php'); 
+    require_once('../../includes/navigation.php'); 
 ?>
 
 <body>
@@ -92,7 +97,6 @@ include '../../includes/navigation.php';
                     <button type="button" onclick="zutatHinzufügen()">+ Zutat hinzufügen</button>
                 </div>
 
-                <!-- Felder für Menüart, Ernährung und Küche -->
                 <div class="additional-options">
                     <div>
                         <label for="mahlzeitkategorie">Menüart</label>
@@ -140,6 +144,6 @@ include '../../includes/navigation.php';
     <script src="..\..\js\formValidation.js"></script>
 </body>
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 </html>

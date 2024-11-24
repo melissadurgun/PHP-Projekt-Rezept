@@ -1,4 +1,10 @@
 <?php
+/**
+ * Seite wird aufgerufen, wenn der Benutzer auf Profil löschen drückt. 
+ * Zeigt nochmal eine Warnung an, dass alles gelöscht wird, wenn der Benutzer sich tatsächlich für Löschen entscheidet. 
+ */
+
+
 session_start();
 
 // Überprüfen, ob der Benutzer eingeloggt ist
@@ -7,9 +13,9 @@ if (!isset($_SESSION['user'])) {
     header("Location: Login.php");
     exit();
 }
-
 ?>
 
+<!-- HTML-Teil, um die Warnung anzuzeigen --> 
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -20,8 +26,8 @@ if (!isset($_SESSION['user'])) {
 </head>
 
 <?php
-include '../../includes/header.php';
-include '../../includes/navigation.php';
+require_once('../../includes/header.php'); 
+require_once('../../includes/navigation.php'); 
 ?>
 
 <body>
@@ -42,7 +48,7 @@ include '../../includes/navigation.php';
 </body>
 
 <?php
-include '../../includes/footer.php';
+require_once('../../includes/footer.php'); 
 ?>
 
 </html>
