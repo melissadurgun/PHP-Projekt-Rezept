@@ -651,6 +651,13 @@ footer {
 
 .link-container-rezepte {
   display: flex;
+  justify-content: space-evenly;
+  gap: 10px;
+  margin-right: 20px;
+}
+
+.userbuttons-container-rezepte{
+  display: flex;
   justify-content: right;
   gap: 10px;
   margin-right: 20px;
