@@ -25,7 +25,7 @@ const einheitField = `<select name="zutaten[${ingredientIndex}][einheit]">
 // Create the delete button for the ingredient
 const deleteButton = document.createElement('button');
 deleteButton.type = 'button';
-deleteButton.innerHTML = '<i class="fa fa-trash-o"></i> Löschen';
+deleteButton.innerHTML = '<i class="fa fa-trash"></i> Löschen';
 deleteButton.setAttribute('id', `delete-zutat`);
 deleteButton.setAttribute('class', 'deleteButton');
 deleteButton.onclick = function () {

@@ -133,6 +133,7 @@ $rezepte = $sucheHandler->getRezepte($filters);
                             <i class="fa fa-leaf"></i> <?= htmlspecialchars($rezept['ernaehrung']); ?>
                         </span>
                     </div>
+
                 </div>
             <?php endforeach; ?>
         <?php endif; ?>

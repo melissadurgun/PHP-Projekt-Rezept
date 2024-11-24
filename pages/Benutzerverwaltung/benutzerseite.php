@@ -79,7 +79,7 @@ include '../../includes/navigation.php';
                     <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
                     <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept['rezept_id']; ?>"
                         onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                        <i class="fa fa-trash-o"> <span> Löschen</span></i>
+                        <i class="fa fa-trash"> <span>Löschen</span></i>
                     </a>
                     <a
                         href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept['rezept_id']; ?>">

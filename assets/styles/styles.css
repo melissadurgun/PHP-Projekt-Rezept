@@ -9,7 +9,7 @@ header {
   text-align: center;
   padding: 20px;
 }
-
+/*Header*/
 .header-container {
   display: flex;
   align-items: center;
@@ -21,6 +21,7 @@ h1 {
   font-size: 2.5em;
 }
 
+/*Suchleiste*/
 .search-bar {
   width: 50%;
   padding-left: 40px;
@@ -59,6 +60,7 @@ h1 {
   cursor: pointer;
 }
 
+/*Account*/
 .account-container {
   position: relative;
   justify-content: flex-end;
@@ -99,6 +101,7 @@ h1 {
   display: block;
 }
 
+/*Filter*/
 nav {
   background-color: #fff;
   padding: 10px;
@@ -268,6 +271,7 @@ nav {
   box-sizing: border-box;
 }
 
+/*Rezept anlegen*/
 .recipe-form {
   display: flex;
   flex-direction: column;
@@ -294,7 +298,6 @@ label {
   margin-bottom: 5px;
 }
 
-/* Style for the label to look like an image button */
 .file-label {
   display: inline-block;
   width: 100px;
@@ -306,35 +309,26 @@ label {
   border-radius: 15px;
 }
 
-/* Optionally add hover effect */
 .file-label:hover {
   opacity: 0.4;
-  /* Slight transparency for hover effect */
 }
 
-/* Adding the "Upload File" message */
 .file-label::after {
   content: "Upload File";
   position: absolute;
   top: -30px;
-  /* Adjust based on positioning needs */
   left: 50%;
   transform: translateX(-50%);
   background-color: rgba(0, 0, 0, 0.7);
-  /* Dark background with transparency */
   color: white;
   padding: 5px 10px;
   border-radius: 5px;
   font-size: 12px;
   white-space: nowrap;
-  /* opacity: 0; */
   pointer-events: none;
-  /* Prevents the message from blocking clicks */
   transition: opacity 0.3s ease;
-  /* Smooth fade-in transition */
 }
 
-/* Show message on hover */
 .file-label:hover::after {
   opacity: 1;
 }
@@ -364,13 +358,9 @@ textarea {
 
 .zubereitung textarea {
   resize: vertical;
-  /* Allow vertical resizing */
   min-height: 100px;
-  /* Set a reasonable minimum height */
   max-height: 500px;
-  /* Set a maximum height if desired */
   overflow-y: auto;
-  /* Show scrollbar if content exceeds max height */
 }
 
 .titel {
@@ -380,7 +370,6 @@ textarea {
 .info {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  /* Three equal columns */
   gap: 10px;
   margin-bottom: 20px;
 }
@@ -616,7 +605,8 @@ footer {
   margin: 20px;
 }
 
-.fa-trash-o {
+
+.fa-trash:not(#delete-zutat) {
   cursor: pointer;
   text-decoration: none;
   border: 1px solid #7f9383;
@@ -624,15 +614,16 @@ footer {
   padding: 10px;
 }
 
-.fa-trash-o span {
+.fa-trash span {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: black;
 }
 
-.fa-trash-o a {
-  color: black;
+.fa-trash a,
+.bewerten-button {
+  cursor: pointer;
   text-decoration: none;
-  border: 2px solid #7f9383;
+  border: 1px solid #7f9383;
   border-radius: 15px;
   padding: 10px;
 }
@@ -660,7 +651,9 @@ footer {
 
 .link-container-rezepte {
   display: flex;
-  justify-content: space-around;
+  justify-content: right;
+  gap: 10px;
+  margin-right: 20px;
 }
 
 .link-container-rezepte a:hover {
@@ -672,6 +665,7 @@ footer {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
 }
 
 .rezept-kachel {
@@ -685,10 +679,6 @@ footer {
   margin: 10px;
   box-sizing: border-box;
 }
-
-/* .rezept-kachel :hover {
-  transform: scale(1.5);
-} */
 
 .rezept-kachel img {
   width: 100%;
@@ -841,11 +831,8 @@ footer {
 
 .rezept-topbox {
   display: flex;
-  /* Flexbox aktivieren */
   align-items: center;
-  /* Vertikale Zentrierung */
   justify-content: space-around;
-  /* Horizontale Verteilung */
   background-color: #fff;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
   border-radius: 30px;
@@ -891,9 +878,7 @@ footer {
   width: auto;
   height: 300px;
   object-fit: cover;
-  /* object-position: center; */
   border-radius: 8px;
-  /* Ensure image also has rounded corners */
 }
 
 .rezept-info h1 {
@@ -920,7 +905,7 @@ footer {
   padding-left: 20px;
   border-radius: 30px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-  width: 70%;
+  width: 100%;
   background-color: #dbe1dc;
 }
 
@@ -968,6 +953,7 @@ footer {
 .rezept-bottombox {
   display: flex;
   align-items: center;
+  flex-direction: row;
   border-radius: 30px;
   padding: 10px;
   gap: 10px;
@@ -978,4 +964,45 @@ footer {
   width: 20px;
   text-align: center;
   color: #666;
+}
+
+.bewertung-container {
+  background-color: #fff;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  width: 70%;
+  background-color: #dbe1dc;
+  margin: 15%;
+  margin-top: 20px;
+}
+
+.bewerten-container {
+  background-color: #fff;
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  background-color: #dbe1dc;
+  margin: 15%;
+  margin-top: 20px;
+  margin-bottom: 0;
+  padding-bottom: 20px;
+}
+
+input[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  background-color: #04914f;
+  color: #fff;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: right;
+}
+
+.stars {
+  display: flex;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
