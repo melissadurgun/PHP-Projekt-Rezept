@@ -66,30 +66,40 @@ include '../../includes/navigation.php';
 
         <!-- Anzeigen der Rezepte des Benutzers -->
         <div class="rezepte-container">
-            <?php foreach ($rezepte as $rezept): ?>
-            <div class="rezept-kachel">
-                <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
-                <img src="<?php echo htmlspecialchars($rezept['bild'] ?: 'platzhalter.png'); ?>"
-                    alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
-                <h3><a
-                        href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo $rezept['rezept_id']; ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
-                </h3>
+    <?php foreach ($rezepte as $rezept): ?>
+        <div class="rezept-kachel">
+            <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
+            <?php if (!empty($rezept['bild'])): ?>
+                <img 
+                    src="data:image/jpeg;base64,<?= base64_encode($rezept['bild']); ?>" 
+                    alt="<?= htmlspecialchars($rezept['titel']); ?>" 
+                    class="recipe-image">
+            <?php else: ?>
+                <img 
+                    src="../../assets/images/platzhalter.png" 
+                    alt="Platzhalterbild" 
+                    class="recipe-image">
+            <?php endif; ?>
 
-                <div class="link-container-rezepte">
-                    <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
-                    <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept['rezept_id']; ?>"
-                        onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                        <i class="fa fa-trash-o"> <span> Löschen</span></i>
-                    </a>
-                    <a
-                        href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept['rezept_id']; ?>">
-                        <i class="fa fa-edit"><span>Bearbeiten</span></i>
-                    </a>
-                </div>
+            <h3>
+                <a href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?= $rezept['rezept_id']; ?>">
+                    <?= htmlspecialchars($rezept['titel']); ?>
+                </a>
+            </h3>
 
+            <div class="link-container-rezepte">
+                <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
+                <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?= $rezept['rezept_id']; ?>"
+                   onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
+                    <i class="fa fa-trash-o"> <span> Löschen</span></i>
+                </a>
+                <a href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?= $rezept['rezept_id']; ?>">
+                    <i class="fa fa-edit"><span>Bearbeiten</span></i>
+                </a>
             </div>
-            <?php endforeach; ?>
         </div>
+    <?php endforeach; ?>
+</div>
 
     </section>
 
