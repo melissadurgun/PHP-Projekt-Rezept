@@ -69,8 +69,17 @@ include '../../includes/navigation.php';
             <?php foreach ($rezepte as $rezept): ?>
             <div class="rezept-kachel">
                 <!-- Überprüfen, ob ein Bild vorhanden ist, andernfalls Platzhalter anzeigen -->
-                <img src="<?php echo htmlspecialchars($rezept['bild'] ?: 'platzhalter.png'); ?>"
-                    alt="<?php echo htmlspecialchars($rezept['titel']); ?>">
+                <?php if (!empty($rezept['bild'])): ?>
+                <img 
+                    src="data:image/jpeg;base64,<?= base64_encode($rezept['bild']); ?>" 
+                    alt="<?= htmlspecialchars($rezept['titel']); ?>" 
+                    class="recipe-image">
+                <?php else: ?>
+                <img 
+                    src="../../assets/images/platzhalter.png" 
+                    alt="Platzhalterbild" 
+                    class="recipe-image">
+                <?php endif; ?>
                 <h3><a
                         href="../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=<?php echo $rezept['rezept_id']; ?>"><?php echo htmlspecialchars($rezept['titel']); ?></a>
                 </h3>
