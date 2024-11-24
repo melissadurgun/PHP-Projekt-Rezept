@@ -9,10 +9,10 @@ class DB extends PDO
     public function __construct()
     {
         //---Code für XAMPP - auskommentieren, wenn Docker benutzt wird 
-        $host = 'localhost';
+        //$host = 'localhost';
 
         //---Code für Docker - auskommentieren, wenn XAMPP benutzt wird 
-        // $host = "db";
+        $host = "db";
 
         //---Gemeinsamer Code - nicht auskommentieren
         $dbname = 'rezepte';
