@@ -22,10 +22,10 @@ $recipe = $data['recipe'];
 $ingredients = $data['ingredients'];
 
 // Prüfen, ob der eingeloggte Benutzer der Besitzer des Rezepts ist
-if (isset($_SESSION['user_id'])){
+if (isset($_SESSION['user_id'])) {
     $isOwner = ($recipe['user_id'] == $_SESSION['user_id']);
 } else {
-    $isOwner = false; 
+    $isOwner = false;
 }
 
 // Prepare data for display
@@ -55,7 +55,7 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 <body>
     <?php include '../../includes/header.php'; ?>
     <?php include '../../includes/navigation.php'; ?>
-    
+
 
     <div class="rezept-detail-container">
         <div class="rezept-topbox">
@@ -87,7 +87,8 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
                 <h2>Zutaten für <?php echo $portionen; ?> Portionen</h2>
                 <ul>
                     <?php foreach ($ingredients as $ingredient): ?>
-                    <li><?php echo htmlspecialchars($ingredient['menge']) . " " . htmlspecialchars($ingredient['einheit']) . " " . htmlspecialchars($ingredient['name']); ?></li>
+                        <li><?php echo htmlspecialchars($ingredient['menge']) . " " . htmlspecialchars($ingredient['einheit']) . " " . htmlspecialchars($ingredient['name']); ?>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -95,18 +96,17 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
 
         <!-- Display "Rezept bearbeiten" und "Rezept löschen" button only if the user is the recipe owner -->
         <?php if ($isOwner): ?>
-        <div class="link-container-rezepte">
-                    <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
-                    <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept_id; ?>"
-                        onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
-                        <i class="fa fa-trash"> <span> Löschen</span></i>
-                    </a>
-                    <a
-                        href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept_id; ?>">
-                        <i class="fa fa-edit"><span>Bearbeiten</span></i>
-                    </a>
-                </div>
-        
+            <div class="link-container-rezepte">
+                <!-- Löschen-Link mit JavaScript-Bestätigungsdialog -->
+                <a href="../../handlers/Rezeptverwaltung/RezeptLoeschenHandler.php?delete_id=<?php echo $rezept_id; ?>"
+                    onclick="return confirm('Möchten Sie dieses Rezept wirklich löschen?');">
+                    <i class="fa fa-trash"> <span> Löschen</span></i>
+                </a>
+                <a href="../../pages/Rezeptverwaltung/RezeptBearbeiten.php?rezept_id=<?php echo $rezept_id; ?>">
+                    <i class="fa fa-edit"><span>Bearbeiten</span></i>
+                </a>
+            </div>
+
         <?php endif; ?>
     </div>
 
@@ -114,7 +114,8 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
     <div class="bewerten-container">
         <h2>Rezeptbewertungen</h2>
         <!-- "Rezept bewerten"-Button als Link zu RezeptBewerten.php mit GET über die URL -->
-        <a href="../../pages/Bewertung/RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>" class="bewerten-button">Rezept bewerten</a>
+        <a href="../../pages/Bewertung/RezeptBewerten.php?rezept_id=<?php echo $rezept_id; ?>"
+            class="bewerten-button">Rezept bewerten</a>
     </div>
 
     <!-- Bewertungen Ansehen -->
@@ -127,4 +128,5 @@ $zubereitung = nl2br(htmlspecialchars($recipe['zubereitung']));
         <?php include '../../includes/footer.php'; ?>
     </footer>
 </body>
+
 </html>
