@@ -72,7 +72,8 @@ include '../../includes/navigation.php';
         <?php
         // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist
         if (!empty($errorMessage)) {
-            echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
+            echo '<div class="error-container">
+                    <p class="error-message">' . htmlspecialchars($errorMessage) . '<p></div>';
         }
         ?>
     </div>

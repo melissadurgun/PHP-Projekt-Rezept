@@ -1,3 +1,16 @@
+<?php
+
+session_start();
+
+// Check if user is logged in
+if (!isset($_SESSION['user'])) {
+    $_SESSION['error_message'] = "Du musst dich anmelden, um Rezepte hinzuzufügen.";
+    header("Location: ..\..\pages\Benutzerverwaltung\Login.php");
+    exit;
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,7 +29,7 @@ include '../../includes/navigation.php';
 
 <body>
     <div class="form">
-        <form class="RezeptHinzufügenForm" action="..\..\pages\BildTest\Hinzufügen.php"
+        <form class="RezeptHinzufügenForm" action="..\..\handlers\Rezeptverwaltung\RezeptHinzufügenHandler.php"
             method="POST" enctype="multipart/form-data">
             <div class="recipe-form">
                 <div class="recipe-header">

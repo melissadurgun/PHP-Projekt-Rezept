@@ -70,14 +70,17 @@ include '../../includes/navigation.php';
 
             <input type="submit" value="Anmelden" class="anmelden">
         </form>
+
+        <?php
+        // Fehlermeldung anzeigen, falls Login fehlgeschlagen ist
+        if (!empty($errorMessage)) {
+            echo '<div class="error-container">
+                    <p class="error-message">' . htmlspecialchars($errorMessage) . '<p></div>';
+        }
+        ?>
     </div>
 
-    <?php
-    // Fehlermeldung anzeigen, wenn vorhanden
-    if (!empty($errorMessage)) {
-        echo '<div style="color:red;">' . htmlspecialchars($errorMessage) . '</div>';
-    }
-    ?>
+    
     </div>
 </body>
 

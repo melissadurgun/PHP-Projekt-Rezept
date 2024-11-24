@@ -2,14 +2,8 @@
 
 session_start();
 
-include '../../includes/header.php';
 require_once('../../config/db.php');
 
-// Check if user is logged in
-if (!isset($_SESSION['user'])) {
-    header("Location: ..\..\pages\Benutzerverwaltung\login.php");
-    exit;
-}
 
 // Datenbankverbindung
 $db = new DB();
@@ -73,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    echo "Rezept und Zutaten erfolgreich gespeichert!";
+    //echo "Rezept und Zutaten erfolgreich gespeichert!";
     header("Location: ../../pages/Rezeptverwaltung/RezeptDetailansicht.php?rezept_id=" . $rezept_id);
     exit();
 }
