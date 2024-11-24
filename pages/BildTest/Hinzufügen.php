@@ -5,14 +5,17 @@
 
 require_once('../../config/db.php');
 
-class RezeptHinzufügenHandler {
+class RezeptHinzufügenHandler
+{
     private $DB;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->DB = new DB();
     }
 
-    public function addRezept($user_id, $titel, $zubereitung, $zubereitungsdauer, $portionen, $ernaehrung, $schwierigkeitsgrad, $mahlzeitkategorie, $kueche, $bild, $zutaten) {
+    public function addRezept($user_id, $titel, $zubereitung, $zubereitungsdauer, $portionen, $ernaehrung, $schwierigkeitsgrad, $mahlzeitkategorie, $kueche, $bild, $zutaten)
+    {
         try {
             // Bildinhalt vorbereiten, falls vorhanden
             $bildInhalt = null;
